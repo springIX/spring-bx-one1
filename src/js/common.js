@@ -78,6 +78,11 @@ async function fetchReport() {
   }
 }
 
+function startConsulting() {
+  document.getElementById("main").classList.add("hidden");
+  document.getElementById("step1").classList.remove("hidden");
+}
+
 function nextStep(currentStep) {
   document.getElementById(`step${currentStep}`).classList.add('hidden');
   let nextStepElement = document.getElementById(`step${currentStep + 1}`);
