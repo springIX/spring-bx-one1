@@ -25,15 +25,18 @@ $survey_pdt: 162rem;
   .survey_tit{ position: absolute; left: 354rem; top: 50rem; @include font-size(14rem); display: flex; align-items: center; font-weight: bold; white-space: nowrap;
     img{ margin-right: 4rem; width: 24rem;}
   }
-  .survey_lnb{ position: absolute; left: 0; top: 0; height: 100%; width:  270rem; background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.00) 100%); backdrop-filter: blur(50px); border-right: 1px solid #fff; padding: $survey_pdt 0 0 $layout_padding; font-weight: bold; 
+  .survey_lnb{ position: absolute; left: 0; top: 0; height: 100%; width:  270rem; background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.00) 100%); backdrop-filter: blur(50px); border-right: 1px solid #fff; padding: $survey_pdt 0 0 $layout_padding; font-weight: bold; z-index: 10;
     ol{
-      li{ 
+      li{ opacity: .3;  transition: .3s ease;
         + li{ margin-top: 16rem;} 
         .tit{ @include font-size(14rem); margin-bottom: 12rem; display: flex; align-items: center; 
           &::before{ content: ''; width: 16rem; height: 16rem; border-radius: 50%; margin-right: 8rem; background-color: $black;}
         }
-        button{ @include font-size(12rem); padding: 13rem 35rem 13rem 14rem; position: relative; background: url(../images/survey_lnb_tag.svg)no-repeat left center / auto 100%; @include ellip(1); width: 100%;  text-align: left;
+        button{ @include font-size(12rem); padding: 13rem 35rem 13rem 14rem; position: relative; background: url(../images/survey_lnb_tag.svg)no-repeat left center / auto 100%; @include ellip(1); width: 100%; display: none; text-align: left;
           &::before{ content: ''; width: 15rem; height: 15rem; background: url(../images/ico_write.svg)no-repeat center center / contain; position: absolute; right: 14rem; top: 50%; transform: translateY(-50%); opacity: .5;}
+        }
+        &.complete{ opacity: 1;
+          button{  display: block;}
         }
       }
     }
