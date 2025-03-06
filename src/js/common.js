@@ -1,3 +1,66 @@
+async function generateRandomId() {
+  try {
+      const response = await fetch("https://cd8b-220-118-59-188.ngrok-free.app/rand_id", {
+          method: "GET",
+          headers: { "Accept": "application/json" }  // ✅ Content-Type 제거, Accept 추가
+      });
+
+      if (!response.ok) {
+          throw new Error(`랜덤 아이디 생성 실패 (상태 코드: ${response.status})`);
+      }
+
+      const responseText = await response.text();
+      console.log("서버 응답 원본:", responseText);  // JSON인지 HTML인지 확인
+
+      // 응답이 JSON인지 체크 후 파싱
+      if (responseText.startsWith("<!DOCTYPE html>")) {
+          throw new Error("서버가 JSON이 아닌 HTML을 반환했습니다.");
+      }
+
+      const data = JSON.parse(responseText);
+      console.log("파싱된 JSON 데이터:", data);
+
+      document.getElementById("randomIdInput").value = data.random_id;
+      sessionStorage.setItem("random_id", data.random_id);
+  } catch (error) {
+      console.error("랜덤 아이디 생성 오류:", error);
+      alert("랜덤 아이디 생성에 실패했습니다.");
+  }
+}
+
+
+
+
+// async function login() {
+//   const randomId = document.getElementById("randomIdInput").value;
+
+//   if (!randomId) {
+//       alert("랜덤 아이디를 먼저 생성하세요.");
+//       return;
+//   }
+
+//   try {
+//       const response = await fetch("https://cd8b-220-118-59-188.ngrok-free.app/rand_id", {
+//           method: "ㅖㅒㄴ",
+//           headers: { "Content-Type": "application/json" },
+//           body: JSON.stringify({ random_id: randomId })
+//       });
+
+//       if (!response.ok) {
+//           throw new Error(`로그인 실패 (상태 코드: ${response.status})`);
+//       }
+
+//       sessionStorage.setItem("random_id", randomId);
+//       document.getElementById("main").classList.add("hidden");
+//       document.getElementById("step1").classList.remove("hidden");
+//   } catch (error) {
+//       console.error("로그인 오류:", error);
+//       alert("로그인에 실패했습니다.");
+//   }
+// }
+
+
+
 
 async function fetchReport() {
   try {
@@ -11,7 +74,7 @@ async function fetchReport() {
           user_query: input3
       };
 
-      const response = await fetch('https://7080-220-118-59-188.ngrok-free.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
+      const response = await fetch('https://7080-220-118-59-188.ngrok-free.app/bx_one', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
