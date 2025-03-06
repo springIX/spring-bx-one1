@@ -182,13 +182,23 @@ header .sub_menu .company_btn i:nth-child(3) {
   background-color: #ffffff;
   border-radius: 8rem;
 }
-.pop_wrap .login_box .write_box input[type=text] {
+.pop_wrap .login_box .write_box input.id_gen_btn {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.pop_wrap .login_box .write_box input.id_txt {
   color: #000000;
   cursor: auto;
+  margin: 24rem 0 48rem;
 }
-.pop_wrap .login_box .write_box input[type=button] {
-  margin-top: 24rem;
+.pop_wrap .login_box .write_box input.submit_btn {
   background-color: #000000;
+  font-size: clamp(10px, 20rem, 999rem);
+}
+.pop_wrap .login_box .write_box input.submit_btn[disabled] {
+  opacity: 0.5;
+  touch-action: none;
+  pointer-events: none;
 }
 
 @media (min-width: 751px) {
