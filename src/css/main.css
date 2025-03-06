@@ -8,12 +8,12 @@
   position: relative;
 }
 
-/********** MAIN **********/
+/********** MAIN VISUAL **********/
 #main {
   height: 100%;
+  padding: 162rem 0 130rem;
 }
 #main .container {
-  padding: 162rem 0 130rem;
   height: 100%;
 }
 #main .container .txt_box {
@@ -24,7 +24,7 @@
 #main .container .process_info {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 20rem;
-  position: relative;
+  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -40,4 +40,65 @@
 #main .container .process_info .start_btn img {
   width: 20rem;
   margin-left: 10rem;
+}
+
+/********** SURVEY **********/
+#survey_wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#survey_wrap .survey_lnb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 270rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 100%);
+  backdrop-filter: blur(50px);
+  border-right: 1px solid #fff;
+  padding: 162rem 0 0 44rem;
+  font-weight: bold;
+}
+#survey_wrap .survey_lnb ol li + li {
+  margin-top: 16rem;
+}
+#survey_wrap .survey_lnb ol li .tit {
+  font-size: clamp(10px, 14rem, 999rem);
+  margin-bottom: 12rem;
+  display: flex;
+  align-items: center;
+}
+#survey_wrap .survey_lnb ol li .tit::before {
+  content: "";
+  width: 16rem;
+  height: 16rem;
+  border-radius: 50%;
+  margin-right: 8rem;
+  background-color: #000000;
+}
+#survey_wrap .survey_lnb ol li button {
+  font-size: clamp(10px, 12rem, 999rem);
+  padding: 13rem 35rem 13rem 14rem;
+  position: relative;
+  background: url(../images/survey_lnb_tag.svg) no-repeat left center/auto 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  text-align: left;
+}
+#survey_wrap .survey_lnb ol li button::before {
+  content: "";
+  width: 15rem;
+  height: 15rem;
+  background: url(../images/ico_write.svg) no-repeat center center/contain;
+  position: absolute;
+  right: 14rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+#survey_wrap .survey_box .survey_cont {
+  padding: 160rem 352rem 100rem;
 }

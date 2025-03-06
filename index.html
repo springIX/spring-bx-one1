@@ -53,21 +53,45 @@
         </div>
       </div>
     </div>
-    <div class="">
-      <div id="step1" class="hidden">
-        <label>1단계 입력:</label>
-        <input type="text" id="input1">
-        <button onclick="nextStep(1)">다음</button>
+    <div id="survey_wrap" class="hidden">
+      <video src="src/images/sub_visual.mp4" muted autoplay loop playsinline class="cover"></video>
+      <div class="survey_lnb">
+        <ol>
+          <li>
+            <p class="tit">STEP 1</p>
+            <button onclick="nextStep(0)">이에르 카페</button>
+          </li>
+          <li>
+            <p class="tit">STEP 2</p>
+            <button onclick="nextStep(1)"></button>
+          </li>
+          <li>
+            <p class="tit">STEP 3</p>
+            <button onclick="nextStep(2)"></button>
+          </li>
+        </ol>
       </div>
-      <div id="step2" class="hidden">
-        <label>2단계 입력:</label>
-        <input type="text" id="input2">
-        <button onclick="nextStep(2)">다음</button>
+
+      <div id="step1" class="survey_box hidden">
+        <div class="survey_cont">
+          <label>1단계 입력:</label>
+          <input type="text" id="input1">
+          <button onclick="nextStep(1)">다음</button>
+        </div>
       </div>
-      <div id="step3" class="hidden">
-        <label>3단계 입력:</label>
-        <input type="text" id="input3">
-        <button onclick="submitForm()">제출</button>
+      <div id="step2" class="survey_box hidden">
+        <div class="survey_cont">
+          <label>2단계 입력:</label>
+          <input type="text" id="input2">
+          <button onclick="nextStep(2)">다음</button>
+        </div>
+      </div>
+      <div id="step3" class="survey_box hidden">
+        <div class="survey_cont">
+          <label>3단계 입력:</label>
+          <input type="text" id="input3">
+          <button onclick="submitForm()">제출</button>
+        </div>
       </div>
       <div id="loading" class="hidden">
         <p>로딩 중...</p>
@@ -117,7 +141,8 @@
         <form action="">
           <input type="button" value="랜덤아이디 생성" class="id_gen_btn">
           <input type="text" placeholder="아이디를 입력하세요." class="id_txt" readonly>
-          <input type="button" value="Sign in" class="submit_btn" onclick="startConsulting()" data-btn="login" disabled>
+          <input type="button" value="Sign in" class="submit_btn" onclick="startConsulting();" data-btn="login"
+            disabled>
         </form>
       </div>
     </div>
