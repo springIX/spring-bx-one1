@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단계별 입력 폼</title>
+    <link rel="stylesheet" href="./src/css/common.css">
+</head>
+<body>
+    <div class="container">
+        <div id="step1">
+            <label>1단계 입력:</label>
+            <input type="text" id="input1">
+            <button onclick="nextStep(1)">다음</button>
+        </div>
+        <div id="step2" class="hidden">
+            <label>2단계 입력:</label>
+            <input type="text" id="input2">
+            <button onclick="nextStep(2)">다음</button>
+        </div>
+        <div id="step3" class="hidden">
+            <label>3단계 입력:</label>
+            <input type="text" id="input3">
+            <button onclick="submitForm()">제출</button>
+        </div>
+        <div id="loading" class="hidden">
+            <p>로딩 중...</p>
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+                <div id="progress-text" class="progress-text">0%</div>
+            </div>
+        </div>
+        <button id="result-button" class="hidden" onclick="showResult()">결과 보기</button>
+        <div id="result-page" class="hidden">
+            <div class="json_data">
+                <div class="data_wrap">
+                    <div id="result_data" class="result_data"></div>
+                    <div id="final_report" class="final_report"></div>
+                </div>
+                <div class="pdf-download">
+                    <button id="download-pdf1" onclick="downloadPDFForPage(0)">01. Brand Identity Report</button>
+                    <button id="download-pdf2" onclick="downloadPDFForPage(1)">02. Brand Identity Report</button>
+                    <button id="download-pdf3" onclick="downloadPDFForPage(2)">03. Brand Identity Report</button>
+                    <button id="download-pdf4" onclick="downloadPDFForPage(3)">04. Brand Identity Report</button>
+                    <button id="download-pdf5" onclick="downloadPDFForPage(4)">05. Brand Identity Report</button>
+                </div>
+            </div>
+            <!-- PDF 미리보기 모달 -->
+            <div id="pdfModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+    <script src="./src/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단계별 입력 폼</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 1920px;
+            overflow: hidden;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .data_wrap {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+        .result_data,
+        .final_report {
+            width: 50%;
+            text-align: left;
+        }
+        .pdf-download {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #loading {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+            height: 20px;
+            position: relative;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 70%;
+            height: 100%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="step1">
+            <label>1단계 입력:</label>
+            <input type="text" id="input1">
+            <button onclick="nextStep(1)">다음</button>
+        </div>
+        <div id="step2" class="hidden">
+            <label>2단계 입력:</label>
+            <input type="text" id="input2">
+            <button onclick="nextStep(2)">다음</button>
+        </div>
+        <div id="step3" class="hidden">
+            <label>3단계 입력:</label>
+            <input type="text" id="input3">
+            <button onclick="submitForm()">제출</button>
+        </div>
+        <div id="loading" class="hidden">
+            <p>로딩 중...</p>
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+                <div id="progress-text" class="progress-text">0%</div>
+            </div>
+        </div>
+        <button id="result-button" class="hidden" onclick="showResult()">결과 보기</button>
+        <div id="result-page" class="hidden">
+            <div class="json_data">
+                <div class="data_wrap">
+                    <div id="result_data" class="result_data"></div>
+                    <div id="final_report" class="final_report"></div>
+                </div>
+                <div class="pdf-download">
+                    <button id="download-pdf1" onclick="downloadPDF(0)">01. Brand Identity Report</button>
+                    <button id="download-pdf2" onclick="downloadPDF(1)">02. Brand Identity Report</button>
+                    <button id="download-pdf3" onclick="downloadPDF(2)">03. Brand Identity Report</button>
+                    <button id="download-pdf4" onclick="downloadPDF(3)">04. Brand Identity Report</button>
+                    <button id="download-pdf" onclick="downloadPDF(4)">05. Brand Identity Report</button>
+                </div>
+            </div>
+            <!-- PDF 미리보기 모달 -->
+            <div id="pdfModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+    <script>
+async function fetchReport() {
+    try {
+        const response = await fetch('/bx_architect_report2.json');
+        if (!response.ok) {
+            throw new Error("JSON 파일을 불러오는 데 실패했습니다.");
+        }
+        const data = await response.json();
+        console.log("JSON 데이터 확인:", data);
+
+        if (Object.keys(data).length === 0) {
+            alert("JSON 데이터가 비어 있습니다.");
+            return;
+        }
+
+        let finalReportOutput = "";
+        let resultDataOutput = "";
+
+        document.getElementById("final_report").innerHTML = ""; 
+        document.getElementById("result_data").innerHTML = "";  
+
+        // 사용자 입력 데이터 표시
+        resultDataOutput += `<h3>사용자 입력 데이터</h3>`;
+        resultDataOutput += `<p>1단계 입력: <strong>${document.getElementById("input1").value || "입력 없음"}</strong></p>`;
+        resultDataOutput += `<p>2단계 입력: <strong>${document.getElementById("input2").value || "입력 없음"}</strong></p>`;
+        resultDataOutput += `<p>3단계 입력: <strong>${document.getElementById("input3").value || "입력 없음"}</strong></p>`;
+
+        // final_report 처리
+        if (data.final_report) {
+            const lines = data.final_report.split("\n");
+
+            lines.forEach(paragraph => {
+                if (paragraph.startsWith("# ")) {
+                    finalReportOutput += `<h2>${paragraph.replace("#", "").trim()}</h2>`;
+                } else if (paragraph.startsWith("## ")) {
+                    finalReportOutput += `<h3>${paragraph.replace("##", "").trim()}</h3>`;
+                } else if (paragraph.startsWith("### ")) {
+                    finalReportOutput += `<h4>${paragraph.replace("###", "").trim()}</h4>`;
+                } else if (paragraph.startsWith("- ['")) {
+                    const link = paragraph.match(/\['(.+?)'\]/);
+                    if (link) {
+                        finalReportOutput += `<p><a href="${link[1]}" target="_blank">${link[1]}</a></p>`;
+                    }
+                } else if (paragraph.trim() !== "") {
+                    finalReportOutput += `<p>${paragraph.trim()}</p>`;
+                }
+            });
+        }
+
+        document.getElementById("result_data").innerHTML = resultDataOutput;
+        document.getElementById("final_report").innerHTML = finalReportOutput;
+
+        console.log("JSON 데이터 로드 완료:", finalReportOutput);
+    } catch (error) {
+        console.error("fetchReport 오류:", error);
+    }
+}
+
+function nextStep(currentStep) {
+    document.getElementById(`step${currentStep}`).classList.add('hidden');
+    let nextStepElement = document.getElementById(`step${currentStep + 1}`);
+    if (nextStepElement) {
+        nextStepElement.classList.remove('hidden');
+    }
+}
+
+function submitForm() {
+    document.getElementById("step3").classList.add("hidden");
+    document.getElementById("loading").classList.remove("hidden");
+    
+    let progressBar = document.getElementById("progress-bar");
+    let progressText = document.getElementById("progress-text");
+    let duration = 1;
+    let intervalTime = duration * 10;
+    let progress = 0;
+
+    let interval = setInterval(() => {
+        progress += 1;
+        progressBar.style.width = progress + "%";
+        progressText.innerText = progress + "%";
+        if (progress >= 100) {
+            clearInterval(interval);
+            document.getElementById("loading").classList.add("hidden");
+            document.getElementById("result-button").classList.remove("hidden");
+        }
+    }, intervalTime);
+}
+
+function showResult() {
+    document.getElementById("result-button").classList.add("hidden");
+    document.getElementById("result-page").classList.remove("hidden");
+    document.getElementById("download-pdf").classList.remove("hidden");
+    fetchReport();
+}
+
+function downloadPDF(buttonIndex) {
+    generatePDFWithUserInput(buttonIndex);
+}
+
+async function generatePDFWithUserInput(buttonIndex) {
+    try {
+        const templateUrl = "/src/path/test1.pdf";
+        const response = await fetch(templateUrl);
+        if (!response.ok) throw new Error("PDF 템플릿을 불러오지 못했습니다.");
+        const templateBytes = await response.arrayBuffer();
+
+        const { PDFDocument, rgb } = PDFLib;
+        const pdfDoc = await PDFDocument.load(templateBytes);
+
+        // 폰트 로드 및 등록
+        const fontkitModule = await import('https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@0.0.4/+esm');
+        pdfDoc.registerFontkit(fontkitModule.default);
+        const fontUrl = "/src/font/pretendard/Pretendard-Regular.ttf";
+        const fontBytes = await (await fetch(fontUrl)).arrayBuffer();
+        const customFont = await pdfDoc.embedFont(fontBytes);
+
+        let pages = pdfDoc.getPages();
+        let resultPage = pages[2];
+        let finalReportPage = pages[3]; 
+        let targetPage = pages.length > buttonIndex ? pages[buttonIndex] : pdfDoc.addPage([842, 595]);
+
+        let finalReportY = 780;
+        let xMargin = 60;
+        const maxY = 50;
+        const lineHeight = 24;
+
+        // 사용자 입력 값 가져오기
+        const step1 = document.getElementById("input1").value || "입력값 없음";
+        const step2 = document.getElementById("input2").value || "입력값 없음";
+        const step3 = document.getElementById("input3").value || "입력값 없음";
+
+        // JSON 데이터 가져오기
+        const responseData = await fetch('/bx_architect_report2.json');
+        const jsonData = await responseData.json();
+        const emoFunc = jsonData.compounds.emo_func_benefits[buttonIndex] || {};
+        const keyword = jsonData.compounds.compound_keywords[buttonIndex] || {};
+        const marketingSummary = jsonData.compounds.mkt_state[buttonIndex]?.marketing_summary || "마케팅 요약 없음";
+        const markdownText = jsonData.final_report || "최종 보고서 없음";
+
+        function simpleMarkdownToText(markdown) {
+            return markdown
+                .replace(/^#\s/gm, '# ')  // # 보존
+                .replace(/^##\s/gm, '## ') // ## 보존
+                .replace(/^###\s/gm, '### ') // ### 보존
+                .replace(/[*_~]/g, '') // *, _, ~ 제거 (기울임, 굵게 표시 삭제)
+                .replace(/<[^>]*>/g, '') // HTML 태그 제거
+                .replace(/\n{2,}/g, '\n'); // 연속 개행문자 줄이기
+        }
+
+        function wrapFinalReportText(text, maxChars, fontSize) {
+            let words = text.split(" ");
+            let lines = [];
+            let currentLine = "";
+
+            words.forEach(word => {
+                let testLine = currentLine.length === 0 ? word : currentLine + " " + word;
+                
+                if (testLine.length > maxChars) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = testLine;
+                }
+            });
+
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const processedText = simpleMarkdownToText(markdownText);
+        const finalReportLines = processedText.split("\n");
+
+        finalReportLines.forEach(line => {
+            let textSize = 14;
+            let indent = xMargin;
+            let lineSpacing = lineHeight;
+
+            if (line.startsWith("# ")) {
+                textSize = 28;
+                line = line.replace("# ", "").toUpperCase();
+                lineSpacing = 42;
+            } else if (line.startsWith("## ")) {
+                textSize = 22;
+                line = line.replace("## ", "");
+                lineSpacing = 34;
+            } else if (line.startsWith("### ")) {
+                textSize = 18;
+                line = line.replace("### ", "");
+                lineSpacing = 28;
+            }
+
+            const wrappedFinalReportLines = wrapFinalReportText(line, 160, textSize);
+            wrappedFinalReportLines.forEach(subLine => {
+                if (finalReportY < maxY) {
+                    finalReportPage = pdfDoc.addPage([842, 595]);
+                    finalReportY = 780;
+                }
+                finalReportPage.drawText(subLine, {
+                    x: indent,
+                    y: finalReportY,
+                    size: textSize, 
+                    font: customFont,
+                    color: rgb(1, 1, 1),
+                });
+                finalReportY -= lineSpacing;
+            });
+        });
+
+        const pdfBytes = await pdfDoc.save();
+        openModal(URL.createObjectURL(new Blob([pdfBytes], { type: "application/pdf" })));
+    } catch (error) {
+        console.error("PDF 생성 오류:", error);
+    }
+}
+
+
+
+
+
+
+
+function openModal(pdfUrl) {
+    document.getElementById("pdfViewer").src = pdfUrl;
+    document.getElementById("pdfModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("pdfModal").style.display = "none";
+    document.getElementById("pdfViewer").src = "";
+}
+
+function downloadPDFForPage(pageIndex) {
+    generatePDFWithUserInput(pageIndex);
+}
+
+
+    </script>
+</body>
+</html>
