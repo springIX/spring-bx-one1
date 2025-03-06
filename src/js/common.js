@@ -97,9 +97,11 @@ function submitForm() {
 
   let progressBar = document.getElementById("progress-bar");
   let progressText = document.getElementById("progress-text");
+  let resultButton = document.getElementById("result-button");
 
   // 60초(60000ms) ~ 120초(120000ms) 사이의 랜덤 시간 선택
-  let duration = Math.floor(Math.random() * (120 - 60 + 1) + 60); // 60~120초
+  // let duration = Math.floor(Math.random() * (120 - 60 + 1) + 60);
+  let duration = 1;
   let intervalTime = (duration * 1000) / 100; // 1%씩 업데이트 (전체 지속 시간에 맞춤)
   let progress = 0;
 
@@ -116,8 +118,7 @@ function submitForm() {
 
           // JSON 요청 완료 후 UI 업데이트
           fetchPromise.then(() => {
-              document.getElementById("loading").classList.add("hidden");
-              document.getElementById("result-button").classList.remove("hidden");
+            document.getElementById("result-button").classList.remove("hidden");
           }).catch(error => {
               console.error("데이터 로딩 중 오류 발생:", error);
               document.getElementById("loading").classList.add("hidden");
@@ -129,6 +130,7 @@ function submitForm() {
 
 
 function showResult() {
+  document.getElementById("loading").classList.add("hidden");
   document.getElementById("result-page").classList.remove("hidden");
   document.getElementById("result-button").classList.add("hidden");
 }
