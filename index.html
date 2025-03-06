@@ -139,10 +139,9 @@
       <img src="src/images/logo.svg" alt="" class="logo">
       <div class="write_box">
         <form action="">
-          <input type="button" value="랜덤아이디 생성" class="id_gen_btn">
-          <input type="text" placeholder="아이디를 입력하세요." class="id_txt" readonly>
-          <input type="button" value="Sign in" class="submit_btn" onclick="startConsulting();" data-btn="login"
-            disabled>
+          <input type="button" value="랜덤아이디 생성" class="id_gen_btn" onclick="generateRandomId()">
+          <input type="text" placeholder="아이디를 입력하세요." id="randomIdInput" class="id_txt" readonly>
+          <input type="button" value="Sign in" class="submit_btn" onclick="login()" data-btn="login" disabled>
         </form>
       </div>
     </div>
