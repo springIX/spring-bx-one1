@@ -1,66 +1,142 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>단계별 입력 폼</title>
-    <link rel="stylesheet" href="./src/css/common.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <title>BX ONE 1</title>
+
+  <link rel="stylesheet" href="./src/css/common.css">
+  <link rel="stylesheet" href="./src/css/main.css">
 </head>
+
 <body>
-    <div class="container">
-        <div id="main">
-            <button onclick="startConsulting()">브랜드 컨설팅 시작하기</button>
-        </div>
-        <div class="">
-            <div id="step1" class="hidden">
-                <label>1단계 입력:</label>
-                <input type="text" id="input1">
-                <button onclick="nextStep(1)">다음</button>
-            </div>
-            <div id="step2" class="hidden">
-                <label>2단계 입력:</label>
-                <input type="text" id="input2">
-                <button onclick="nextStep(2)">다음</button>
-            </div>
-            <div id="step3" class="hidden">
-                <label>3단계 입력:</label>
-                <input type="text" id="input3">
-                <button onclick="submitForm()">제출</button>
-            </div>
-            <div id="loading" class="hidden">
-                <p>로딩 중...</p>
-                <div class="progress-container">
-                    <div id="progress-bar" class="progress-bar"></div>
-                    <div id="progress-text" class="progress-text">0%</div>
-                </div>
-                <button id="result-button" class="hidden result-button" onclick="showResult()">결과 보기</button>
-            </div>
-            <div id="result-page" class="hidden">
-                <div class="json_data">
-                    <div class="data_wrap">
-                        <div id="result_data" class="result_data"></div>
-                        <div id="final_report" class="final_report"></div>
-                    </div>
-                    <div class="pdf-download">
-                        <button id="download-pdf1" onclick="downloadPDFForPage(0)">01. Brand Identity Report</button>
-                        <button id="download-pdf2" onclick="downloadPDFForPage(1)">02. Brand Identity Report</button>
-                        <button id="download-pdf3" onclick="downloadPDFForPage(2)">03. Brand Identity Report</button>
-                        <button id="download-pdf4" onclick="downloadPDFForPage(3)">04. Brand Identity Report</button>
-                        <button id="download-pdf5" onclick="downloadPDFForPage(4)">05. Brand Identity Report</button>
-                    </div>
-                </div>
-                <!-- PDF 미리보기 모달 -->
-                <div id="pdfModal" class="modal hidden">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-------- HEADER -------->
+  <header class="flex_cnt">
+    <a href="" class="logo">
+      <img src="src/images/logo.svg">
+    </a>
+    <div class="sub_menu flex_cnt">
+      <button href="" class="profile_btn" data-btn="login">
+        <img src="src/images/profile.png" class="cover">
+      </button>
+      <button href="" class="company_btn" data-btn="footer">
+        <i></i>
+        <i></i>
+        <i></i>
+      </button>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
-    <script src="./src/js/common.js"></script>
+  </header>
+  <!------- //HEADER ------->
+
+  <!-------- CONTENTS -------->
+  <div id="main_wrap">
+    <div id="main" class="">
+      <img src="src/images/main_visual.jpg" class="main_visual cover">
+      <video src="src/images/main_visual.mp4" muted autoplay loop playsinline class="cover"></video>
+      <div class="container">
+        <img src="src/images/main_title.svg" alt="BX ONE 1" class="main_title">
+        <p class="txt_box">작은 브랜드일수록 더욱 독보적이어야 합니다. <br>
+          BX ONE 1이 개발한 독창적인 BX-Generation 엔진으로 <br>
+          경쟁 시장에서 우뚝 설 수 있는 차별화된 브랜드 아이덴티티를 <br>
+          빠르고 간단한 절차만으로 완성해 드립니다.</p>
+        <div class="process_info flex_cnt">
+          <p>제품명, USP, 고객행동만 입력하시면, <br>
+            짧은 시간 안에 당신만의 독보적인 브랜드가 탄생합니다.</p>
+          <button onclick="startConsulting()" class="start_btn">
+            브랜드 컨설팅 시작하기
+            <img src="src/images/arr_next.svg" alt="">
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div id="step1" class="hidden">
+        <label>1단계 입력:</label>
+        <input type="text" id="input1">
+        <button onclick="nextStep(1)">다음</button>
+      </div>
+      <div id="step2" class="hidden">
+        <label>2단계 입력:</label>
+        <input type="text" id="input2">
+        <button onclick="nextStep(2)">다음</button>
+      </div>
+      <div id="step3" class="hidden">
+        <label>3단계 입력:</label>
+        <input type="text" id="input3">
+        <button onclick="submitForm()">제출</button>
+      </div>
+      <div id="loading" class="hidden">
+        <p>로딩 중...</p>
+        <div class="progress-container">
+          <div id="progress-bar" class="progress-bar"></div>
+          <div id="progress-text" class="progress-text">0%</div>
+        </div>
+        <button id="result-button" class="hidden result-button" onclick="showResult()">결과 보기</button>
+      </div>
+      <div id="result-page" class="hidden">
+        <div class="json_data">
+          <div class="data_wrap">
+            <div id="result_data" class="result_data"></div>
+            <div id="final_report" class="final_report"></div>
+          </div>
+          <div class="pdf-download">
+            <button id="download-pdf1" onclick="downloadPDFForPage(0)">01. Brand Identity Report</button>
+            <button id="download-pdf2" onclick="downloadPDFForPage(1)">02. Brand Identity Report</button>
+            <button id="download-pdf3" onclick="downloadPDFForPage(2)">03. Brand Identity Report</button>
+            <button id="download-pdf4" onclick="downloadPDFForPage(3)">04. Brand Identity Report</button>
+            <button id="download-pdf5" onclick="downloadPDFForPage(4)">05. Brand Identity Report</button>
+          </div>
+        </div>
+        <!-- PDF 미리보기 모달 -->
+        <div id="pdfModal" class="modal hidden">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!------- //CONTENTS ------->
+
+  <!-------- LOGIN -------->
+  <!------- //LOGIN ------->
+  <div class="pop_wrap" data-toggle="login">
+    <div class="dim cover" data-btn="login"></div>
+    <div class="login_box p_center">
+      <div class="tit">
+        <img src="src/images/profile.svg" alt="">
+        <p>로그인</p>
+      </div>
+      <img src="src/images/logo.svg" alt="" class="logo">
+      <div class="write_box">
+        <form action="">
+          <input type="text" placeholder="아이디를 입력하세요." readonly>
+          <input type="button" value="랜덤아이디 생성">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+  <script src="./src/js/jquery.js"></script>
+  <script src="./src/js/common.js"></script>
+  <script>
+    $(function () {
+      /********* BTN FUNCTION *********/
+      $('[data-btn]').click(function (e) {
+        let btn_vals = $(this).data('btn').toString().split(',');
+        btn_vals.forEach(function (btn_val) {
+          $(`[data-toggle=${btn_val.trim()}]`).toggleClass('on');
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>

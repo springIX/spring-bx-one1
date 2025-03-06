@@ -1,136 +1,152 @@
+@charset "UTF-8";
+/* Responsive */
+/* Ellipsis */
+@import url("layout.css");
+@font-face {
+  font-family: "Pretendard";
+  font-display: swap;
+  src: url(../font/pretendard/Pretendard-Light.eot);
+  src: local("☺"), url(../font/pretendard/Pretendard-Light.eot#iefix) format("embedded-opentype"), url(../font/pretendard/Pretendard-Light.woff2) format("woff2"), url(../font/pretendard/Pretendard-Light.woff) format("woff"), url(../font/pretendard/Pretendard-Light.otf) format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  font-display: swap;
+  src: url(../font/pretendard/Pretendard-Regular.eot);
+  src: local("☺"), url(../font/pretendard/Pretendard-Regular.eot#iefix) format("embedded-opentype"), url(../font/pretendard/Pretendard-Regular.woff2) format("woff2"), url(../font/pretendard/Pretendard-Regular.woff) format("woff"), url(../font/pretendard/Pretendard-Regular.otf) format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  font-display: swap;
+  src: url(../font/pretendard/Pretendard-Medium.eot);
+  src: local("☺"), url(../font/pretendard/Pretendard-Medium.eot#iefix) format("embedded-opentype"), url(../font/pretendard/Pretendard-Medium.woff2) format("woff2"), url(../font/pretendard/Pretendard-Medium.woff) format("woff"), url(../font/pretendard/Pretendard-Medium.otf) format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  font-display: swap;
+  src: url(../font/pretendard/Pretendard-SemiBold.eot);
+  src: local("☺"), url(../font/pretendard/Pretendard-SemiBold.eot#iefix) format("embedded-opentype"), url(../font/pretendard/Pretendard-SemiBold.woff2) format("woff2"), url(../font/pretendard/Pretendard-SemiBold.woff) format("woff"), url(../font/pretendard/Pretendard-SemiBold.otf) format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  font-display: swap;
+  src: url(../font/pretendard/Pretendard-Bold.eot);
+  src: local("☺"), url(../font/pretendard/Pretendard-Bold.eot#iefix) format("embedded-opentype"), url(../font/pretendard/Pretendard-Bold.woff2) format("woff2"), url(../font/pretendard/Pretendard-Bold.woff) format("woff"), url(../font/pretendard/Pretendard-Bold.otf) format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  font-display: swap;
+  src: url(../font/pretendard/Pretendard-ExtraBold.eot);
+  src: local("☺"), url(../font/pretendard/Pretendard-ExtraBold.eot#iefix) format("embedded-opentype"), url(../font/pretendard/Pretendard-ExtraBold.woff2) format("woff2"), url(../font/pretendard/Pretendard-ExtraBold.woff) format("woff"), url(../font/pretendard/Pretendard-ExtraBold.otf) format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+html {
+  height: 100%;
+  font-size: 1px;
+}
+@media (max-width: 1640px) {
+  html {
+    font-size: 0.06097561vw;
+  }
+}
+@media (max-width: 750px) {
+  html {
+    font-size: 0.266666667vw;
+  }
+}
+
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 50px;
+  min-width: 320px;
+  color: #fff;
+  font-family: "Pretendard";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  word-wrap: break-word;
+  word-break: keep-all;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  outline: none !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+::placeholder {
+  color: #6c6c6c;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: 0 none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+  border: none;
+  width: 100%;
 }
 
 .container {
-  max-width: 1920px;
-  overflow: hidden;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1564rem;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  position: relative;
 }
 
+/**********************/
 .hidden {
   display: none;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.data_wrap {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.result_data,
-.final_report {
-  width: 50%;
-  text-align: left;
-}
-
-.pdf-download {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-
-button {
-  padding: 10px;
-  margin-top: 10px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-#loading {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.progress-container {
-  width: 100%;
-  background-color: #ccc;
-  border-radius: 5px;
-  margin-top: 20px;
-  height: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background-color: #007bff;
-  border-radius: 5px;
-  transition: width 0.2s ease-in-out;
-}
-
-.progress-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.result-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.result-button.show {
-  display: inline-block;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  background-color: white;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 70%;
-  height: 100%;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  font-size: 30px;
-  cursor: pointer;
 }

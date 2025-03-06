@@ -1,0 +1,101 @@
+@charset "utf-8";
+@import "var";
+
+.cover{ width: 100%; height: 100%; object-fit: cover; position: absolute; left: 0; top: 0;}
+.f_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.p_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.taC {
+  text-align: center;
+}
+.taL {
+  text-align: left;
+}
+.taR {
+  text-align: right;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+.flex_cnt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.flex_btm {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.dot_txt,
+.dot_list > li {
+  position: relative;
+  padding-left: 18rem;
+  @include screen("mo") {
+    padding-left: 12rem;
+  }
+}
+.dot_txt::before,
+.dot_list > li::before {
+  content: "•";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: -2rem;
+}
+
+/********** HEADER **********/
+header{ padding: 50rem 40rem; position: fixed; left: 0; top: 0; width: 100%; z-index: 999;
+  .logo{ width: 130rem;}
+  .sub_menu{ gap: 22rem;
+    .profile_btn{ width: 32rem; height: 32rem; overflow: hidden; position: relative; border-radius: 50%;}
+    .company_btn{ width: 32rem; height: 18rem; position: relative;
+      i{ width: 100%; height: 2rem; background-color: $white; position: absolute; left: 0;
+        &:nth-child(1){ top: 0;}
+        &:nth-child(2){ top: 50%; transform: translateY(-50%);}
+        &:nth-child(3){ bottom: 0;}
+      }
+    }
+  }
+}
+
+/********** LOGIN **********/
+.pop_wrap{ position: fixed; left: 0; top: 0; z-index: 1000; width: 100%; height: 100%; touch-action: none; pointer-events: none; opacity: 0; transition: .5s ease;
+  &.on{ touch-action: auto; pointer-events: auto; opacity: 1;
+    .login_box{ transform: translate(-50%, -50%); opacity: 1; touch-action: auto; pointer-events: auto;}
+  }
+  .login_box{ transform: translate(-50%, -30%); opacity: 0; touch-action: none; transition: 1s ease; pointer-events: none; border-radius: 24px; border: 1px solid $white; background: linear-gradient(0deg, rgba(196, 196, 196, 0.10) 0%, rgba(196, 196, 196, 0.10) 100%), linear-gradient(106deg, rgba(255, 21, 133, 0.25) 6.52%, rgba(0, 133, 255, 0.00) 92.88%); backdrop-filter: blur(50px); width: 420rem; padding:32rem;
+    .tit{ display: flex; align-items: center; @include font-size(24rem); font-weight: bold;
+      img{ width: 24rem; margin-right: 4rem;}
+    }
+    .logo{ width: 130rem; margin: 54rem auto 48rem;}
+    .write_box{
+      input{ width: 100%; height: 56rem; padding: 0 24rem; background-color: $white; border-radius: 8rem;
+        &[type=text]{ color: $black; cursor:auto;}
+        &[type=button]{ margin-top:24rem; background-color: $black;}
+      }
+    }
+  }
+}
+
+
+@include screen("pc") {
+  .mo{ display: none !important;}
+}
+@include screen("mo") {
+  .pc{ display: none !important;}
+}
