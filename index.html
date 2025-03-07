@@ -34,7 +34,7 @@
 
   <!-------- CONTENTS -------->
   <div id="main_wrap">
-    <div id="main" class="">
+    <div id="main" class="hidden">
       <video src="src/images/main_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <div class="container">
         <img src="src/images/main_title.svg" alt="BX ONE 1" class="main_title">
@@ -52,11 +52,15 @@
         </div>
       </div>
     </div>
-    <div id="survey_wrap" class="hidden">
+    <div id="survey_wrap">
       <video src="src/images/sub_visual.mp4" muted autoplay loop playsinline class="cover"></video>
+      <p class="survey_tit">
+        <img src="src/images/ico_light.svg" alt="">
+        BX-Generation
+      </p>
       <div class="survey_lnb">
         <ol>
-          <li>
+          <li class="complete">
             <p class="tit">STEP 1</p>
             <button onclick="nextStep(0)">이에르 카페</button>
           </li>
@@ -71,54 +75,97 @@
         </ol>
       </div>
 
-      <div id="step1" class="survey_box hidden">
+      <div id="step1" class="survey_box">
         <div class="survey_cont">
-          <label>1단계 입력:</label>
-          <input type="text" id="input1">
-          <button onclick="nextStep(1)">다음</button>
+          <div class="con_box">
+            <div class="txt_box">
+              <span>STEP 1</span>
+              <p>당신의 브랜드 or <br>제품명을 입력해주세요.</p>
+            </div>
+            <button class="example_btn" data-btn="example1" data-toggle="example">예시보기</button>
+            <ul class="example_list" data-toggle="example1">
+              <li>고급 원단과 간결한 디자인으로 완성한 타임리스 스타일</li>
+              <li>6세부터 쉽게 배우는 AI 코딩 프로그램</li>
+              <li>탄소배출을 줄이는 에코 패키징 & 배송 솔루션</li>
+              <li>완벽한 수납과 공간 활용이 돋보이는 스마트 하우징</li>
+            </ul>
+          </div>
+          <div class="write_box">
+            <input type="text" id="input1">
+            <button onclick="nextStep(1)">STEP 2<img src="src/images/arr_next_bold.svg" alt=""></button>
+          </div>
         </div>
       </div>
       <div id="step2" class="survey_box hidden">
         <div class="survey_cont">
-          <label>2단계 입력:</label>
-          <input type="text" id="input2">
-          <button onclick="nextStep(2)">다음</button>
+          <div class="con_box">
+            <div class="txt_box">
+              <span>STEP 2</span>
+              <p>브랜드 or 제품의 <br>핵심강점/ USP를 입력해주세요.</p>
+            </div>
+            <button class="example_btn" data-btn="example2" data-toggle="example">예시보기</button>
+            <ul class="example_list" data-toggle="example2">
+              <li></li>
+            </ul>
+          </div>
+          <div class="write_box">
+            <input type="text" id="input2">
+            <button onclick="nextStep(2)">STEP 3<img src="src/images/arr_next_bold.svg" alt=""></button>
+          </div>
         </div>
       </div>
       <div id="step3" class="survey_box hidden">
         <div class="survey_cont">
-          <label>3단계 입력:</label>
-          <input type="text" id="input3">
-          <button onclick="submitForm()">제출</button>
+          <div class="con_box">
+            <div class="txt_box">
+              <span>STEP 3</span>
+              <p>고객이 우리 브랜드를 찾고 <br>
+                선택해야 하는 이유를 알고 싶다면, <br>
+                아래 질문 중 하나를 선택하거나 <br>
+                직접 입력해보세요.</p>
+            </div>
+            <button class="example_btn" data-btn="example3" data-toggle="example">예시보기</button>
+            <ul class="example_list" data-toggle="example3">
+              <li></li>
+            </ul>
+          </div>
+          <div class="write_box">
+            <input type="text" id="input3">
+            <button onclick="submitForm()">제출</button>
+          </div>
         </div>
       </div>
       <div id="loading" class="hidden">
-        <p>로딩 중...</p>
-        <div class="progress-container">
-          <div id="progress-bar" class="progress-bar"></div>
-          <div id="progress-text" class="progress-text">0%</div>
+        <div class="survey_cont">
+          <p>로딩 중...</p>
+          <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+            <div id="progress-text" class="progress-text">0%</div>
+          </div>
+          <button id="result-button" class="hidden result-button" onclick="showResult()">결과 보기</button>
         </div>
-        <button id="result-button" class="hidden result-button" onclick="showResult()">결과 보기</button>
       </div>
       <div id="result-page" class="hidden">
-        <div class="json_data">
-          <div class="data_wrap">
-            <div id="result_data" class="result_data"></div>
-            <div id="final_report" class="final_report"></div>
+        <div class="container">
+          <div class="json_data">
+            <div class="data_wrap">
+              <div id="result_data" class="result_data"></div>
+              <div id="final_report" class="final_report"></div>
+            </div>
+            <div class="pdf-download">
+              <button id="download-pdf1" onclick="downloadPDFForPage(0)">01. Brand Identity Report</button>
+              <button id="download-pdf2" onclick="downloadPDFForPage(1)">02. Brand Identity Report</button>
+              <button id="download-pdf3" onclick="downloadPDFForPage(2)">03. Brand Identity Report</button>
+              <button id="download-pdf4" onclick="downloadPDFForPage(3)">04. Brand Identity Report</button>
+              <button id="download-pdf5" onclick="downloadPDFForPage(4)">05. Brand Identity Report</button>
+            </div>
           </div>
-          <div class="pdf-download">
-            <button id="download-pdf1" onclick="downloadPDFForPage(0)">01. Brand Identity Report</button>
-            <button id="download-pdf2" onclick="downloadPDFForPage(1)">02. Brand Identity Report</button>
-            <button id="download-pdf3" onclick="downloadPDFForPage(2)">03. Brand Identity Report</button>
-            <button id="download-pdf4" onclick="downloadPDFForPage(3)">04. Brand Identity Report</button>
-            <button id="download-pdf5" onclick="downloadPDFForPage(4)">05. Brand Identity Report</button>
-          </div>
-        </div>
-        <!-- PDF 미리보기 모달 -->
-        <div id="pdfModal" class="modal hidden">
-          <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+          <!-- PDF 미리보기 모달 -->
+          <div id="pdfModal" class="modal hidden">
+            <div class="modal-content">
+              <span class="close" onclick="closeModal()">&times;</span>
+              <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -164,6 +211,9 @@
       $('.login_box .id_gen_btn').click(function () {
         $('.login_box .submit_btn').attr('disabled', false);
       });
+
+      /********* SURVEY *********/
+
     });
   </script>
 </body>
