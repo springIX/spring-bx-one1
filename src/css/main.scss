@@ -75,7 +75,21 @@ $survey_pdt: 162rem;
         .txt_box{ margin-bottom: 20rem; 
           span{ display: block; @include font-size(32rem);}
           .tit{ display: block; @include font-size(56rem); line-height: 1.2; margin-top: 29rem;}
-          .loading_info{}
+          .loading_info{ display: flex; align-items: center; margin-top: 32rem;
+            p{ width: max-content; margin-right: 15rem;}
+            .loader{ display: block; width: 20px; height: 20px; border-radius: 50%; border:2px solid $white; position: relative; animation: loading1 1s linear infinite;
+              &::after{ content: ""; box-sizing: border-box; position: absolute; inset: 0px; border-radius: 50%; border: 2px solid $ci; animation: loading2 2s linear infinite alternate-reverse; width: 100%; height: 100%;}
+              @keyframes loading1 {
+                0%   {transform: rotate(0deg);}
+                100%   {transform: rotate(360deg);}
+              }              
+              @keyframes loading2 {
+                  0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0);}
+                  50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+                  90%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%);}
+              }
+            }
+          }
         }
         .example_btn{ display: flex; align-items: center;
           &::after{ content: ''; width: 12rem; height: 11rem; background: url(../images/ico_file.svg)no-repeat center center / contain; margin:1rem 0 0 10rem;}
@@ -115,7 +129,7 @@ $survey_pdt: 162rem;
         .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(300rem); font-weight: 700; text-align: right; line-height: 1;}
         .progress_container{position: relative;
           .progress_bar_wrap{ padding: 5rem;
-            .progress_bar{ height: 100%; border-radius: 130px; background: linear-gradient(90deg, #6132D3 0.18%, #FF1585 99.82%);}
+            .progress_bar{ width: 0%; height: 100%; border-radius: 130px; background: linear-gradient(90deg, #6132D3 0.18%, #FF1585 99.82%);}
           }
         }
         .result_button{  display: flex; align-items: center; @include font-size(16rem); padding: 18rem 15rem; background-color: $ci; color: $white; border-radius: 8rem; margin: 80rem auto 0; touch-action: none; pointer-events: none; transform: translateY(50rem); opacity: 0; transition: 1s ease; position: relative;

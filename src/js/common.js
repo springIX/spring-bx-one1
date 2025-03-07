@@ -78,6 +78,143 @@ function startConsulting() {
   document.getElementById("step1").classList.remove("hidden");
 }
 
+// 예시보기 문구들
+const example_txt_name = [
+  "이에르 커피",
+  "블렌드엑스 종합광고대행사",
+  "퓨전미식당",
+  "네이처뷰 화장품",
+  "이지핏 피트니스 센터",
+  "에코홈 인테리어",
+  "트렌디 마켓",
+  "스마트러닝 교육 플랫폼",
+  "하모니 오디오",
+  "비전 테크솔루션"
+];
+const example_txt_benefit = [
+  "챔피언 바리스타의 신선 로스팅 · 깊은 풍미 에스프레소",
+  "소비자 인사이트 · 차별화 크리에이티브 광고",
+  "현지 재료 + 세계 요리의 독창적 퓨전",
+  "100% 자연 유래 · 민감 피부 안전 · 본연의 아름다움",
+  "최신 기구 & 전문 트레이너 · 맞춤 운동 프로그램",
+  "친환경 소재 + 최신 디자인 · 지속 가능한 인테리어",
+  "최신 유행 아이템 · 합리적 가격 · 다채로운 구성",
+  "AI 맞춤 교육 · 학습 효율 극대화",
+  "최첨단 음향 기술 · 세련된 디자인",
+  "맞춤형 IT 솔루션 · 디지털 전환 · 경쟁력 강화"
+];
+const example_txt_choose = [
+  ["카페에서 커피를 선택할 때 가장 중요하게 고려하는 요소는 무엇인가요?",
+    "바리스타의 로스팅 기술이나 전문성이 구매 결정에 영향을 주나요?",
+    "커피의 산미, 고소함, 향 등 어떤 맛 프로필을 선호하시나요?",
+    "신선하게 로스팅된 원두의 맛이 구매 의사에 어떤 영향을 미치나요?"],
+
+  ["광고대행사를 선택할 때 가장 중요하게 고려하는 기준은 무엇인가요?",
+    "서비스 비용, 과거 캠페인 성공 사례, 크리에이티브 제안 중 어떤 요소가 가장 큰 영향을 미치나요?",
+    "의뢰 시, 광고대행사의 전략적 접근 방식이나 고객 맞춤형 서비스에 대해 어떻게 평가하시나요?",
+    "광고 파트너 선정 과정에서 개선되었으면 하는 점은 무엇인가요?"],
+
+  ["퓨전 요리를 선택할 때 가장 매력적으로 느끼는 요소는 무엇인가요?",
+    "현지 재료와 국제 요리법의 조화에 대해 어떻게 생각하시나요?",
+    "새로운 맛의 경험과 전통적인 맛 중 어느 쪽에 더 큰 가치를 두시나요?",
+    "메뉴 구성이나 가격대는 선택에 어떤 영향을 미치나요?"],
+
+  ["화장품 선택 시 자연 유래 성분의 비중은 어느 정도인가요?",
+    "피부에 자극 없이 효과를 느낄 수 있는 제품에 대해 어떻게 평가하시나요?",
+    "제품의 가격대와 품질 사이의 균형에 대해 어떤 기대를 가지시나요?",
+    "패키지 디자인이나 브랜드 신뢰도가 구매 결정에 미치는 영향은 어느 정도인가요?"],
+
+  ["피트니스 센터를 선택할 때 가장 중요하게 고려하는 요소는 무엇인가요?",
+    "최신 운동기구와 전문 트레이너의 역할이 얼마나 중요하다고 생각하시나요?",
+    "맞춤형 운동 프로그램의 효과와 만족도에 대해 어떻게 평가하시나요?",
+    "운영 시간, 위치, 멤버십 비용 등 기타 요소도 선택에 영향을 미치나요?"],
+
+  ["인테리어를 선택할 때 친환경 소재 사용 여부가 중요한 결정 요소인가요?",
+    "최신 디자인 트렌드와 친환경 요소의 조화에 대해 어떻게 생각하시나요?",
+    "실내 공기질, 에너지 효율성 등 지속 가능성이 주는 장점을 어느 정도 고려하시나요?",
+    "예산과 친환경 디자인 사이에서 우선 순위는 어떻게 결정하시나요?"],
+
+  ["온라인 쇼핑 시 가장 중요하게 생각하는 요소는 무엇인가요?",
+    "최신 유행 아이템에 대한 기대와 실제 구매 경험은 어떻게 일치하나요?",
+    "상품 가격, 품질, 고객 리뷰 중 어떤 요소가 구매 결정에 가장 큰 영향을 미치나요?",
+    "쇼핑몰의 상품 구성과 추천 시스템에 대해 어떻게 평가하시나요?"],
+
+  ["맞춤형 교육 프로그램이 학습 성과에 미치는 영향에 대해 어떻게 생각하시나요?",
+    "AI 기반 추천 시스템이 개인 학습에 얼마나 도움이 되었나요?",
+    "플랫폼 사용 중 가장 만족스러웠던 기능과 개선되었으면 하는 부분은 무엇인가요?",
+    "학습 진도 관리와 피드백 시스템이 학습 동기 부여에 미치는 영향은 어느 정도인가요?"],
+
+  ["오디오 제품 구매 시 가장 중요한 기준은 무엇인가요?",
+    "음향 기술과 제품 디자인 중 어느 쪽이 구매 결정에 더 큰 영향을 미치나요?",
+    "실내 환경에 최적화된 음향 성능에 대한 만족도는 어느 정도인가요?",
+    "가격 대비 성능과 디자인 만족도에 대해 어떻게 평가하시나요?"],
+
+  ["IT 솔루션 제공업체 선정 시 가장 중점을 두는 요소는 무엇인가요?",
+    "과거의 성공 사례와 맞춤형 서비스 제공이 의사결정에 미치는 영향은 어느 정도인가요?",
+    "비용, 기술 지원, 프로젝트 관리 등 각각의 요소에 대해 어떻게 평가하시나요?",
+    "디지털 전환을 추진하면서 가장 필요로 하는 지원은 무엇이라고 생각하시나요?"]
+];
+
+// 중복 없이 무작위로 4개 선택하는 함수
+function getRandomItems(array, count) {
+  let shuffled = array.slice().sort(() => 0.5 - Math.random()); // 배열 섞기
+  return shuffled.slice(0, count); // 앞에서 4개 선택
+}
+
+// 제품명 예시보기 추출
+function insertExampleName() {
+  const exampleList = document.querySelector('.example_list[data-toggle="brand_name"]');
+  if (!exampleList) return;
+
+  let selectedItems = getRandomItems(example_txt_name, 4); // 4개 선택
+
+  exampleList.innerHTML = ""; // 기존 내용 초기화
+  selectedItems.forEach(item => {
+    let li = document.createElement("li");
+    li.textContent = item;
+    exampleList.appendChild(li);
+  });
+}
+
+// 특장점 예시보기 추출
+function insertExampleBenefit() {
+  const exampleList = document.querySelector('.example_list[data-toggle="brand_benefit"]');
+  if (!exampleList) return;
+
+  let selectedItems = getRandomItems(example_txt_benefit, 4); // 4개 선택
+
+  exampleList.innerHTML = ""; // 기존 내용 초기화
+  selectedItems.forEach(item => {
+    let li = document.createElement("li");
+    li.textContent = item;
+    exampleList.appendChild(li);
+  });
+}
+
+// 선택해야 하는 이유 예시보기 추출
+function getRandomQuestions(array) {
+  return array.map(group => group[Math.floor(Math.random() * group.length)]);
+}
+
+function insertExampleChoose() {
+  const exampleList = document.querySelector('.example_list[data-toggle="example_txt_choose"]');
+  if (!exampleList) return;
+
+  let selectedQuestions = getRandomQuestions(example_txt_choose); // 각 묶음에서 하나씩 선택
+
+  exampleList.innerHTML = ""; // 기존 내용 초기화
+  selectedQuestions.forEach(question => {
+    let li = document.createElement("li");
+    li.textContent = question;
+    exampleList.appendChild(li);
+  });
+}
+
+// 실행
+insertExampleName();
+insertExampleBenefit();
+insertExampleChoose();
+
 // 값 전달 후 이동
 function nextStep(currentStep) {
   document.getElementById(`step${currentStep}`).classList.add('hidden');
@@ -138,8 +275,8 @@ inputFields.forEach((inputField, index) => {
 function submitForm() {
   document.getElementById("step3").classList.add("hidden");
   document.getElementById("loading").classList.remove("hidden");
+  document.getElementById("loading").classList.add("active");
   document.getElementById("main_wrap").classList.add("consulting_end");
-
 
   let buttonClicked = event.target;
   let inputField = buttonClicked.previousElementSibling;
@@ -152,18 +289,52 @@ function submitForm() {
   let resultButton = document.getElementById("result-button");
 
   // 60초(60000ms) ~ 120초(120000ms) 사이의 랜덤 시간 선택
-  // let duration = Math.floor(Math.random() * (120 - 60 + 1) + 60);
-  let duration = 1;
-  let intervalTime = (duration * 1000) / 100; // 1%씩 업데이트 (전체 지속 시간에 맞춤)
+  let duration = Math.floor(Math.random() * (120 - 60 + 1) + 60);
+  // let intervalTime = (duration * 1000) / 100; // 1%씩 업데이트 (전체 지속 시간에 맞춤)
+  let intervalTime = 10;
   let progress = 0;
 
   // 로딩이 진행되는 동안 JSON 데이터를 가져옴
   let fetchPromise = fetchReport();
 
+  // 랜덤 텍스트 : 로딩 중 일때
+  const loadingTxt = [
+    ["1-1번째텍스트", "1-2번째텍스트", "1-3번째텍스트", "1-5번째텍스트", "1-5번째텍스트"],
+    ["2-1번째텍스트", "2-2번째텍스트", "2-3번째텍스트", "2-5번째텍스트", "2-5번째텍스트"],
+    ["3-1번째텍스트", "3-2번째텍스트", "3-3번째텍스트", "3-5번째텍스트", "3-5번째텍스트"],
+    ["4-1번째텍스트", "4-2번째텍스트", "4-3번째텍스트", "4-5번째텍스트", "4-5번째텍스트"]
+  ];
+  const loadingRandPick = loadingTxt.map(group =>
+    group[Math.floor(Math.random() * group.length)]
+  );
+
+
+  // 텍스트가 표시될 요소
+  const displayElement = document.getElementById("loading_info");
+
+  // 초기값 (첫 번째 그룹에서 무작위 선택)
+  displayElement.textContent = loadingTxt[0][Math.floor(Math.random() * loadingTxt[0].length)];
+
+  let changePoints = [
+    Math.floor(Math.random() * (30 - 20 + 1)) + 20,
+    Math.floor(Math.random() * (55 - 45 + 1)) + 45,
+    Math.floor(Math.random() * (80 - 70 + 1)) + 70
+  ];
+
   let interval = setInterval(() => {
     progress += 1;
     progressBar.style.width = progress + "%";
     progressText.innerText = progress + "%";
+
+    if (progress === changePoints[0]) {
+      displayElement.textContent = loadingTxt[1][Math.floor(Math.random() * loadingTxt[1].length)];
+    }
+    if (progress === changePoints[1]) {
+      displayElement.textContent = loadingTxt[2][Math.floor(Math.random() * loadingTxt[2].length)];
+    }
+    if (progress === changePoints[2]) {
+      displayElement.textContent = loadingTxt[3][Math.floor(Math.random() * loadingTxt[3].length)];
+    }
 
     if (progress >= 100) {
       clearInterval(interval);
@@ -179,6 +350,7 @@ function submitForm() {
     }
   }, intervalTime);
 }
+
 
 
 function showResult() {
@@ -333,7 +505,7 @@ async function generatePDFWithUserInput(buttonIndex) {
     addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 800, 60, customFont, pinkColor, 72);
     addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 300, 24, customFont, rgb(1, 1, 1), 32);
     
-    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 550, 760, 56, customFont, rgb(1, 1, 1), 80);
+    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 361, 750, 56, customFont, rgb(1, 1, 1), 80);
     
     
     addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 450, 20, customFont, rgb(1, 1, 1), 32);
@@ -396,6 +568,3 @@ function closeModal() {
 function downloadPDFForPage(pageIndex) {
   generatePDFWithUserInput(pageIndex);
 }
-
-
-// 추가한 코드

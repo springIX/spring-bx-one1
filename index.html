@@ -42,7 +42,7 @@
           BX ONE 1이 개발한 독창적인 BX-Generation 엔진으로 <br>
           경쟁 시장에서 우뚝 설 수 있는 차별화된 브랜드 아이덴티티를 <br>
           빠르고 간단한 절차만으로 완성해 드립니다.</p>
-        <div class="process_info flex_cnt  ani_fade">
+        <div class="process_info flex_cnt ani_fade">
           <p>제품명, USP, 고객행동만 입력하시면, <br>
             짧은 시간 안에 당신만의 독보적인 브랜드가 탄생합니다.</p>
           <button data-btn="login" class="start_btn">
@@ -85,13 +85,8 @@
                 <strong class="fx"><b>제품명을 입력해주세요.</b></strong>
               </div>
             </div>
-            <button class="example_btn ani_fadeup ani_dly3" data-btn="example1" data-toggle="example">예시보기</button>
-            <ul class="example_list" data-toggle="example1">
-              <li>고급 원단과 간결한 디자인으로 완성한 타임리스 스타일</li>
-              <li>6세부터 쉽게 배우는 AI 코딩 프로그램</li>
-              <li>탄소배출을 줄이는 에코 패키징 & 배송 솔루션</li>
-              <li>완벽한 수납과 공간 활용이 돋보이는 스마트 하우징</li>
-            </ul>
+            <button class="example_btn ani_fadeup ani_dly3" data-btn="brand_name" data-toggle="brand_name">예시보기</button>
+            <ul class="example_list" data-toggle="brand_name"></ul>
           </div>
           <div class="write_box">
             <input type="text" id="input1" class="answer_input">
@@ -109,8 +104,9 @@
                 <strong class="fx"><b>핵심강점/ USP를 입력해주세요.</b></strong>
               </div>
             </div>
-            <button class="example_btn ani_fadeup ani_dly3" data-btn="example2" data-toggle="example">예시보기</button>
-            <ul class="example_list" data-toggle="example2">
+            <button class="example_btn ani_fadeup ani_dly3" data-btn="example_txt_benefit"
+              data-toggle="example_txt_benefit">예시보기</button>
+            <ul class="example_list" data-toggle="example_txt_benefit">
               <li></li>
             </ul>
           </div>
@@ -132,8 +128,9 @@
                 <strong class="fx"><b>직접 입력해보세요. </b></strong>
               </div>
             </div>
-            <button class="example_btn ani_fadeup ani_dly5" data-btn="example3" data-toggle="example">예시보기</button>
-            <ul class="example_list" data-toggle="example3">
+            <button class="example_btn ani_fadeup ani_dly5" data-btn="example_txt_choose"
+              data-toggle="example_txt_choose">예시보기</button>
+            <ul class="example_list" data-toggle="example_txt_choose">
               <li></li>
             </ul>
           </div>
@@ -147,10 +144,13 @@
         <div class="survey_cont">
           <div class="con_box">
             <div class="txt_box">
-              <strong>BX-Generation <br>
-                보고서 완성까지 약 1~2분 소요됩니다.</strong>
+              <div class="tit">
+                <strong class="fx"><b>BX-Generation</b></strong>
+                <strong class="fx"><b>보고서 완성까지 약 1~2분 소요됩니다.</b></strong>
+              </div>
               <div class="loading_info">
-                <p>입력하신 정보를 바탕으로 검색 쿼리 생성 중...</p>
+                <p id="loading_info"></p>
+                <i class="loader"></i>
               </div>
             </div>
           </div>
@@ -266,7 +266,6 @@
   <script src="./src/js/jquery.js"></script>
   <script src="./src/js/front_spring_bx.js"></script>
   <script src="./src/js/common.js"></script>
-  <script src="./src/js/rand_txt.js"></script>
   <script>
     $(function () {
       /********* BTN FUNCTION *********/
