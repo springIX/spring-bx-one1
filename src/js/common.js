@@ -1,21 +1,19 @@
 async function generateRandomId() {
   try {
-    const response = await fetch('https://148a-220-118-59-188.ngrok-free.app/rand_id');
+    const url = `https://148a-220-118-59-188.ngrok-free.app/api/rand_id?nocache=${Date.now()}`;
+    const response = await fetch(url, { cache: "no-store" });
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
-    const responseText = await response.text();
-    console.log("서버 응답 원본:", responseText);
-
-    const data = await response.json();
+    const data = JSON.parse(responseText);
     const randomId = data.random_id;
     console.log(randomId);
 
     document.getElementById("randomIdInput").value = randomId;
     sessionStorage.setItem("random_id", randomId);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 
@@ -64,13 +62,20 @@ async function fetchReport() {
           user_query: input3
       };
 
-      const response = await fetch('https://7080-220-118-59-188.ngrok-free.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
+      const response = await fetch('/bx_architect_report2.json', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
           },
           body: JSON.stringify(requestData)
       });
+      // const response = await fetch('https://148a-220-118-59-188.ngrok-free.app/bx_one', {
+      //     method: 'POST',
+      //     headers: {
+      //         'Content-Type': 'application/json'
+      //     },
+      //     body: JSON.stringify(requestData)
+      // });
 
       if (!response.ok) {
           const errorText = await response.text(); // 오류 내용 출력
@@ -265,7 +270,7 @@ async function generatePDFWithUserInput(buttonIndex) {
           const wrappedLines = wrapFinalReportText(text, maxWidth, fontSize);
           wrappedLines.forEach(line => {
               page.drawText(line, { x, y, maxWidth, size: fontSize, color: color, lineHeight: lineHeight, font: customFont});
-              y -= 28; // ✅ 이제 줄 간격이 조절 가능!
+              y -= 28;
           });
       }
 
