@@ -136,6 +136,7 @@ async function fetchReport() {
 function startConsulting() {
   document.getElementById("main").classList.add("hidden");
   document.getElementById("step1").classList.remove("hidden");
+  document.getElementById("survey_wrap").classList.remove("hidden");
 }
 
 function nextStep(currentStep) {

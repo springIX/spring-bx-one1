@@ -34,7 +34,7 @@
 
   <!-------- CONTENTS -------->
   <div id="main_wrap">
-    <div id="main" class="hidden">
+    <div id="main">
       <video src="src/images/main_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <div class="container">
         <img src="src/images/main_title.svg" alt="BX ONE 1" class="main_title">
@@ -45,14 +45,18 @@
         <div class="process_info flex_cnt">
           <p>제품명, USP, 고객행동만 입력하시면, <br>
             짧은 시간 안에 당신만의 독보적인 브랜드가 탄생합니다.</p>
-          <button data-btn="login" class="start_btn">
+          <!-- <button data-btn="login" class="start_btn">
+            브랜드 컨설팅 시작하기
+            <img src="src/images/arr_next.svg" alt="">
+          </button> -->
+          <button class="start_btn" onClick="startConsulting();">
             브랜드 컨설팅 시작하기
             <img src="src/images/arr_next.svg" alt="">
           </button>
         </div>
       </div>
     </div>
-    <div id="survey_wrap">
+    <div id="survey_wrap" class="hidden">
       <video src="src/images/sub_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <p class="survey_tit">
         <img src="src/images/ico_light.svg" alt="">
@@ -75,7 +79,7 @@
         </ol>
       </div>
 
-      <div id="step1" class="survey_box">
+      <div id="step1" class="survey_box hidden">
         <div class="survey_cont">
           <div class="con_box">
             <div class="txt_box">
@@ -171,7 +175,7 @@
         <div class="container">
           <div class="json_data">
             <div class="data_wrap">
-              <div id="result_data" class="result_data" data-btn="pdf"></div>
+              <div id="result_data" class="result_data"></div>
               <div id="final_report" class="final_report"></div>
             </div>
             <div class="pdf_download">
@@ -186,6 +190,7 @@
               <button id="download-pdf5" onclick="downloadPDFForPage(4)" data-btn="pdf">5. Brand Identity
                 Report</button>
             </div>
+            <a href="" class="retry_btn">재시도 하기</a>
           </div>
           <!-- PDF 미리보기 모달 -->
           <div id="pdfModal" class="modal_popup" data-toggle="pdf">
@@ -195,7 +200,10 @@
                 <!--onclick="closeModal()"-->
                 <img src="src/images/ico_close.svg" alt="">
               </span>
-              <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+              <div class="pdf_viewer">
+                <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+              </div>
+              <a href="" class="pdf_download_btn">PDF 다운로드</a>
             </div>
           </div>
         </div>
