@@ -8,7 +8,7 @@ async function fetchRandomId() {
     const data = await response.json();  // data는 { "random_id": "CIwAOKWsK7JB" } 형태의 객체
     const randomId = data.random_id;
     console.log("Fetched randomId:", randomId);
-    
+
     // HTML 문서 내 id가 "randomIdInput"인 요소의 value 속성을 업데이트합니다.
     const inputElement = document.getElementById("randomIdInput");
     if (inputElement) {
@@ -20,27 +20,30 @@ async function fetchRandomId() {
       console.error('Element with id "randomIdInput" not found.');
     }
 
-  return randomId;
+    return randomId;
   } catch (error) {
-  console.error('Error:', error);
+    console.error('Error:', error);
   }
 }
 
 function login() {
-  const mainElement = document.getElementById("main");
-  const step1Element = document.getElementById("step1");
-  const surveyWrap = document.getElementById("survey_wrap");
+  // const mainElement = document.getElementById("main");
+  // const step1Element = document.getElementById("step1");
+  // const surveyWrap = document.getElementById("survey_wrap");
 
-  if (mainElement) {
-    mainElement.classList.add("hidden");
-  } else {
-    console.error('Element with id "main" not found.');
-  }
+  // if (mainElement) {
+  //   mainElement.classList.add("hidden");
+  // } else {
+  //   console.error('Element with id "main" not found.');
+  // }
 
-  if (step1Element) {
-    step1Element.classList.remove("hidden");
-    surveyWrap.classList.remove("hidden");
-  } else {
-    console.error('Element with id "step1" not found.');
-  }
+  // if (step1Element) {
+  //   step1Element.classList.remove("hidden");
+  //   surveyWrap.classList.remove("hidden");
+  // } else {
+  //   console.error('Element with id "step1" not found.');
+  // }
+
+  document.getElementById("main_wrap").classList.add("consulting_start");
+  document.getElementById("step1").classList.add("active");
 }

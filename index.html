@@ -37,12 +37,12 @@
     <div id="main">
       <video src="src/images/main_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <div class="container">
-        <img src="src/images/main_title.svg" alt="BX ONE 1" class="main_title">
-        <p class="txt_box">작은 브랜드일수록 더욱 독보적이어야 합니다. <br>
+        <img src="src/images/main_title.svg" alt="BX ONE 1" class="main_title  ani_fade">
+        <p class="txt_box ani_fade">작은 브랜드일수록 더욱 독보적이어야 합니다. <br>
           BX ONE 1이 개발한 독창적인 BX-Generation 엔진으로 <br>
           경쟁 시장에서 우뚝 설 수 있는 차별화된 브랜드 아이덴티티를 <br>
           빠르고 간단한 절차만으로 완성해 드립니다.</p>
-        <div class="process_info flex_cnt">
+        <div class="process_info flex_cnt  ani_fade">
           <p>제품명, USP, 고객행동만 입력하시면, <br>
             짧은 시간 안에 당신만의 독보적인 브랜드가 탄생합니다.</p>
           <button data-btn="login" class="start_btn">
@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <div id="survey_wrap" class="hidden">
+    <div id="survey_wrap">
       <video src="src/images/sub_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <p class="survey_tit">
         <img src="src/images/ico_light.svg" alt="">
@@ -60,29 +60,32 @@
       </p>
       <div class="survey_lnb">
         <ol>
-          <li class="complete">
+          <li>
             <p class="tit">STEP 1</p>
-            <button onclick="nextStep(0)">이에르 카페</button>
+            <button onclick="nextStep_lnb(0)"></button>
           </li>
           <li>
             <p class="tit">STEP 2</p>
-            <button onclick="nextStep(1)"></button>
+            <button onclick="nextStep_lnb(1)"></button>
           </li>
           <li>
             <p class="tit">STEP 3</p>
-            <button onclick="nextStep(2)"></button>
+            <button onclick="nextStep_lnb(2)"></button>
           </li>
         </ol>
       </div>
 
-      <div id="step1" class="survey_box hidden">
+      <div id="step1" class="survey_box">
         <div class="survey_cont">
           <div class="con_box">
             <div class="txt_box">
-              <span>STEP 1</span>
-              <strong>당신의 브랜드 or <br>제품명을 입력해주세요.</strong>
+              <span class="ani_fadeup">STEP 1</span>
+              <div class="tit">
+                <strong class="fx"><b>당신의 브랜드 or </b></strong>
+                <strong class="fx"><b>제품명을 입력해주세요.</b></strong>
+              </div>
             </div>
-            <button class="example_btn" data-btn="example1" data-toggle="example">예시보기</button>
+            <button class="example_btn ani_fadeup ani_dly3" data-btn="example1" data-toggle="example">예시보기</button>
             <ul class="example_list" data-toggle="example1">
               <li>고급 원단과 간결한 디자인으로 완성한 타임리스 스타일</li>
               <li>6세부터 쉽게 배우는 AI 코딩 프로그램</li>
@@ -91,8 +94,8 @@
             </ul>
           </div>
           <div class="write_box">
-            <input type="text" id="input1">
-            <button onclick="nextStep(1)">STEP 2<img src="src/images/arr_next_bold.svg" alt=""></button>
+            <input type="text" id="input1" class="answer_input">
+            <button onclick="nextStep(1)" disabled>STEP 2<img src="src/images/arr_next_bold.svg" alt=""></button>
           </div>
         </div>
       </div>
@@ -100,17 +103,20 @@
         <div class="survey_cont">
           <div class="con_box">
             <div class="txt_box">
-              <span>STEP 2</span>
-              <strong>브랜드 or 제품의 <br>핵심강점/ USP를 입력해주세요.</strong>
+              <span class="ani_fadeup">STEP 2</span>
+              <div class="tit">
+                <strong class="fx"><b>브랜드 or 제품의</b></strong>
+                <strong class="fx"><b>핵심강점/ USP를 입력해주세요.</b></strong>
+              </div>
             </div>
-            <button class="example_btn" data-btn="example2" data-toggle="example">예시보기</button>
+            <button class="example_btn ani_fadeup ani_dly3" data-btn="example2" data-toggle="example">예시보기</button>
             <ul class="example_list" data-toggle="example2">
               <li></li>
             </ul>
           </div>
           <div class="write_box">
-            <input type="text" id="input2">
-            <button onclick="nextStep(2)">STEP 3<img src="src/images/arr_next_bold.svg" alt=""></button>
+            <input type="text" id="input2" class="answer_input">
+            <button onclick="nextStep(2)" disabled>STEP 3<img src="src/images/arr_next_bold.svg" alt=""></button>
           </div>
         </div>
       </div>
@@ -119,19 +125,21 @@
           <div class="con_box">
             <div class="txt_box">
               <span>STEP 3</span>
-              <strong>고객이 우리 브랜드를 찾고 <br>
-                선택해야 하는 이유를 알고 싶다면, <br>
-                아래 질문 중 하나를 선택하거나 <br>
-                직접 입력해보세요.</strong>
+              <div class="tit">
+                <strong class="fx"><b>고객이 우리 브랜드를 찾고 </b></strong>
+                <strong class="fx"><b>선택해야 하는 이유를 알고 싶다면, </b></strong>
+                <strong class="fx"><b>아래 질문 중 하나를 선택하거나 </b></strong>
+                <strong class="fx"><b>직접 입력해보세요. </b></strong>
+              </div>
             </div>
-            <button class="example_btn" data-btn="example3" data-toggle="example">예시보기</button>
+            <button class="example_btn ani_fadeup ani_dly5" data-btn="example3" data-toggle="example">예시보기</button>
             <ul class="example_list" data-toggle="example3">
               <li></li>
             </ul>
           </div>
           <div class="write_box">
-            <input type="text" id="input3">
-            <button onclick="submitForm()">제출</button>
+            <input type="text" id="input3" class="answer_input">
+            <button onclick="submitForm()" disabled>제출</button>
           </div>
         </div>
       </div>
@@ -160,7 +168,7 @@
                 <div id="progress-bar" class="progress_bar"></div>
               </div>
             </div>
-            <button id="result-button" class="hidden result_button" onclick="showResult()">
+            <button id="result-button" class="result_button" onclick="showResult()">
               컨설팅 보고서가 완성되었습니다
               <img src="src/images/ico_complete.svg" alt="">
             </button>
@@ -235,7 +243,6 @@
   <script src="./src/js/jquery.js"></script>
   <script src="./src/js/front_spring_bx.js"></script>
   <script src="./src/js/common.js"></script>
-  <script src="./src/js/common2.js"></script>
   <script>
     $(function () {
       /********* BTN FUNCTION *********/
