@@ -12,14 +12,12 @@ async function generateRandomId() {
     const randomId = data.random_id;
     console.log(randomId);
 
-    document.getElementById("randomIdInput").value = data.random_id;
-    sessionStorage.setItem("random_id", data.random_id);
+    document.getElementById("randomIdInput").value = randomId;
+    sessionStorage.setItem("random_id", randomId);
   } catch (error) {
     console.error('Error:', error);
   }
 }
-
-
 
 
 
