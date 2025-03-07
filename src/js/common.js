@@ -11,13 +11,14 @@ async function fetchReport() {
       user_query: input3
     };
 
-    const response = await fetch('https://7080-220-118-59-188.ngrok-free.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
-    });
+    const response = await fetch('/bx_architect_report2.json');
+    // const response = await fetch('https://7080-220-118-59-188.ngrok-free.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(requestData)
+    // });
 
     if (!response.ok) {
       const errorText = await response.text(); // 오류 내용 출력
