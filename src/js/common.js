@@ -84,17 +84,71 @@ function startConsulting() {
   document.getElementById("step1").classList.remove("hidden");
 }
 
+// 값 전달 후 이동
 function nextStep(currentStep) {
   document.getElementById(`step${currentStep}`).classList.add('hidden');
   let nextStepElement = document.getElementById(`step${currentStep + 1}`);
   if (nextStepElement) {
     nextStepElement.classList.remove('hidden');
+    nextStepElement.classList.add('active');
+  }
+
+  // lnb
+  let surveyLnb = document.querySelectorAll('.survey_lnb li');
+  if (surveyLnb[currentStep - 1]) {
+    surveyLnb[currentStep - 1].classList.add('on');
+
+    // 클릭한 버튼의 형제 input 값을 가져오기
+    let buttonClicked = event.target; // 클릭된 버튼
+    let inputField = buttonClicked.previousElementSibling; // 형제 input 요소 찾기
+
+    if (inputField && inputField.classList.contains("answer_input")) {
+      surveyLnb[currentStep - 1].querySelector("button").textContent = inputField.value;
+    }
   }
 }
+
+//단순이동
+function nextStep_lnb(currentStep) {
+  document.querySelectorAll('.survey_box').classList.add('hidden');
+  let nextStepElement = document.getElementById(`step${currentStep + 1}`);
+  if (nextStepElement) {
+    nextStepElement.classList.remove('hidden');
+    nextStepElement.classList.add('active');
+  }
+}
+
+
+const inputFields = document.querySelectorAll(".answer_input");
+
+inputFields.forEach((inputField, index) => {
+  let hasValue = false;
+  let nxtBtn = inputField.nextElementSibling;
+
+  inputField.addEventListener("input", function () {
+    const currentValue = inputField.value.trim();
+    if (currentValue === "" && hasValue) {
+      hasValue = false;
+      nxtBtn.disabled = true;
+    } else if (currentValue !== "" && !hasValue) {
+      hasValue = true;
+      nxtBtn.disabled = false;
+    }
+  });
+});
+
+
 
 function submitForm() {
   document.getElementById("step3").classList.add("hidden");
   document.getElementById("loading").classList.remove("hidden");
+
+
+  let buttonClicked = event.target;
+  let inputField = buttonClicked.previousElementSibling;
+  let lastLnb = document.querySelector(".survey_lnb ol li:last-child");
+  lastLnb.querySelector("button").textContent = inputField.value;
+  lastLnb.classList.add('on');
 
   let progressBar = document.getElementById("progress-bar");
   let progressText = document.getElementById("progress-text");
@@ -119,7 +173,7 @@ function submitForm() {
 
       // JSON 요청 완료 후 UI 업데이트
       fetchPromise.then(() => {
-        document.getElementById("result-button").classList.remove("hidden");
+        document.getElementById("result-button").classList.add("on");
       }).catch(error => {
         console.error("데이터 로딩 중 오류 발생:", error);
         document.getElementById("loading").classList.add("hidden");
@@ -323,10 +377,6 @@ async function generatePDFWithUserInput(buttonIndex) {
   }
 }
 
-
-
-
-
 function openModal(pdfUrl) {
   document.getElementById("pdfViewer").src = pdfUrl;
   document.getElementById("pdfModal").style.display = "block";
@@ -340,3 +390,6 @@ function closeModal() {
 function downloadPDFForPage(pageIndex) {
   generatePDFWithUserInput(pageIndex);
 }
+
+
+// 추가한 코드

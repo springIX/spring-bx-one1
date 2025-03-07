@@ -10,10 +10,18 @@
 
 /********** MAIN VISUAL **********/
 #main {
+  width: 100%;
   height: 100%;
   padding: 162rem 0 130rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
 }
 #main video {
+  transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#main .ani_fade {
   transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 #main .container {
@@ -45,16 +53,29 @@
   margin-left: 10rem;
 }
 
+#main_wrap.consulting_start #main {
+  touch-action: none;
+  pointer-events: none;
+}
 #main_wrap.consulting_start #main video {
   transform: scale(1.05);
   opacity: 0;
+}
+#main_wrap.consulting_start #main .ani_fade {
+  transform: translateY(50rem);
+  opacity: 0;
+}
+#main_wrap.consulting_start #survey_wrap .survey_lnb {
+  transform: translateX(0);
 }
 
 /********** SURVEY **********/
 #survey_wrap {
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 #survey_wrap .survey_tit {
   position: absolute;
@@ -82,6 +103,8 @@
   padding: 162rem 0 0 44rem;
   font-weight: bold;
   z-index: 10;
+  transform: translateX(-100%);
+  transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 #survey_wrap .survey_lnb ol li {
   opacity: 0.3;
@@ -127,10 +150,10 @@
   transform: translateY(-50%);
   opacity: 0.5;
 }
-#survey_wrap .survey_lnb ol li.complete {
+#survey_wrap .survey_lnb ol li.on {
   opacity: 1;
 }
-#survey_wrap .survey_lnb ol li.complete button {
+#survey_wrap .survey_lnb ol li.on button {
   display: block;
 }
 #survey_wrap .survey_box {
@@ -160,9 +183,10 @@
   margin-bottom: 20rem;
 }
 #survey_wrap .survey_box .survey_cont .con_box .txt_box span {
+  display: block;
   font-size: clamp(10px, 32rem, 999rem);
 }
-#survey_wrap .survey_box .survey_cont .con_box .txt_box strong {
+#survey_wrap .survey_box .survey_cont .con_box .txt_box .tit {
   display: block;
   font-size: clamp(10px, 56rem, 999rem);
   line-height: 1.2;
@@ -249,6 +273,11 @@
   flex-shrink: 0;
   background-color: #FF1585;
   border-radius: 4rem;
+  transition: 0.5s ease;
+}
+#survey_wrap .survey_box .survey_cont .write_box button[disabled] {
+  background-color: #777;
+  cursor: pointer;
 }
 #survey_wrap .survey_box .survey_cont .write_box button img {
   display: inline-block;
@@ -257,7 +286,6 @@
 }
 #survey_wrap .survey_box .survey_cont .progress_contents {
   position: relative;
-  padding-bottom: 140rem;
   width: 100%;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .icon_box {
@@ -295,23 +323,62 @@
   background: linear-gradient(90deg, #6132D3 0.18%, #FF1585 99.82%);
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .result_button {
+  display: flex;
   align-items: center;
   font-size: clamp(10px, 16rem, 999rem);
   padding: 18rem 15rem;
   background-color: #FF1585;
   color: #ffffff;
   border-radius: 8rem;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-}
-#survey_wrap .survey_box .survey_cont .progress_contents .result_button:not(.hidden) {
-  display: flex;
+  margin: 80rem auto 0;
+  touch-action: none;
+  pointer-events: none;
+  transform: translateY(50rem);
+  opacity: 0;
+  transition: 1s ease;
+  position: relative;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .result_button img {
   width: 24rem;
   margin-left: 10rem;
+}
+#survey_wrap .survey_box .survey_cont .progress_contents .result_button::before, #survey_wrap .survey_box .survey_cont .progress_contents .result_button::after {
+  content: "";
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #FF1585;
+  border-radius: 8rem;
+}
+#survey_wrap .survey_box .survey_cont .progress_contents .result_button.on {
+  opacity: 1;
+  transform: translateY(0%);
+  touch-action: auto;
+  pointer-events: auto;
+}
+#survey_wrap .survey_box .survey_cont .progress_contents .result_button.on::before, #survey_wrap .survey_box .survey_cont .progress_contents .result_button.on::after {
+  animation: btn_light 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes btn_light {
+  0% {
+    width: 90%;
+    height: 90%;
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    width: calc(100% + 30rem);
+    height: calc(100% + 30rem);
+    opacity: 0;
+  }
+}
+#survey_wrap .survey_box .survey_cont .progress_contents .result_button.on::after {
+  animation-delay: 0.3s;
 }
 #survey_wrap #result-page {
   padding: 162rem 0 100rem;
@@ -328,6 +395,7 @@
   height: 500rem;
   background-color: #ffffff;
   border-radius: 30rem;
+  padding: 32rem;
 }
 #survey_wrap #result-page .json_data .data_wrap .final_report {
   margin-left: 16rem;
@@ -432,6 +500,10 @@
   margin: 23rem 0;
   width: 100%;
   height: 730rem;
+}
+#survey_wrap #result-page .modal_popup .modal_content .pdf_viewer iframe {
+  border-radius: 30rem;
+  overflow: hidden;
 }
 #survey_wrap #result-page .modal_popup .modal_content .pdf_download_btn {
   width: 266rem;

@@ -79,6 +79,101 @@
   top: -2rem;
 }
 
+.fx {
+  display: block;
+  overflow: hidden;
+}
+.fx b {
+  display: block;
+  transform: translateY(130%);
+  transition: 1s cubic-bezier(0.25, 1, 0.5, 1);
+  font-weight: inherit;
+}
+
+.active .fx b {
+  animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fade-up {
+  0% {
+    transform: translateY(130%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.active .fx:nth-child(2) b {
+  animation-delay: 0.1s;
+}
+.active .fx:nth-child(3) b {
+  animation-delay: 0.2s;
+}
+.active .fx:nth-child(4) b {
+  animation-delay: 0.3s;
+}
+.active .fx:nth-child(5) b {
+  animation-delay: 0.4s;
+}
+.active .fx:nth-child(6) b {
+  animation-delay: 0.5s;
+}
+.active .fx:nth-child(7) b {
+  animation-delay: 0.6s;
+}
+
+.active .ani_fadeup {
+  animation: fade-up2 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fade-up2 {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+.active .ani_dly1 {
+  animation-delay: 0.1s;
+}
+
+.active .ani_dly2 {
+  animation-delay: 0.2s;
+}
+
+.active .ani_dly3 {
+  animation-delay: 0.3s;
+}
+
+.active .ani_dly4 {
+  animation-delay: 0.4s;
+}
+
+.active .ani_dly5 {
+  animation-delay: 0.5s;
+}
+
+.active .ani_dly6 {
+  animation-delay: 0.6s;
+}
+
+.active .ani_dly7 {
+  animation-delay: 0.7s;
+}
+
+.active .ani_dly8 {
+  animation-delay: 0.8s;
+}
+
+.active .ani_dly9 {
+  animation-delay: 0.9s;
+}
+
+.active .ani_dly10 {
+  animation-delay: 1s;
+}
+
 /********** HEADER **********/
 header {
   padding: 50rem 40rem;
