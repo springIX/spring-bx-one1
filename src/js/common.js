@@ -159,15 +159,20 @@ async function generatePDFWithUserInput(buttonIndex) {
     const fontUrl = "/src/font/pretendard/Pretendard-Regular.ttf";
     const fontBytes = await (await fetch(fontUrl)).arrayBuffer();
     const customFont = await pdfDoc.embedFont(fontBytes);
+    const fontUrlBold = "/src/font/pretendard/Pretendard-Bold.ttf";
+    const fontBytesBold = await (await fetch(fontUrlBold)).arrayBuffer();
+    const customFontBold = await pdfDoc.embedFont(fontBytesBold);
 
     let pages = pdfDoc.getPages();
+    let coverPage = pages[0];
+    let listPage = pages[1];
     let resultPage = pages[2];
     let finalReportPage = pages[3];
     let citationPage = pages[5];
-    let brandingPage = pages[6]
-    let coreKeywordsPage = pages[7]
+    let brandingPage = pages[7]
+    let IdentityPage = pages[8]
 
-    let finalReportY = 690;
+    let finalReportY = 600;
     let xMargin = 60;
     const maxY = 50;
     const lineHeight = 30;
@@ -179,12 +184,24 @@ async function generatePDFWithUserInput(buttonIndex) {
     const step1 = document.getElementById("input1").value || "입력값 없음";
     const step2 = document.getElementById("input2").value || "입력값 없음";
     const step3 = document.getElementById("input3").value || "입력값 없음";
+    const btnTxtData = {
+      compounds: {
+        button_text: [
+          { btnTxt: "1. Brand Identity Report" },
+          { btnTxt: "2. Brand Identity Report" },
+          { btnTxt: "3. Brand Identity Report" },
+          { btnTxt: "4. Brand Identity Report" },
+          { btnTxt: "5. Brand Identity Report" }
+        ]
+      }
+    };
+    
 
     // JSON 데이터 가져오기
     const jsonData = window.reportData;
     const emoFunc = jsonData.compounds.emo_func_benefits[buttonIndex] || {};
     const keyword = jsonData.compounds.compound_keywords[buttonIndex] || {};
-    const marketingSummary = jsonData.compounds.mkt_state[buttonIndex]?.marketing_summary || "마케팅 요약 없음";
+    const btnTxt = btnTxtData.compounds.button_text[buttonIndex] || {};
     const socialReport = jsonData.social_report || "최종 보고서 없음";
 
     function wrapFinalReportText(text, maxWidth, fontSize) {
@@ -209,28 +226,65 @@ async function generatePDFWithUserInput(buttonIndex) {
       return lines;
     }
 
-    function addWrappedText(page, text, x, y, maxWidth, fontSize, color = rgb(1, 1, 1), lineHeight = 28) {
+    function addWrappedText(page, text, x, y, maxWidth, fontSize, font = customFont, color = rgb(1, 1, 1), lineHeight = 28) {
       const wrappedLines = wrapFinalReportText(text, maxWidth, fontSize);
       wrappedLines.forEach(line => {
-        page.drawText(line, { x, y, maxWidth, size: fontSize, color: color, lineHeight: lineHeight, font: customFont });
-        y -= 28; // ✅ 이제 줄 간격이 조절 가능!
+        page.drawText(line, { 
+          x, 
+          y, 
+          size: fontSize, 
+          color: color, 
+          font: font
+        });
+        y -= lineHeight;
       });
     }
+    
 
-    addWrappedText(resultPage, step1, 62, 688, 300, 24, rgb(1, 1, 1), 80);
-    addWrappedText(resultPage, step2, 720, 688, 300, 24, rgb(1, 1, 1), 80);
-    addWrappedText(resultPage, step3, 1321, 688, 300, 24, rgb(1, 1, 1), 80);
-    addWrappedText(finalReportPage, jsonData.social_report_title || "", 60, 802, 800, 34, rgb(1, 1, 1), 36);
-    addWrappedText(finalReportPage, jsonData.social_report_subtitle || "", 64, 740, 800, 28, rgb(1, 1, 1), 30);
-    addWrappedText(citationPage, jsonData.citation || "", 64, 800, 1000, 20, rgb(1, 1, 1), 26);
+    async function addCenteredWrappedText(page, text, centerX, y, maxWidth, fontSize, font = customFont, color = rgb(1, 1, 1), lineHeight = 28) {
+      const wrappedLines = wrapFinalReportText(text, maxWidth, fontSize);
+      for (const line of wrappedLines) {
+        const textWidth = await font.widthOfTextAtSize(line, fontSize);
+        const x = centerX - textWidth / 2;
+    
+        page.drawText(line, { 
+          x, 
+          y, 
+          size: fontSize, 
+          color: color, 
+          font: font
+        });
+    
+        y -= lineHeight;
+      }
+    }
+    
+
+    addWrappedText(coverPage, btnTxt.btnTxt || "", 1465, 740, 300, 25, customFontBold, rgb(1, 1, 1), 25);
+    addWrappedText(listPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(resultPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(finalReportPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(brandingPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(pages[6], btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(IdentityPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
 
 
-    addWrappedText(brandingPage, keyword.keyword || "", 450, 890, 800, 50, pinkColor, 50);
-    addWrappedText(brandingPage, keyword.korean || "", 450, 537, 800, 80, rgb(1, 1, 1), 80);
-    addWrappedText(brandingPage, keyword.explanation || "", 450, 295, 1000, 48, rgb(1, 1, 1), 50);
-    addWrappedText(coreKeywordsPage, emoFunc.emotional_benefit || "", 450, 700, 1000, 26, rgb(1, 1, 1), 30);
-    addWrappedText(coreKeywordsPage, emoFunc.functional_benefit || "", 450, 450, 1000, 26, rgb(1, 1, 1), 30);
-    addWrappedText(coreKeywordsPage, jsonData.attribute || "", 450, 185, 1000, 26, rgb(1, 1, 1), 30);
+    addWrappedText(resultPage, step1, 62, 688, 300, 24, customFontBold, rgb(1, 1, 1), 80);
+    addWrappedText(resultPage, step2, 720, 688, 300, 24, customFontBold, rgb(1, 1, 1), 80);
+    addWrappedText(resultPage, step3, 1321, 688, 300, 24, customFontBold, rgb(1, 1, 1), 80);
+    addWrappedText(finalReportPage, jsonData.social_report_title || "", 60, 800, 800, 34, customFontBold, rgb(1, 1, 1), 36);
+    addWrappedText(finalReportPage, jsonData.social_report_subtitle || "", 64, 740, 800, 25, customFont, rgb(1, 1, 1), 30);
+    addWrappedText(citationPage, jsonData.citation || "", 64, 800, 1000, 20, customFont, rgb(1, 1, 1), 26);
+
+
+    addWrappedText(brandingPage, keyword.korean || "", 119, 825, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 800, 60, customFont, pinkColor, 72);
+    addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 350, 24, customFont, rgb(1, 1, 1), 32);
+    
+    
+    addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 450, 20, customFont, rgb(1, 1, 1), 32);
+    addCenteredWrappedText(brandingPage, emoFunc.functional_benefit || "", 1258, 354, 450, 20, customFont, rgb(1, 1, 1), 32);
+    addCenteredWrappedText(brandingPage, (jsonData.compounds.attribute || []).join(", "), 1258, 150, 450, 20, customFont, rgb(1, 1, 1), 32);
 
 
     const finalReportLines = socialReport.split("\n");
