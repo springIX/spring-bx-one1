@@ -34,7 +34,7 @@
 
   <!-------- CONTENTS -------->
   <div id="main_wrap">
-    <div id="main">
+    <div id="main" class="hidden">
       <video src="src/images/main_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <div class="container">
         <img src="src/images/main_title.svg" alt="BX ONE 1" class="main_title">
@@ -80,7 +80,7 @@
           <div class="con_box">
             <div class="txt_box">
               <span>STEP 1</span>
-              <p>당신의 브랜드 or <br>제품명을 입력해주세요.</p>
+              <strong>당신의 브랜드 or <br>제품명을 입력해주세요.</strong>
             </div>
             <button class="example_btn" data-btn="example1" data-toggle="example">예시보기</button>
             <ul class="example_list" data-toggle="example1">
@@ -101,7 +101,7 @@
           <div class="con_box">
             <div class="txt_box">
               <span>STEP 2</span>
-              <p>브랜드 or 제품의 <br>핵심강점/ USP를 입력해주세요.</p>
+              <strong>브랜드 or 제품의 <br>핵심강점/ USP를 입력해주세요.</strong>
             </div>
             <button class="example_btn" data-btn="example2" data-toggle="example">예시보기</button>
             <ul class="example_list" data-toggle="example2">
@@ -119,10 +119,10 @@
           <div class="con_box">
             <div class="txt_box">
               <span>STEP 3</span>
-              <p>고객이 우리 브랜드를 찾고 <br>
+              <strong>고객이 우리 브랜드를 찾고 <br>
                 선택해야 하는 이유를 알고 싶다면, <br>
                 아래 질문 중 하나를 선택하거나 <br>
-                직접 입력해보세요.</p>
+                직접 입력해보세요.</strong>
             </div>
             <button class="example_btn" data-btn="example3" data-toggle="example">예시보기</button>
             <ul class="example_list" data-toggle="example3">
@@ -135,35 +135,66 @@
           </div>
         </div>
       </div>
-      <div id="loading" class="hidden">
+      <div id="loading" class="survey_box hidden">
         <div class="survey_cont">
-          <p>로딩 중...</p>
-          <div class="progress-container">
-            <div id="progress-bar" class="progress-bar"></div>
-            <div id="progress-text" class="progress-text">0%</div>
+          <div class="con_box">
+            <div class="txt_box">
+              <strong>BX-Generation <br>
+                보고서 완성까지 약 1~2분 소요됩니다.</strong>
+              <div class="loading_info">
+                <p>입력하신 정보를 바탕으로 검색 쿼리 생성 중...</p>
+              </div>
+            </div>
           </div>
-          <button id="result-button" class="hidden result-button" onclick="showResult()">결과 보기</button>
+          <div class="progress_contents">
+            <div class="icon_box">
+              <img src="src/images/ico_progress1.svg" alt="" class="icon1">
+              <img src="src/images/ico_progress2.svg" alt="" class="icon2">
+              <img src="src/images/ico_progress3.svg" alt="" class="icon3">
+              <img src="src/images/ico_progress4.svg" alt="" class="icon4">
+            </div>
+            <div id="progress-text" class="progress_txt">0%</div>
+            <div class="progress_container">
+              <img src="src/images/progress_bar.svg" alt="">
+              <div class="progress_bar_wrap cover">
+                <div id="progress-bar" class="progress_bar"></div>
+              </div>
+            </div>
+            <button id="result-button" class="hidden result_button" onclick="showResult()">
+              컨설팅 보고서가 완성되었습니다
+              <img src="src/images/ico_complete.svg" alt="">
+            </button>
+          </div>
         </div>
       </div>
       <div id="result-page" class="hidden">
         <div class="container">
           <div class="json_data">
             <div class="data_wrap">
-              <div id="result_data" class="result_data"></div>
+              <div id="result_data" class="result_data" data-btn="pdf"></div>
               <div id="final_report" class="final_report"></div>
             </div>
-            <div class="pdf-download">
-              <button id="download-pdf1" onclick="downloadPDFForPage(0)">01. Brand Identity Report</button>
-              <button id="download-pdf2" onclick="downloadPDFForPage(1)">02. Brand Identity Report</button>
-              <button id="download-pdf3" onclick="downloadPDFForPage(2)">03. Brand Identity Report</button>
-              <button id="download-pdf4" onclick="downloadPDFForPage(3)">04. Brand Identity Report</button>
-              <button id="download-pdf5" onclick="downloadPDFForPage(4)">05. Brand Identity Report</button>
+            <div class="pdf_download">
+              <button id="download-pdf1" onclick="downloadPDFForPage(0)" data-btn="pdf">1. Brand Identity
+                Report</button>
+              <button id="download-pdf2" onclick="downloadPDFForPage(1)" data-btn="pdf">2. Brand Identity
+                Report</button>
+              <button id="download-pdf3" onclick="downloadPDFForPage(2)" data-btn="pdf">3. Brand Identity
+                Report</button>
+              <button id="download-pdf4" onclick="downloadPDFForPage(3)" data-btn="pdf">4. Brand Identity
+                Report</button>
+              <button id="download-pdf5" onclick="downloadPDFForPage(4)" data-btn="pdf">5. Brand Identity
+                Report</button>
             </div>
           </div>
           <!-- PDF 미리보기 모달 -->
-          <div id="pdfModal" class="modal hidden">
-            <div class="modal-content">
-              <span class="close" onclick="closeModal()">&times;</span>
+          <div id="pdfModal" class="modal_popup" data-toggle="pdf">
+            <div class="dim cover" data-btn="pdf"></div>
+            <div class="modal_content p_center">
+              <span class="close" data-btn="pdf">
+                <!--onclick="closeModal()"-->
+                <img src="src/images/ico_close.svg" alt="">
+              </span>
               <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
             </div>
           </div>
@@ -174,7 +205,6 @@
   <!------- //CONTENTS ------->
 
   <!-------- LOGIN -------->
-  <!------- //LOGIN ------->
   <div class="pop_wrap" data-toggle="login">
     <div class="dim cover" data-btn="login"></div>
     <div class="login_box p_center">
@@ -192,6 +222,7 @@
       </div>
     </div>
   </div>
+  <!------- //LOGIN ------->
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
