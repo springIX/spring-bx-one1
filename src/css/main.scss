@@ -133,13 +133,29 @@ $survey_pdt: 162rem;
           }
         }
       }
-    }
+    }  
   }
   #result-page{padding: $survey_pdt 0 100rem; 
     .json_data{ color: $black; 
-      .data_wrap{ display: flex; margin-bottom: 16rem;
-        > div{ width: 100%;  height: 500rem;  background-color: $white; border-radius: 30rem; padding: 32rem;}
-        .final_report{ margin-left: 16rem;}
+      .data_wrap{ display: flex; margin-bottom: 16rem; height: 500rem;  
+        > div{width: 50%; background-color: $white; border-radius: 30rem; padding: 32rem;}
+        .result_data_wrap {
+          .title {
+            .ico_frame {width: 24rem; height: 24rem; background-image: url('/src/images/ico_frame.svg'); background-size: auto; background-repeat: no-repeat; background-position: center center; display: inline-block;}
+          }
+          .result_data {flex: 1; overflow:hidden;
+            .scroll {display: flex; flex-direction: column; gap: 48rem; }
+            .step_wrap {
+              .step_tit {margin-bottom: 7rem; @include font-size(16rem); font-weight: bold;}
+              .step_data { @include font-size(32rem); font-weight: 300;}
+            }
+          }
+          
+        }
+        .title { display: flex; gap: 4rem; align-items: center; @include font-size(24rem); font-weight: bold; margin-bottom: 40rem;
+        }
+        .scroll {overflow-y: scroll; height: 100%;}
+        .final_report_wrap{ margin-left: 16rem; overflow: hidden;}
       }
       .pdf_download{ display: flex; gap: 15rem; padding-bottom: 32rem; margin-bottom: 40rem; border-bottom: 1px solid rgba($color: $white, $alpha: .3);
         button{ width: 100%; background-color: $white; border-radius: 20rem; height: 88rem; display: flex; align-items: center; justify-content: center; @include font-size(16rem); font-weight: bold; transition: .3s ease;

@@ -37,16 +37,11 @@ async function fetchReport() {
     window.reportData = data; // 전역 변수에 데이터 저장
 
     let finalReportOutput = "";
-    let resultDataOutput = "";
 
     document.getElementById("final_report").innerHTML = "";
-    document.getElementById("result_data").innerHTML = "";
-
-    // 사용자 입력 데이터 표시
-    resultDataOutput += `<h3>사용자 입력 데이터</h3>`;
-    resultDataOutput += `<p>1단계 입력: <strong>${input1 || "입력 없음"}</strong></p>`;
-    resultDataOutput += `<p>2단계 입력: <strong>${input2 || "입력 없음"}</strong></p>`;
-    resultDataOutput += `<p>3단계 입력: <strong>${input3 || "입력 없음"}</strong></p>`;
+    document.getElementById("step1_data").innerHTML = input1 || "입력 없음";
+    document.getElementById("step2_data").innerHTML = input2 || "입력 없음";
+    document.getElementById("step3_data").innerHTML = input3 || "입력 없음";
 
     // social_report 처리
     if (data.social_report) {
@@ -70,7 +65,6 @@ async function fetchReport() {
       });
     }
 
-    document.getElementById("result_data").innerHTML = resultDataOutput;
     document.getElementById("final_report").innerHTML = finalReportOutput;
 
     console.log("JSON 데이터 로드 완료:", finalReportOutput);
@@ -339,7 +333,7 @@ async function generatePDFWithUserInput(buttonIndex) {
     addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 800, 60, customFont, pinkColor, 72);
     addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 300, 24, customFont, rgb(1, 1, 1), 32);
     
-    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 361, 750, 56, customFont, rgb(1, 1, 1), 80);
+    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 550, 760, 56, customFont, rgb(1, 1, 1), 80);
     
     
     addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 450, 20, customFont, rgb(1, 1, 1), 32);
@@ -384,7 +378,13 @@ async function generatePDFWithUserInput(buttonIndex) {
 }
 
 function openModal(pdfUrl) {
-  document.getElementById("pdfViewer").src = pdfUrl;
+  const pdfViewer = document.getElementById("pdfViewer");
+  const downloadBtn = document.querySelector(".pdf_download_btn");
+
+  pdfViewer.src = pdfUrl; // PDF 뷰어에 로드
+  downloadBtn.href = pdfUrl; // 다운로드 링크 설정
+  downloadBtn.setAttribute("download", "블렌드엑스 종합광고대행사_bx_architect_final_report.pdf"); // 파일 다운로드 설정
+
   document.getElementById("pdfModal").style.display = "block";
 }
 

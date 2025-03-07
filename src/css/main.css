@@ -405,16 +405,56 @@
 #survey_wrap #result-page .json_data .data_wrap {
   display: flex;
   margin-bottom: 16rem;
+  height: 500rem;
 }
 #survey_wrap #result-page .json_data .data_wrap > div {
-  width: 100%;
-  height: 500rem;
+  width: 50%;
   background-color: #ffffff;
   border-radius: 30rem;
   padding: 32rem;
 }
-#survey_wrap #result-page .json_data .data_wrap .final_report {
+#survey_wrap #result-page .json_data .data_wrap .result_data_wrap .title .ico_frame {
+  width: 24rem;
+  height: 24rem;
+  background-image: url("/src/images/ico_frame.svg");
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: inline-block;
+}
+#survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data {
+  flex: 1;
+  overflow: hidden;
+}
+#survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data .scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 48rem;
+}
+#survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data .step_wrap .step_tit {
+  margin-bottom: 7rem;
+  font-size: clamp(10px, 16rem, 999rem);
+  font-weight: bold;
+}
+#survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data .step_wrap .step_data {
+  font-size: clamp(10px, 32rem, 999rem);
+  font-weight: 300;
+}
+#survey_wrap #result-page .json_data .data_wrap .title {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  font-size: clamp(10px, 24rem, 999rem);
+  font-weight: bold;
+  margin-bottom: 40rem;
+}
+#survey_wrap #result-page .json_data .data_wrap .scroll {
+  overflow-y: scroll;
+  height: 100%;
+}
+#survey_wrap #result-page .json_data .data_wrap .final_report_wrap {
   margin-left: 16rem;
+  overflow: hidden;
 }
 #survey_wrap #result-page .json_data .pdf_download {
   display: flex;
