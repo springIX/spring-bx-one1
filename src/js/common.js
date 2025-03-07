@@ -255,6 +255,7 @@ async function generatePDFWithUserInput(buttonIndex) {
     const jsonData = window.reportData;
     const emoFunc = jsonData.compounds.emo_func_benefits[buttonIndex] || {};
     const keyword = jsonData.compounds.compound_keywords[buttonIndex] || {};
+    const mktState = jsonData.compounds.mkt_state[buttonIndex] || {};
     const btnTxt = btnTxtData.compounds.button_text[buttonIndex] || {};
     const socialReport = jsonData.social_report || "최종 보고서 없음";
 
@@ -323,9 +324,9 @@ async function generatePDFWithUserInput(buttonIndex) {
     addWrappedText(IdentityPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
 
 
-    addWrappedText(resultPage, step1, 62, 688, 300, 24, customFontBold, rgb(1, 1, 1), 80);
-    addWrappedText(resultPage, step2, 720, 688, 300, 24, customFontBold, rgb(1, 1, 1), 80);
-    addWrappedText(resultPage, step3, 1321, 688, 300, 24, customFontBold, rgb(1, 1, 1), 80);
+    addWrappedText(resultPage, step1, 62, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
+    addWrappedText(resultPage, step2, 720, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
+    addWrappedText(resultPage, step3, 1321, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
     addWrappedText(finalReportPage, jsonData.social_report_title || "", 60, 800, 800, 34, customFontBold, rgb(1, 1, 1), 36);
     addWrappedText(finalReportPage, jsonData.social_report_subtitle || "", 64, 740, 800, 25, customFont, rgb(1, 1, 1), 30);
     addWrappedText(citationPage, jsonData.citation || "", 64, 800, 1000, 20, customFont, rgb(1, 1, 1), 26);
@@ -333,7 +334,9 @@ async function generatePDFWithUserInput(buttonIndex) {
 
     addWrappedText(brandingPage, keyword.korean || "", 119, 825, 300, 20, customFontBold, rgb(1, 1, 1), 20);
     addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 800, 60, customFont, pinkColor, 72);
-    addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 350, 24, customFont, rgb(1, 1, 1), 32);
+    addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 300, 24, customFont, rgb(1, 1, 1), 32);
+    
+    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 361, 750, 56, customFont, rgb(1, 1, 1), 80);
     
     
     addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 450, 20, customFont, rgb(1, 1, 1), 32);
