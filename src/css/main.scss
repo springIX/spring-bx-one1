@@ -31,6 +31,17 @@
   }
 }
 
+// 제출 버튼
+#main_wrap.consulting_end{
+  #main{ touch-action: none; pointer-events: none;
+    video{ transform: scale(1.05); opacity: 0;}
+    .ani_fade{ transform: translateY(50rem); opacity: 0; }
+  }
+  #survey_wrap{
+    .survey_lnb{ transform: translateX(-100%);}
+  }
+}
+
 /********** SURVEY **********/
 $survey_pdt: 162rem;
 

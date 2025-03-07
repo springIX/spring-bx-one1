@@ -69,6 +69,22 @@
   transform: translateX(0);
 }
 
+#main_wrap.consulting_end #main {
+  touch-action: none;
+  pointer-events: none;
+}
+#main_wrap.consulting_end #main video {
+  transform: scale(1.05);
+  opacity: 0;
+}
+#main_wrap.consulting_end #main .ani_fade {
+  transform: translateY(50rem);
+  opacity: 0;
+}
+#main_wrap.consulting_end #survey_wrap .survey_lnb {
+  transform: translateX(-100%);
+}
+
 /********** SURVEY **********/
 #survey_wrap {
   width: 100%;

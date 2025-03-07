@@ -110,7 +110,9 @@ function nextStep(currentStep) {
 
 //단순이동
 function nextStep_lnb(currentStep) {
-  document.querySelectorAll('.survey_box').classList.add('hidden');
+  document.querySelectorAll('.survey_box').forEach(box => {
+    box.classList.add('hidden');
+  });
   let nextStepElement = document.getElementById(`step${currentStep + 1}`);
   if (nextStepElement) {
     nextStepElement.classList.remove('hidden');
@@ -142,6 +144,7 @@ inputFields.forEach((inputField, index) => {
 function submitForm() {
   document.getElementById("step3").classList.add("hidden");
   document.getElementById("loading").classList.remove("hidden");
+  document.getElementById("main_wrap").classList.add("consulting_end");
 
 
   let buttonClicked = event.target;
@@ -249,7 +252,7 @@ async function generatePDFWithUserInput(buttonIndex) {
         ]
       }
     };
-    
+
 
     // JSON 데이터 가져오기
     const jsonData = window.reportData;
@@ -283,36 +286,36 @@ async function generatePDFWithUserInput(buttonIndex) {
     function addWrappedText(page, text, x, y, maxWidth, fontSize, font = customFont, color = rgb(1, 1, 1), lineHeight = 28) {
       const wrappedLines = wrapFinalReportText(text, maxWidth, fontSize);
       wrappedLines.forEach(line => {
-        page.drawText(line, { 
-          x, 
-          y, 
-          size: fontSize, 
-          color: color, 
+        page.drawText(line, {
+          x,
+          y,
+          size: fontSize,
+          color: color,
           font: font
         });
         y -= lineHeight;
       });
     }
-    
+
 
     async function addCenteredWrappedText(page, text, centerX, y, maxWidth, fontSize, font = customFont, color = rgb(1, 1, 1), lineHeight = 28) {
       const wrappedLines = wrapFinalReportText(text, maxWidth, fontSize);
       for (const line of wrappedLines) {
         const textWidth = await font.widthOfTextAtSize(line, fontSize);
         const x = centerX - textWidth / 2;
-    
-        page.drawText(line, { 
-          x, 
-          y, 
-          size: fontSize, 
-          color: color, 
+
+        page.drawText(line, {
+          x,
+          y,
+          size: fontSize,
+          color: color,
           font: font
         });
-    
+
         y -= lineHeight;
       }
     }
-    
+
 
     addWrappedText(coverPage, btnTxt.btnTxt || "", 1465, 740, 300, 25, customFontBold, rgb(1, 1, 1), 25);
     addWrappedText(listPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
@@ -334,8 +337,8 @@ async function generatePDFWithUserInput(buttonIndex) {
     addWrappedText(brandingPage, keyword.korean || "", 119, 825, 300, 20, customFontBold, rgb(1, 1, 1), 20);
     addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 800, 60, customFont, pinkColor, 72);
     addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 350, 24, customFont, rgb(1, 1, 1), 32);
-    
-    
+
+
     addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 450, 20, customFont, rgb(1, 1, 1), 32);
     addCenteredWrappedText(brandingPage, emoFunc.functional_benefit || "", 1258, 354, 450, 20, customFont, rgb(1, 1, 1), 32);
     addCenteredWrappedText(brandingPage, (jsonData.compounds.attribute || []).join(", "), 1258, 150, 450, 20, customFont, rgb(1, 1, 1), 32);
