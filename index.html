@@ -34,7 +34,7 @@
 
   <!-------- CONTENTS -------->
   <div id="main_wrap">
-    <div id="main" class="hidden">
+    <div id="main">
       <video src="src/images/main_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <div class="container">
         <img src="src/images/main_title.svg" alt="BX ONE 1" class="main_title">
@@ -215,8 +215,10 @@
       <img src="src/images/logo.svg" alt="" class="logo">
       <div class="write_box">
         <form action="">
-          <input type="button" value="랜덤아이디 생성" class="id_gen_btn" onclick="generateRandomId()">
-          <input type="text" placeholder="아이디를 입력하세요." id="randomIdInput" class="id_txt" readonly>
+          <input type="button" value="랜덤아이디 생성" class="id_gen_btn" onclick="fetchRandomId()">
+
+          <input type="text" placeholder="아이디를 입력하세요." id="randomIdInput" class="id_txt" readonly value="">
+
           <input type="button" value="Sign in" class="submit_btn" onclick="login()" data-btn="login" disabled>
         </form>
       </div>
@@ -227,6 +229,7 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
   <script src="./src/js/jquery.js"></script>
+  <script src="./src/js/front_spring_bx.js"></script>
   <script src="./src/js/common.js"></script>
   <script>
     $(function () {

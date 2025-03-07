@@ -1,26 +1,3 @@
-async function generateRandomId() {
-  try {
-    const response = await fetch('https://148a-220-118-59-188.ngrok-free.app/rand_id');
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseText = await response.text();
-    console.log("서버 응답 원본:", responseText);
-
-    const data = await response.json();
-    const randomId = data.random_id;
-    console.log(randomId);
-
-    document.getElementById("randomIdInput").value = data.random_id;
-    sessionStorage.setItem("random_id", data.random_id);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-
-
 
 
 // async function login() {
