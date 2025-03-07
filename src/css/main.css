@@ -13,6 +13,9 @@
   height: 100%;
   padding: 162rem 0 130rem;
 }
+#main video {
+  transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
 #main .container {
   height: 100%;
 }
@@ -40,6 +43,11 @@
 #main .container .process_info .start_btn img {
   width: 20rem;
   margin-left: 10rem;
+}
+
+#main_wrap.consulting_start #main video {
+  transform: scale(1.05);
+  opacity: 0;
 }
 
 /********** SURVEY **********/
