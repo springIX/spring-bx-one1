@@ -1,6 +1,7 @@
 async function fetchRandomId() {
   try {
-    const response = await fetch('https://7844-220-118-59-188.ngrok-free.app/api/rand_id');
+    // const response = await fetch('https://7844-220-118-59-188.ngrok-free.app/api/rand_id');
+    const response = await fetch('/randomid.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -22,5 +23,24 @@ async function fetchRandomId() {
   return randomId;
   } catch (error) {
   console.error('Error:', error);
+  }
+}
+
+function login() {
+  const mainElement = document.getElementById("main");
+  const step1Element = document.getElementById("step1");
+  const surveyWrap = document.getElementById("survey_wrap");
+
+  if (mainElement) {
+    mainElement.classList.add("hidden");
+  } else {
+    console.error('Element with id "main" not found.');
+  }
+
+  if (step1Element) {
+    step1Element.classList.remove("hidden");
+    surveyWrap.classList.remove("hidden");
+  } else {
+    console.error('Element with id "step1" not found.');
   }
 }
