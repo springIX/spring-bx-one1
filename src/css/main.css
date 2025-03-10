@@ -270,8 +270,12 @@
 #survey_wrap .survey_box .survey_cont .con_box .example_list {
   margin-top: 16rem;
 }
-#survey_wrap .survey_box .survey_cont .con_box .example_list[data-btn=brand_choose] li {
+#survey_wrap .survey_box .survey_cont .con_box .example_list[data-toggle=brand_choose] li {
   cursor: pointer;
+}
+#survey_wrap .survey_box .survey_cont .con_box .example_list[data-toggle=brand_choose] li:hover {
+  color: #000000;
+  font-weight: 700;
 }
 #survey_wrap .survey_box .survey_cont .con_box .example_list li {
   margin-bottom: 10rem;
@@ -284,10 +288,6 @@
   transition: opacity 0.5s ease, transform 0.5s ease;
   touch-action: none;
   pointer-events: none;
-}
-#survey_wrap .survey_box .survey_cont .con_box .example_list li:hover {
-  color: #000000;
-  font-weight: 700;
 }
 #survey_wrap .survey_box .survey_cont .con_box .example_list.on li {
   opacity: 1;
@@ -343,7 +343,7 @@
 }
 #survey_wrap .survey_box .survey_cont .write_box button[disabled] {
   background-color: #777;
-  cursor: pointer;
+  cursor: default;
 }
 #survey_wrap .survey_box .survey_cont .write_box button img {
   display: inline-block;
@@ -366,6 +366,9 @@
   position: absolute;
   left: 0;
   top: 0;
+}
+#survey_wrap .survey_box .survey_cont .progress_contents .icon_box img:not(.icon1) {
+  display: none;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .progress_txt {
   background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0) 85.67%);

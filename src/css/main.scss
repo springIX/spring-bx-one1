@@ -95,9 +95,11 @@ $survey_pdt: 162rem;
           &::after{ content: ''; width: 12rem; height: 11rem; background: url(../images/ico_file.svg)no-repeat center center / contain; margin:1rem 0 0 10rem;}
         }
         .example_list{ margin-top: 16rem;
-          &[data-btn=brand_choose] li{ cursor: pointer; }
-          li{ margin-bottom: 10rem; width: max-content; font-weight: 500; color: #777; font-weight: 500; opacity: 0; transform: translateX(-10rem); transition: opacity .5s ease, transform .5s ease; touch-action: none; pointer-events: none;
+          &[data-toggle=brand_choose] li{ cursor: pointer; 
             &:hover{ color: $black; font-weight: 700;}
+          
+          }
+          li{ margin-bottom: 10rem; width: max-content; font-weight: 500; color: #777; font-weight: 500; opacity: 0; transform: translateX(-10rem); transition: opacity .5s ease, transform .5s ease; touch-action: none; pointer-events: none;
           }
           &.on{
             li{ opacity: 1; transform: translateX(0); touch-action: auto; pointer-events: auto;
@@ -118,14 +120,16 @@ $survey_pdt: 162rem;
         background: rgba(0, 0, 0, 0.50); padding: 10rem;
         input{ width: 100%; height: 44rem; padding: 0 14rem;}
         button{ width: 137rem; flex-shrink: 0; background-color: $ci; border-radius: 4rem; transition: .5s ease;
-          &[disabled]{ background-color: #777; cursor: pointer;}
+          &[disabled]{ background-color: #777; cursor: default;}
           img{display: inline-block; width: 20rem; margin-left: 10rem;}
         }
       }
 
       .progress_contents{ position: relative; width: 100%;
         .icon_box{ height: 200rem; position: absolute; left: 117rem; top: 46rem;
-          img{ height: 100%; width: auto; position: absolute; left: 0; top: 0;}
+          img{ height: 100%; width: auto; position: absolute; left: 0; top: 0;
+            &:not(.icon1){display: none;}
+          }
         }
         .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(300rem); font-weight: 700; text-align: right; line-height: 1;}
         .progress_container{position: relative;

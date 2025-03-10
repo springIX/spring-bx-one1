@@ -203,21 +203,31 @@ function insertExampleChoose() {
   });
 }
 
+// 실행
+insertExampleName();
+insertExampleBenefit();
+insertExampleChoose();
+
+// 선택해야 하는 이유 예시보기 클릭 시 자동입력 
 const ChooseExampleList = document.querySelector('.example_list[data-toggle="brand_choose"]');
 const ChooseInput = document.querySelector('input#input3');
 
 ChooseExampleList.addEventListener("click", function (event) {
   if (event.target.tagName === "LI") {
     ChooseInput.value = event.target.textContent;
-    ChooseInput.nextSibling('button').disabled = false;
+    document.querySelector('.submit_btn').disabled = false;
   }
 });
 
+// 인풋이 빈 값일 때 버튼 비활성화
+document.querySelectorAll('.survey_cont .write_box').forEach(box => {
+  const input = box.querySelector('.answer_input');
+  const button = box.querySelector('button');
 
-// 실행
-insertExampleName();
-insertExampleBenefit();
-insertExampleChoose();
+  input.addEventListener('input', () => {
+    button.disabled = input.value.trim() === '';
+  });
+});
 
 // 값 전달 후 이동
 function nextStep(currentStep) {
@@ -315,6 +325,7 @@ function submitForm() {
 
   // 텍스트가 표시될 요소
   const displayElement = document.getElementById("loading_info");
+  const loadingIcon = document.querySelector(".progress_contents .icon_box");
 
   // 초기값 (첫 번째 그룹에서 무작위 선택)
   displayElement.textContent = loadingTxt[0][Math.floor(Math.random() * loadingTxt[0].length)];
@@ -332,17 +343,23 @@ function submitForm() {
 
     if (progress === changePoints[0]) {
       displayElement.textContent = loadingTxt[1][Math.floor(Math.random() * loadingTxt[1].length)];
+      loadingIcon.querySelector('.icon1').style.display = 'none';
+      loadingIcon.querySelector('.icon2').style.display = 'block';
     }
     if (progress === changePoints[1]) {
       displayElement.textContent = loadingTxt[2][Math.floor(Math.random() * loadingTxt[2].length)];
+      loadingIcon.querySelector('.icon2').style.display = 'none';
+      loadingIcon.querySelector('.icon3').style.display = 'block';
     }
     if (progress === changePoints[2]) {
       displayElement.textContent = loadingTxt[3][Math.floor(Math.random() * loadingTxt[3].length)];
+      loadingIcon.querySelector('.icon3').style.display = 'none';
+      loadingIcon.querySelector('.icon4').style.display = 'block';
     }
 
     if (progress >= 100) {
       clearInterval(interval);
-
+      document.querySelector('.loading_info').style.opacity = 0;
       // JSON 요청 완료 후 UI 업데이트
       fetchPromise.then(() => {
         document.getElementById("result-button").classList.add("on");
