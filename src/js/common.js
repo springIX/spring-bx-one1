@@ -605,6 +605,15 @@ function retryConsuling() {
   document.querySelectorAll('#survey_wrap .survey_lnb ol li').forEach(li => {
     li.classList.remove('on');
   });
+
+  document.getElementById("progress-text").textContent = "0%";
+  document.getElementById("progress-bar").style.width = "0%";
+  document.querySelectorAll(".progress_contents .icon_box > div").forEach(div => {
+    div.removeAttribute("style");
+  });
+  document.querySelector('.loading_info').style.opacity = 1;
+  document.getElementById("result-button").classList.remove('on');
+
 }
 
 // document.querySelectorAll(".fx").forEach(aniTxt => {
