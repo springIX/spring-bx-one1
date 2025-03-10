@@ -11,19 +11,23 @@ async function fetchReport() {
       user_query: input3
     };
 
-    // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('https://bxone1.loca.lt/bx_one', { // 실제 데이터 API 엔드포인트 사용
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
-    });
+    const response = await fetch('/bx_architect_report2.json');
+    // const response = await fetch('https://7080-220-118-59-188.ngrok-free.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(requestData)
+    // });
 
     if (!response.ok) {
       const errorText = await response.text(); // 오류 내용 출력
       console.error("서버 응답 오류:", response.status, errorText);
+      alert(`JSON 데이터를 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
+      retryConsuling();
       throw new Error(`JSON 데이터를 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
+
+
     }
 
     const data = await response.json();
@@ -31,6 +35,7 @@ async function fetchReport() {
 
     if (Object.keys(data).length === 0) {
       alert("서버에서 받은 JSON 데이터가 비어 있습니다.");
+      retryConsuling();
       return;
     }
 
@@ -583,3 +588,32 @@ function closeModal() {
 function downloadPDFForPage(pageIndex) {
   generatePDFWithUserInput(pageIndex);
 }
+
+function retryConsuling() {
+  document.querySelectorAll('.answer_input').forEach(input => {
+    input.value = "";
+  });
+  document.getElementById("main_wrap").classList.remove("consulting_end");
+  document.getElementById("step1").classList.add("active");
+  document.getElementById("step1").classList.remove("hidden");
+  document.getElementById("step2").classList.remove("active");
+  document.getElementById("step3").classList.remove("active");
+  document.getElementById("loading").classList.remove("active");
+  document.getElementById("result-page").classList.add("hidden");
+  document.querySelectorAll('#survey_wrap .survey_lnb ol li').forEach(li => {
+    li.classList.remove('on');
+  });
+}
+
+// document.querySelectorAll(".fx").forEach(aniTxt => {
+//   let aniTxtStr = aniTxt.textContent;
+//   let aniTxtStrSplit = aniTxtStr.split("");
+//   aniTxt.innerHTML = "";
+
+//   aniTxtStrSplit.forEach((char, i) => {
+//     let span = document.createElement("i");
+//     span.innerHTML = char === " " ? "&nbsp;" : char;
+//     span.style.animationDelay = `${(i + 1) * 0.2}s`;
+//     aniTxt.appendChild(span);
+//   });
+// });

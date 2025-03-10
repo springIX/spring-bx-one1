@@ -20,6 +20,7 @@
 }
 #main video {
   transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: brightness(0.7);
 }
 #main .ani_fade {
   transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -28,8 +29,8 @@
   height: 100%;
 }
 #main .container .txt_box {
-  padding: 158rem 0 0 50%;
-  font-size: clamp(10px, 20rem, 999rem);
+  padding: 90rem 0 0 50%;
+  font-size: clamp(10px, 18rem, 999rem);
   font-weight: bold;
 }
 #main .container .process_info {
@@ -201,10 +202,11 @@
 #survey_wrap .survey_box .survey_cont .con_box .txt_box span {
   display: block;
   font-size: clamp(10px, 32rem, 999rem);
+  line-height: 1;
 }
 #survey_wrap .survey_box .survey_cont .con_box .txt_box .tit {
   display: block;
-  font-size: clamp(10px, 56rem, 999rem);
+  font-size: clamp(10px, 48rem, 999rem);
   line-height: 1.2;
   margin-top: 29rem;
 }
@@ -358,7 +360,7 @@
   height: 200rem;
   position: absolute;
   left: 117rem;
-  top: 46rem;
+  top: 0;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .icon_box img {
   height: 100%;
@@ -375,7 +377,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: clamp(10px, 300rem, 999rem);
+  font-size: clamp(10px, 240rem, 999rem);
   font-weight: 700;
   text-align: right;
   line-height: 1;
