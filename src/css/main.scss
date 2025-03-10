@@ -158,10 +158,12 @@ $survey_pdt: 162rem;
     .json_data{ color: $black; 
       .data_wrap{ display: flex; margin-bottom: 16rem; height: 500rem;  
         > div{width: 50%; background-color: $white; border-radius: 30rem; padding: 32rem;}
+        .title {
+          .ico {width: 24rem; height: 24rem; background-size: auto; background-repeat: no-repeat; background-position: center center; display: inline-block;}
+          .ico_frame {background-image: url('/src/images/ico_frame.svg');}
+          .ico_frame2 {background-image: url('/src/images/ico_frame2.svg');}
+        }
         .result_data_wrap {
-          .title {
-            .ico_frame {width: 24rem; height: 24rem; background-image: url('/src/images/ico_frame.svg'); background-size: auto; background-repeat: no-repeat; background-position: center center; display: inline-block;}
-          }
           .result_data {overflow:hidden;
             .scroll {display: flex; flex-direction: column; gap: 48rem; }
             .step_wrap {

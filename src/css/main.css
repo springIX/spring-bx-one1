@@ -469,14 +469,19 @@
   border-radius: 30rem;
   padding: 32rem;
 }
-#survey_wrap #result-page .json_data .data_wrap .result_data_wrap .title .ico_frame {
+#survey_wrap #result-page .json_data .data_wrap .title .ico {
   width: 24rem;
   height: 24rem;
-  background-image: url("/src/images/ico_frame.svg");
   background-size: auto;
   background-repeat: no-repeat;
   background-position: center center;
   display: inline-block;
+}
+#survey_wrap #result-page .json_data .data_wrap .title .ico_frame {
+  background-image: url("/src/images/ico_frame.svg");
+}
+#survey_wrap #result-page .json_data .data_wrap .title .ico_frame2 {
+  background-image: url("/src/images/ico_frame2.svg");
 }
 #survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data {
   overflow: hidden;
