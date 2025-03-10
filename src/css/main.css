@@ -434,7 +434,7 @@
 }
 @keyframes icon4 {
   0% {
-    transform: scale(1) translateY(-5rem);
+    transform: scale(1) translateY(-9rem);
   }
   100% {
     transform: scale(0.6) translateY(-49rem);
