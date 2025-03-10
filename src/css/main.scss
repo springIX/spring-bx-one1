@@ -93,7 +93,8 @@ $survey_pdt: 162rem;
           }
         }
         .example_btn{ display: flex; align-items: center;
-          &::after{ content: ''; width: 12rem; height: 11rem; background: url(../images/ico_file.svg)no-repeat center center / contain; margin:1rem 0 0 10rem;}
+          &::after{ content: ''; width: 12rem; height: 11rem; background: url(../images/ico_file.svg)no-repeat center center / contain; margin:1rem 0 0 10rem; transition: .3s ease;}
+          &.on{ filter: invert(1);}
         }
         .example_list{ margin-top: 16rem;
           &[data-toggle=brand_choose] li{ cursor: pointer; 
@@ -144,7 +145,7 @@ $survey_pdt: 162rem;
             }
           }
           .icon3{width: 347rem;
-            transform: translateX(-75px);
+            transform: translateX(-75rem);
             svg > *:not(.not_ani){ animation: icon3 2s infinite;}
             @keyframes icon3 {
               0%{ transform: rotate(0);}

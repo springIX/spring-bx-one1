@@ -272,6 +272,10 @@
   height: 11rem;
   background: url(../images/ico_file.svg) no-repeat center center/contain;
   margin: 1rem 0 0 10rem;
+  transition: 0.3s ease;
+}
+#survey_wrap .survey_box .survey_cont .con_box .example_btn.on {
+  filter: invert(1);
 }
 #survey_wrap .survey_box .survey_cont .con_box .example_list {
   margin-top: 16rem;
@@ -394,7 +398,7 @@
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .icon_box .icon3 {
   width: 347rem;
-  transform: translateX(-75px);
+  transform: translateX(-75rem);
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .icon_box .icon3 svg > *:not(.not_ani) {
   animation: icon3 2s infinite;

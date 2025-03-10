@@ -11,7 +11,7 @@ async function fetchReport() {
     };
 
     // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('https://bxone1.loca.lt/bx_one', { // 실제 데이터 API 엔드포인트 사용
+    const response = await fetch('https://27a898b3ed8e.ngrok.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -614,6 +614,12 @@ function retryConsuling() {
   document.querySelector('.loading_info').style.opacity = 1;
   document.getElementById("result-button").classList.remove('on');
 
+  document.querySelectorAll(".example_btn").forEach(div => {
+    div.classList.remove('on');
+  });
+  document.querySelectorAll(".example_list").forEach(div => {
+    div.classList.remove('on');
+  });
 }
 
 // document.querySelectorAll(".fx").forEach(aniTxt => {
