@@ -10,20 +10,24 @@ async function fetchReport() {
       user_query: input3
     };
 
-    const response = await fetch('/bx_architect_report2.json');
-    // const response = await fetch('https://7080-220-118-59-188.ngrok-free.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(requestData)
-    // });
+    // const response = await fetch('/bx_architect_report2.json');
+    const response = await fetch('https://bxone1.loca.lt/bx_one', { // 실제 데이터 API 엔드포인트 사용
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
       console.error("서버 응답 오류:", response.status, errorText);
-      alert(`JSON 데이터를 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
-      retryConsuling();
+
+      // 특정 에러 코드 확인 후 스크립트 실행
+      if ([500, 504, 404].includes(response.status)) {
+        alert(`JSON 데이터를 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
+        retryConsuling();
+      }
       throw new Error(`JSON 데이터를 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
 
 
@@ -44,7 +48,7 @@ async function fetchReport() {
     document.getElementById("step2_data").innerHTML = input2 || "입력 없음";
     document.getElementById("step3_data").innerHTML = input3 || "입력 없음";
 
-    
+
     // 데이터가 존재할 때만 DOM 업데이트
     if (data.social_report_title) {
       document.querySelector(".social_report_title").textContent = data.social_report_title;
@@ -553,7 +557,7 @@ async function generatePDFWithUserInput(buttonIndex) {
     const pdfUrl = URL.createObjectURL(pdfBlob);
 
     openModal(pdfUrl);
-    
+
     // 다운로드 버튼에 PDF 링크 추가
     const downloadButton = document.querySelector(".pdf_download_btn");
     downloadButton.href = pdfUrl;
