@@ -137,10 +137,10 @@ $survey_pdt: 162rem;
             }
           }
           .icon2{
-            svg > *:not(.not_ani){ animation: icon2 1s infinite alternate-reverse;}
+            .ani{ animation: icon2 1s infinite alternate-reverse;}
             @keyframes icon2 {
-              0%{ transform: translateY(50rem);}
-              100%{ transform: translateY(0rem);}
+              0%{ transform: translateY(0rem);}
+              100%{ transform: translateY(-38rem);}
             }
           }
           .icon3{width: 347rem;

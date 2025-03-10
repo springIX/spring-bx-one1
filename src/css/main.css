@@ -381,15 +381,15 @@
     transform: rotate(0deg) translate(0px, 0px);
   }
 }
-#survey_wrap .survey_box .survey_cont .progress_contents .icon_box .icon2 svg > *:not(.not_ani) {
+#survey_wrap .survey_box .survey_cont .progress_contents .icon_box .icon2 .ani {
   animation: icon2 1s infinite alternate-reverse;
 }
 @keyframes icon2 {
   0% {
-    transform: translateY(50rem);
+    transform: translateY(0rem);
   }
   100% {
-    transform: translateY(0rem);
+    transform: translateY(-38rem);
   }
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .icon_box .icon3 {
