@@ -1,7 +1,7 @@
 async function fetchRandomId() {
   try {
-    const response = await fetch('https://bxone1.loca.lt/rand_id');
-    // const response = await fetch('/randomid.json');
+    // const response = await fetch('https://bxone1.loca.lt/rand_id');
+    const response = await fetch('/randomid.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

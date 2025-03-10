@@ -85,10 +85,6 @@ body {
   outline: none !important;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 ::placeholder {
   color: #6c6c6c;
 }

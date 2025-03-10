@@ -162,19 +162,23 @@ $survey_pdt: 162rem;
           .title {
             .ico_frame {width: 24rem; height: 24rem; background-image: url('/src/images/ico_frame.svg'); background-size: auto; background-repeat: no-repeat; background-position: center center; display: inline-block;}
           }
-          .result_data {flex: 1; overflow:hidden;
+          .result_data {overflow:hidden;
             .scroll {display: flex; flex-direction: column; gap: 48rem; }
             .step_wrap {
-              .step_tit {margin-bottom: 7rem; @include font-size(16rem); font-weight: bold;}
               .step_data { @include font-size(32rem); font-weight: 300;}
             }
           }
           
         }
+        .report_tit {margin-bottom: 7rem; @include font-size(16rem); font-weight: bold;}
         .title { display: flex; gap: 4rem; align-items: center; @include font-size(24rem); font-weight: bold; margin-bottom: 40rem;
         }
-        .scroll {overflow-y: scroll; height: 100%;}
-        .final_report_wrap{ margin-left: 16rem; overflow: hidden;}
+        .scroll {overflow-y: scroll; height: 360rem}
+        .final_report_wrap{ margin-left: 16rem; overflow: hidden;
+          .social_report_title { @include font-size(24rem); padding-bottom: 5rem;}
+          .social_report_subtitle { @include font-size(16rem); padding-bottom: 32rem; color: #888888;}
+          .social_report { @include font-size(16rem);}
+        }
       }
       .pdf_download{ display: flex; gap: 15rem; padding-bottom: 32rem; margin-bottom: 40rem; border-bottom: 1px solid rgba($color: $white, $alpha: .3);
         button{ width: 100%; background-color: $white; border-radius: 20rem; height: 88rem; display: flex; align-items: center; justify-content: center; @include font-size(16rem); font-weight: bold; transition: .3s ease;
@@ -194,7 +198,7 @@ $survey_pdt: 162rem;
         .modal_content{ transform: translate(-50%, -50%); opacity: 1; touch-action: auto; pointer-events: auto;}
       }
       .modal_content{ transform: translate(-50%, -30%); opacity: 0; touch-action: none; transition: 1s ease; pointer-events: none; border-radius: 30px; width: 1523rem; padding:32rem;
-        .close{ display: block; width: 40rem; margin: 0 0 27rem auto;}
+        .close{ display: block; width: 40rem; margin: 0 0 20rem auto; cursor: pointer;}
         .pdf_viewer{ margin: 23rem 0; width: 100%; height: 730rem;
           iframe{ border-radius: 30rem; overflow: hidden;}
         }

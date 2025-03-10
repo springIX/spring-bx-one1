@@ -1,9 +1,8 @@
-
 async function fetchReport() {
   try {
-    const input1 = document.getElementById("input1").value;
-    const input2 = document.getElementById("input2").value;
-    const input3 = document.getElementById("input3").value;
+    const input1 = document.getElementById("input1").value.trim();
+    const input2 = document.getElementById("input2").value.trim();
+    const input3 = document.getElementById("input3").value.trim();
 
     const requestData = {
       product_name: input1,
@@ -11,17 +10,16 @@ async function fetchReport() {
       user_query: input3
     };
 
-    // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('https://bxone1.loca.lt/bx_one', { // 실제 데이터 API 엔드포인트 사용
+    // API 요청: 실제 API를 사용하거나 로컬 JSON을 사용할 수 있음
+    // const response = await fetch('/bx_architect_report2.json'); 
+    const response = await fetch('https://bxone1.loca.lt/bx_one', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestData)
     });
 
     if (!response.ok) {
-      const errorText = await response.text(); // 오류 내용 출력
+      const errorText = await response.text();
       console.error("서버 응답 오류:", response.status, errorText);
       throw new Error(`JSON 데이터를 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
     }
@@ -29,55 +27,36 @@ async function fetchReport() {
     const data = await response.json();
     console.log("서버 응답 데이터 확인:", data);
 
-    if (Object.keys(data).length === 0) {
+    if (!data || Object.keys(data).length === 0) {
       alert("서버에서 받은 JSON 데이터가 비어 있습니다.");
       return;
     }
 
     window.reportData = data; // 전역 변수에 데이터 저장
 
-    let finalReportOutput = "";
-    let resultDataOutput = "";
+    document.getElementById("step1_data").innerHTML = input1 || "입력 없음";
+    document.getElementById("step2_data").innerHTML = input2 || "입력 없음";
+    document.getElementById("step3_data").innerHTML = input3 || "입력 없음";
 
-    document.getElementById("final_report").innerHTML = "";
-    document.getElementById("result_data").innerHTML = "";
-
-    // 사용자 입력 데이터 표시
-    resultDataOutput += `<h3>사용자 입력 데이터</h3>`;
-    resultDataOutput += `<p>1단계 입력: <strong>${input1 || "입력 없음"}</strong></p>`;
-    resultDataOutput += `<p>2단계 입력: <strong>${input2 || "입력 없음"}</strong></p>`;
-    resultDataOutput += `<p>3단계 입력: <strong>${input3 || "입력 없음"}</strong></p>`;
-
-    // social_report 처리
+    
+    // 데이터가 존재할 때만 DOM 업데이트
+    if (data.social_report_title) {
+      document.querySelector(".social_report_title").textContent = data.social_report_title;
+    }
+    if (data.social_report_subtitle) {
+      document.querySelector(".social_report_subtitle").textContent = data.social_report_subtitle;
+    }
     if (data.social_report) {
-      const lines = data.social_report.split("\n");
-
-      lines.forEach(paragraph => {
-        if (paragraph.startsWith("# ")) {
-          finalReportOutput += `<h2>${paragraph.replace("#", "").trim()}</h2>`;
-        } else if (paragraph.startsWith("## ")) {
-          finalReportOutput += `<h3>${paragraph.replace("##", "").trim()}</h3>`;
-        } else if (paragraph.startsWith("### ")) {
-          finalReportOutput += `<h4>${paragraph.replace("###", "").trim()}</h4>`;
-        } else if (paragraph.startsWith("- ['")) {
-          const link = paragraph.match(/\['(.+?)'\]/);
-          if (link) {
-            finalReportOutput += `<p><a href="${link[1]}" target="_blank">${link[1]}</a></p>`;
-          }
-        } else if (paragraph.trim() !== "") {
-          finalReportOutput += `<p>${paragraph.trim()}</p>`;
-        }
-      });
+      // social_report의 * 제거 및 줄바꿈 처리
+      const cleanedReport = data.social_report.replace(/\*/g, "").replace(/\n/g, "<br>");
+      document.querySelector(".social_report").innerHTML = cleanedReport;
     }
 
-    document.getElementById("result_data").innerHTML = resultDataOutput;
-    document.getElementById("final_report").innerHTML = finalReportOutput;
-
-    console.log("JSON 데이터 로드 완료:", finalReportOutput);
   } catch (error) {
     console.error("fetchReport 오류:", error);
   }
 }
+
 
 function startConsulting() {
   document.getElementById("main").classList.add("hidden");
@@ -304,8 +283,7 @@ function submitForm() {
 
   // 60초(60000ms) ~ 120초(120000ms) 사이의 랜덤 시간 선택
   let duration = Math.floor(Math.random() * (120 - 60 + 1) + 60);
-  // let intervalTime = (duration * 1000) / 100; // 1%씩 업데이트 (전체 지속 시간에 맞춤)
-  let intervalTime = 10;
+  let intervalTime = (duration * 1000) / 100;
   let progress = 0;
 
   // 로딩이 진행되는 동안 JSON 데이터를 가져옴
@@ -534,7 +512,7 @@ async function generatePDFWithUserInput(buttonIndex) {
     addCenteredWrappedText(brandingPage, (jsonData.compounds.attribute || []).join(", "), 1258, 150, 450, 20, customFont, rgb(1, 1, 1), 32);
 
 
-    const finalReportLines = socialReport.split("\n");
+    const finalReportLines = socialReport.replace(/\*/g, "").split("\n");
 
     finalReportLines.forEach(line => {
       let textSize = 20;
@@ -563,8 +541,18 @@ async function generatePDFWithUserInput(buttonIndex) {
       });
     });
 
+    // PDF 생성 및 Blob URL 생성
     const pdfBytes = await pdfDoc.save();
-    openModal(URL.createObjectURL(new Blob([pdfBytes], { type: "application/pdf" })));
+    const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+
+    openModal(pdfUrl);
+    
+    // 다운로드 버튼에 PDF 링크 추가
+    const downloadButton = document.querySelector(".pdf_download_btn");
+    downloadButton.href = pdfUrl;
+    downloadButton.download = `블렌드엑스 종합광고대행사_bx_architect_final_report${buttonIndex + 1}.pdf`;
+
   } catch (error) {
     console.error("PDF 생성 오류:", error);
   }

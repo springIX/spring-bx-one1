@@ -477,7 +477,6 @@
   display: inline-block;
 }
 #survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data {
-  flex: 1;
   overflow: hidden;
 }
 #survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data .scroll {
@@ -485,14 +484,14 @@
   flex-direction: column;
   gap: 48rem;
 }
-#survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data .step_wrap .step_tit {
-  margin-bottom: 7rem;
-  font-size: clamp(10px, 16rem, 999rem);
-  font-weight: bold;
-}
 #survey_wrap #result-page .json_data .data_wrap .result_data_wrap .result_data .step_wrap .step_data {
   font-size: clamp(10px, 32rem, 999rem);
   font-weight: 300;
+}
+#survey_wrap #result-page .json_data .data_wrap .report_tit {
+  margin-bottom: 7rem;
+  font-size: clamp(10px, 16rem, 999rem);
+  font-weight: bold;
 }
 #survey_wrap #result-page .json_data .data_wrap .title {
   display: flex;
@@ -504,11 +503,23 @@
 }
 #survey_wrap #result-page .json_data .data_wrap .scroll {
   overflow-y: scroll;
-  height: 100%;
+  height: 360rem;
 }
 #survey_wrap #result-page .json_data .data_wrap .final_report_wrap {
   margin-left: 16rem;
   overflow: hidden;
+}
+#survey_wrap #result-page .json_data .data_wrap .final_report_wrap .social_report_title {
+  font-size: clamp(10px, 24rem, 999rem);
+  padding-bottom: 5rem;
+}
+#survey_wrap #result-page .json_data .data_wrap .final_report_wrap .social_report_subtitle {
+  font-size: clamp(10px, 16rem, 999rem);
+  padding-bottom: 32rem;
+  color: #888888;
+}
+#survey_wrap #result-page .json_data .data_wrap .final_report_wrap .social_report {
+  font-size: clamp(10px, 16rem, 999rem);
 }
 #survey_wrap #result-page .json_data .pdf_download {
   display: flex;
@@ -604,7 +615,8 @@
 #survey_wrap #result-page .modal_popup .modal_content .close {
   display: block;
   width: 40rem;
-  margin: 0 0 27rem auto;
+  margin: 0 0 20rem auto;
+  cursor: pointer;
 }
 #survey_wrap #result-page .modal_popup .modal_content .pdf_viewer {
   margin: 23rem 0;
