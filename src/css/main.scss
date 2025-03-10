@@ -5,7 +5,7 @@
 
 /********** MAIN VISUAL **********/
 #main{ width: 100%; height: 100%;  padding: 162rem 0 130rem; position: absolute; left: 0; top: 0; z-index: 10; 
-  video{ transition: 1s $expo; filter: brightness(.7);} 
+  video{ transition: 1s $expo; filter: brightness(.3);} 
   .ani_fade{ transition: 1s $expo;}
   .container{height: 100%;
     .main_title{ }
@@ -45,7 +45,8 @@
 /********** SURVEY **********/
 $survey_pdt: 162rem;
 
-#survey_wrap{ width: 100%; height: 100%; position: absolute; left: 0; top: 0;
+#survey_wrap{ width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: $white url(../images/survey_bg.png)no-repeat center center / cover;  
+  video{ opacity: 70%;}
   .survey_tit{ position: absolute; left: 354rem; top: 50rem; @include font-size(14rem); display: flex; align-items: center; font-weight: bold; white-space: nowrap;
     img{ margin-right: 4rem; width: 24rem;}
   }
@@ -127,14 +128,49 @@ $survey_pdt: 162rem;
 
       .progress_contents{ position: relative; width: 100%;
         .icon_box{ height: 200rem; position: absolute; left: 117rem; top: 0;
-          img{ height: 100%; width: auto; position: absolute; left: 0; top: 0;
-            &:not(.icon1){display: none;}
+          > *:not(.icon1){display: none;}
+          .icon1{
+            .ani{ transform-origin: right bottom; animation: icon1 1s infinite alternate-reverse;}
+            @keyframes icon1 {
+              0%{ transform: rotate(-20deg) translate(29px, 26px);}
+              100%{ transform: rotate(0deg) translate(0px, 0px);}
+            }
+          }
+          .icon2{
+            svg > *:not(.not_ani){ animation: icon2 1s infinite alternate-reverse;}
+            @keyframes icon2 {
+              0%{ transform: translateY(50rem);}
+              100%{ transform: translateY(0rem);}
+            }
+          }
+          .icon3{width: 347rem;
+            transform: translateX(-75px);
+            svg > *:not(.not_ani){ animation: icon3 2s infinite;}
+            @keyframes icon3 {
+              0%{ transform: rotate(0);}
+              15%{ transform: rotate(9deg) translate(0rem, 0rem);}
+              30%{ transform: rotate(9deg) translate(0rem, 0rem);}
+              40%{ transform: rotate(9deg) translate(10rem, 5rem);}
+              50%{ transform: rotate(9deg) translate(20rem, -5rem);}
+              60%{ transform: rotate(9deg) translate(30rem, 6rem);}
+              70%{ transform: rotate(9deg) translate(40rem, -6rem);}
+              80%{ transform: rotate(9deg) translate(50rem, 7rem);}
+              100%{ transform: rotate(9deg) translate(63rem, -8rem);}
+            }
+          }
+          .icon4{
+            .ani{ animation: icon4 1s infinite alternate-reverse; transform-origin: center center;}
+            @keyframes icon4 {
+              0%{ transform: scale(1) translateY(-5rem);}
+              100%{transform: scale(0.6) translateY(-49rem);
+              }
+            }
           }
         }
         .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(240rem); font-weight: 700; text-align: right; line-height: 1;}
         .progress_container{position: relative;
           .progress_bar_wrap{ padding: 5rem;
-            .progress_bar{ width: 0%; height: 100%; border-radius: 130px; background: linear-gradient(90deg, #6132D3 0.18%, #FF1585 99.82%);}
+            .progress_bar{ width: 0%; min-width: 26rem; height: 100%; border-radius: 130px; background: linear-gradient(90deg, #6132D3 0.18%, #FF1585 99.82%);}
           }
         }
         .result_button{  display: flex; align-items: center; @include font-size(16rem); padding: 18rem 15rem; background-color: $ci; color: $white; border-radius: 8rem; margin: 80rem auto 0; touch-action: none; pointer-events: none; transform: translateY(50rem); opacity: 0; transition: 1s ease; position: relative;
