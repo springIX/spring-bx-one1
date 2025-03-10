@@ -10,14 +10,14 @@ async function fetchReport() {
       user_query: input3
     };
 
-    const response = await fetch('/bx_architect_report2.json');
-    // const response = await fetch('https://7080-220-118-59-188.ngrok-free.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(requestData)
-    // });
+    // const response = await fetch('/bx_architect_report2.json');
+    const response = await fetch('https://27a898b3ed8e.ngrok.app/bx_one', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -286,14 +286,21 @@ function submitForm() {
   let progressBar = document.getElementById("progress-bar");
   let progressText = document.getElementById("progress-text");
   let resultButton = document.getElementById("result-button");
-
+  
   // 60초(60000ms) ~ 120초(120000ms) 사이의 랜덤 시간 선택
   let duration = Math.floor(Math.random() * (120 - 60 + 1) + 60);
   let intervalTime = (duration * 1000) / 100;
   let progress = 0;
+  let jsonLoaded = false;
 
   // 로딩이 진행되는 동안 JSON 데이터를 가져옴
-  let fetchPromise = fetchReport();
+  let fetchPromise = fetchReport().then(() => {
+    jsonLoaded = true;
+  }).catch(error => {
+    console.error("데이터 로딩 중 오류 발생:", error);
+    document.getElementById("loading").classList.add("hidden");
+    alert("데이터를 불러오는 중 오류가 발생했습니다.");
+  });
 
   // 랜덤 텍스트 : 로딩 중 일때
   const loadingTxt = [
@@ -302,9 +309,7 @@ function submitForm() {
     ["3-1번째텍스트", "3-2번째텍스트", "3-3번째텍스트", "3-5번째텍스트", "3-5번째텍스트"],
     ["4-1번째텍스트", "4-2번째텍스트", "4-3번째텍스트", "4-5번째텍스트", "4-5번째텍스트"]
   ];
-  const loadingRandPick = loadingTxt.map(group =>
-    group[Math.floor(Math.random() * group.length)]
-  );
+
 
 
   // 텍스트가 표시될 요소
@@ -344,14 +349,18 @@ function submitForm() {
     if (progress >= 100) {
       clearInterval(interval);
       document.querySelector('.loading_info').style.opacity = 0;
-      // JSON 요청 완료 후 UI 업데이트
-      fetchPromise.then(() => {
-        document.getElementById("result-button").classList.add("on");
-      }).catch(error => {
-        console.error("데이터 로딩 중 오류 발생:", error);
-        document.getElementById("loading").classList.add("hidden");
-        alert("데이터를 불러오는 중 오류가 발생했습니다.");
-      });
+
+      if (jsonLoaded) {
+        resultButton.classList.add("on"); // JSON 데이터도 로드 완료됐을 경우 버튼 노출
+      } else {
+        // JSON 데이터가 아직 안 불러와졌다면 계속 확인
+        let checkInterval = setInterval(() => {
+          if (jsonLoaded) {
+            clearInterval(checkInterval);
+            resultButton.classList.add("on");
+          }
+        }, 500);
+      }
     }
   }, intervalTime);
 }
