@@ -37,11 +37,16 @@ async function fetchReport() {
     window.reportData = data; // 전역 변수에 데이터 저장
 
     let finalReportOutput = "";
+    let resultDataOutput = "";
 
     document.getElementById("final_report").innerHTML = "";
-    document.getElementById("step1_data").innerHTML = input1 || "입력 없음";
-    document.getElementById("step2_data").innerHTML = input2 || "입력 없음";
-    document.getElementById("step3_data").innerHTML = input3 || "입력 없음";
+    document.getElementById("result_data").innerHTML = "";
+
+    // 사용자 입력 데이터 표시
+    resultDataOutput += `<h3>사용자 입력 데이터</h3>`;
+    resultDataOutput += `<p>1단계 입력: <strong>${input1 || "입력 없음"}</strong></p>`;
+    resultDataOutput += `<p>2단계 입력: <strong>${input2 || "입력 없음"}</strong></p>`;
+    resultDataOutput += `<p>3단계 입력: <strong>${input3 || "입력 없음"}</strong></p>`;
 
     // social_report 처리
     if (data.social_report) {
@@ -65,6 +70,7 @@ async function fetchReport() {
       });
     }
 
+    document.getElementById("result_data").innerHTML = resultDataOutput;
     document.getElementById("final_report").innerHTML = finalReportOutput;
 
     console.log("JSON 데이터 로드 완료:", finalReportOutput);
@@ -104,55 +110,46 @@ const example_txt_benefit = [
   "맞춤형 IT 솔루션 · 디지털 전환 · 경쟁력 강화"
 ];
 const example_txt_choose = [
-  ["카페에서 커피를 선택할 때 가장 중요하게 고려하는 요소는 무엇인가요?",
-    "바리스타의 로스팅 기술이나 전문성이 구매 결정에 영향을 주나요?",
-    "커피의 산미, 고소함, 향 등 어떤 맛 프로필을 선호하시나요?",
-    "신선하게 로스팅된 원두의 맛이 구매 의사에 어떤 영향을 미치나요?"],
-
-  ["광고대행사를 선택할 때 가장 중요하게 고려하는 기준은 무엇인가요?",
-    "서비스 비용, 과거 캠페인 성공 사례, 크리에이티브 제안 중 어떤 요소가 가장 큰 영향을 미치나요?",
-    "의뢰 시, 광고대행사의 전략적 접근 방식이나 고객 맞춤형 서비스에 대해 어떻게 평가하시나요?",
-    "광고 파트너 선정 과정에서 개선되었으면 하는 점은 무엇인가요?"],
-
-  ["퓨전 요리를 선택할 때 가장 매력적으로 느끼는 요소는 무엇인가요?",
-    "현지 재료와 국제 요리법의 조화에 대해 어떻게 생각하시나요?",
-    "새로운 맛의 경험과 전통적인 맛 중 어느 쪽에 더 큰 가치를 두시나요?",
-    "메뉴 구성이나 가격대는 선택에 어떤 영향을 미치나요?"],
-
-  ["화장품 선택 시 자연 유래 성분의 비중은 어느 정도인가요?",
-    "피부에 자극 없이 효과를 느낄 수 있는 제품에 대해 어떻게 평가하시나요?",
-    "제품의 가격대와 품질 사이의 균형에 대해 어떤 기대를 가지시나요?",
-    "패키지 디자인이나 브랜드 신뢰도가 구매 결정에 미치는 영향은 어느 정도인가요?"],
-
-  ["피트니스 센터를 선택할 때 가장 중요하게 고려하는 요소는 무엇인가요?",
-    "최신 운동기구와 전문 트레이너의 역할이 얼마나 중요하다고 생각하시나요?",
-    "맞춤형 운동 프로그램의 효과와 만족도에 대해 어떻게 평가하시나요?",
-    "운영 시간, 위치, 멤버십 비용 등 기타 요소도 선택에 영향을 미치나요?"],
-
-  ["인테리어를 선택할 때 친환경 소재 사용 여부가 중요한 결정 요소인가요?",
-    "최신 디자인 트렌드와 친환경 요소의 조화에 대해 어떻게 생각하시나요?",
-    "실내 공기질, 에너지 효율성 등 지속 가능성이 주는 장점을 어느 정도 고려하시나요?",
-    "예산과 친환경 디자인 사이에서 우선 순위는 어떻게 결정하시나요?"],
-
-  ["온라인 쇼핑 시 가장 중요하게 생각하는 요소는 무엇인가요?",
-    "최신 유행 아이템에 대한 기대와 실제 구매 경험은 어떻게 일치하나요?",
-    "상품 가격, 품질, 고객 리뷰 중 어떤 요소가 구매 결정에 가장 큰 영향을 미치나요?",
-    "쇼핑몰의 상품 구성과 추천 시스템에 대해 어떻게 평가하시나요?"],
-
-  ["맞춤형 교육 프로그램이 학습 성과에 미치는 영향에 대해 어떻게 생각하시나요?",
-    "AI 기반 추천 시스템이 개인 학습에 얼마나 도움이 되었나요?",
-    "플랫폼 사용 중 가장 만족스러웠던 기능과 개선되었으면 하는 부분은 무엇인가요?",
-    "학습 진도 관리와 피드백 시스템이 학습 동기 부여에 미치는 영향은 어느 정도인가요?"],
-
-  ["오디오 제품 구매 시 가장 중요한 기준은 무엇인가요?",
-    "음향 기술과 제품 디자인 중 어느 쪽이 구매 결정에 더 큰 영향을 미치나요?",
-    "실내 환경에 최적화된 음향 성능에 대한 만족도는 어느 정도인가요?",
-    "가격 대비 성능과 디자인 만족도에 대해 어떻게 평가하시나요?"],
-
-  ["IT 솔루션 제공업체 선정 시 가장 중점을 두는 요소는 무엇인가요?",
-    "과거의 성공 사례와 맞춤형 서비스 제공이 의사결정에 미치는 영향은 어느 정도인가요?",
-    "비용, 기술 지원, 프로젝트 관리 등 각각의 요소에 대해 어떻게 평가하시나요?",
-    "디지털 전환을 추진하면서 가장 필요로 하는 지원은 무엇이라고 생각하시나요?"]
+  "카페에서 커피를 선택할 때 가장 중요하게 고려하는 요소는 무엇인가요?",
+  "바리스타의 로스팅 기술이나 전문성이 구매 결정에 영향을 주나요?",
+  "커피의 산미, 고소함, 향 등 어떤 맛 프로필을 선호하시나요?",
+  "신선하게 로스팅된 원두의 맛이 구매 의사에 어떤 영향을 미치나요?",
+  "광고대행사를 선택할 때 가장 중요하게 고려하는 기준은 무엇인가요?",
+  "서비스 비용, 과거 캠페인 성공 사례, 크리에이티브 제안 중 어떤 요소가 가장 큰 영향을 미치나요?",
+  "의뢰 시, 광고대행사의 전략적 접근 방식이나 고객 맞춤형 서비스에 대해 어떻게 평가하시나요?",
+  "광고 파트너 선정 과정에서 개선되었으면 하는 점은 무엇인가요?",
+  "퓨전 요리를 선택할 때 가장 매력적으로 느끼는 요소는 무엇인가요?",
+  "현지 재료와 국제 요리법의 조화에 대해 어떻게 생각하시나요?",
+  "새로운 맛의 경험과 전통적인 맛 중 어느 쪽에 더 큰 가치를 두시나요?",
+  "메뉴 구성이나 가격대는 선택에 어떤 영향을 미치나요?",
+  "화장품 선택 시 자연 유래 성분의 비중은 어느 정도인가요?",
+  "피부에 자극 없이 효과를 느낄 수 있는 제품에 대해 어떻게 평가하시나요?",
+  "제품의 가격대와 품질 사이의 균형에 대해 어떤 기대를 가지시나요?",
+  "패키지 디자인이나 브랜드 신뢰도가 구매 결정에 미치는 영향은 어느 정도인가요?",
+  "피트니스 센터를 선택할 때 가장 중요하게 고려하는 요소는 무엇인가요?",
+  "최신 운동기구와 전문 트레이너의 역할이 얼마나 중요하다고 생각하시나요?",
+  "맞춤형 운동 프로그램의 효과와 만족도에 대해 어떻게 평가하시나요?",
+  "운영 시간, 위치, 멤버십 비용 등 기타 요소도 선택에 영향을 미치나요?",
+  "인테리어를 선택할 때 친환경 소재 사용 여부가 중요한 결정 요소인가요?",
+  "최신 디자인 트렌드와 친환경 요소의 조화에 대해 어떻게 생각하시나요?",
+  "실내 공기질, 에너지 효율성 등 지속 가능성이 주는 장점을 어느 정도 고려하시나요?",
+  "예산과 친환경 디자인 사이에서 우선 순위는 어떻게 결정하시나요?",
+  "온라인 쇼핑 시 가장 중요하게 생각하는 요소는 무엇인가요?",
+  "최신 유행 아이템에 대한 기대와 실제 구매 경험은 어떻게 일치하나요?",
+  "상품 가격, 품질, 고객 리뷰 중 어떤 요소가 구매 결정에 가장 큰 영향을 미치나요?",
+  "쇼핑몰의 상품 구성과 추천 시스템에 대해 어떻게 평가하시나요?",
+  "맞춤형 교육 프로그램이 학습 성과에 미치는 영향에 대해 어떻게 생각하시나요?",
+  "AI 기반 추천 시스템이 개인 학습에 얼마나 도움이 되었나요?",
+  "플랫폼 사용 중 가장 만족스러웠던 기능과 개선되었으면 하는 부분은 무엇인가요?",
+  "학습 진도 관리와 피드백 시스템이 학습 동기 부여에 미치는 영향은 어느 정도인가요?",
+  "오디오 제품 구매 시 가장 중요한 기준은 무엇인가요?",
+  "음향 기술과 제품 디자인 중 어느 쪽이 구매 결정에 더 큰 영향을 미치나요?",
+  "실내 환경에 최적화된 음향 성능에 대한 만족도는 어느 정도인가요?",
+  "가격 대비 성능과 디자인 만족도에 대해 어떻게 평가하시나요?",
+  "IT 솔루션 제공업체 선정 시 가장 중점을 두는 요소는 무엇인가요?",
+  "과거의 성공 사례와 맞춤형 서비스 제공이 의사결정에 미치는 영향은 어느 정도인가요?",
+  "비용, 기술 지원, 프로젝트 관리 등 각각의 요소에 대해 어떻게 평가하시나요?",
+  "디지털 전환을 추진하면서 가장 필요로 하는 지원은 무엇이라고 생각하시나요?"
 ];
 
 // 중복 없이 무작위로 4개 선택하는 함수
@@ -192,23 +189,30 @@ function insertExampleBenefit() {
 }
 
 // 선택해야 하는 이유 예시보기 추출
-function getRandomQuestions(array) {
-  return array.map(group => group[Math.floor(Math.random() * group.length)]);
-}
-
 function insertExampleChoose() {
-  const exampleList = document.querySelector('.example_list[data-toggle="example_txt_choose"]');
+  const exampleList = document.querySelector('.example_list[data-toggle="brand_choose"]');
   if (!exampleList) return;
 
-  let selectedQuestions = getRandomQuestions(example_txt_choose); // 각 묶음에서 하나씩 선택
+  let selectedItems = getRandomItems(example_txt_choose, 4); // 4개 선택
 
   exampleList.innerHTML = ""; // 기존 내용 초기화
-  selectedQuestions.forEach(question => {
+  selectedItems.forEach(item => {
     let li = document.createElement("li");
-    li.textContent = question;
+    li.textContent = item;
     exampleList.appendChild(li);
   });
 }
+
+const ChooseExampleList = document.querySelector('.example_list[data-toggle="brand_choose"]');
+const ChooseInput = document.querySelector('input#input3');
+
+ChooseExampleList.addEventListener("click", function (event) {
+  if (event.target.tagName === "LI") {
+    ChooseInput.value = event.target.textContent;
+    ChooseInput.nextSibling('button').disabled = false;
+  }
+});
+
 
 // 실행
 insertExampleName();
@@ -504,10 +508,10 @@ async function generatePDFWithUserInput(buttonIndex) {
     addWrappedText(brandingPage, keyword.korean || "", 119, 825, 300, 20, customFontBold, rgb(1, 1, 1), 20);
     addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 800, 60, customFont, pinkColor, 72);
     addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 300, 24, customFont, rgb(1, 1, 1), 32);
-    
+
     addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 361, 750, 56, customFont, rgb(1, 1, 1), 80);
-    
-    
+
+
     addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 450, 20, customFont, rgb(1, 1, 1), 32);
     addCenteredWrappedText(brandingPage, emoFunc.functional_benefit || "", 1258, 354, 450, 20, customFont, rgb(1, 1, 1), 32);
     addCenteredWrappedText(brandingPage, (jsonData.compounds.attribute || []).join(", "), 1258, 150, 450, 20, customFont, rgb(1, 1, 1), 32);
@@ -550,13 +554,7 @@ async function generatePDFWithUserInput(buttonIndex) {
 }
 
 function openModal(pdfUrl) {
-  const pdfViewer = document.getElementById("pdfViewer");
-  const downloadBtn = document.querySelector(".pdf_download_btn");
-
-  pdfViewer.src = pdfUrl; // PDF 뷰어에 로드
-  downloadBtn.href = pdfUrl; // 다운로드 링크 설정
-  downloadBtn.setAttribute("download", "블렌드엑스 종합광고대행사_bx_architect_final_report.pdf"); // 파일 다운로드 설정
-
+  document.getElementById("pdfViewer").src = pdfUrl;
   document.getElementById("pdfModal").style.display = "block";
 }
 

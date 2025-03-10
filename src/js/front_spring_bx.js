@@ -8,7 +8,6 @@ async function fetchRandomId() {
     const data = await response.json();
     const randomId = data.random_id;
     console.log("Fetched randomId:", randomId);
-
     const inputElement = document.getElementById("randomIdInput");
     if (inputElement) {
       inputElement.value = randomId;
@@ -19,9 +18,9 @@ async function fetchRandomId() {
       console.error('Element with id "randomIdInput" not found.');
     }
 
-    return randomId;
+  return randomId;
   } catch (error) {
-    console.error('Error:', error);
+  console.error('Error:', error);
   }
 }
 

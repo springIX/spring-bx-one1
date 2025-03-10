@@ -95,7 +95,8 @@ $survey_pdt: 162rem;
           &::after{ content: ''; width: 12rem; height: 11rem; background: url(../images/ico_file.svg)no-repeat center center / contain; margin:1rem 0 0 10rem;}
         }
         .example_list{ margin-top: 16rem;
-          li{ margin-bottom: 10rem; width: max-content; font-weight: 500; color: #777; font-weight: 500; cursor: pointer; opacity: 0; transform: translateX(-10rem); transition: opacity .5s ease, transform .5s ease; touch-action: none; pointer-events: none;
+          &[data-btn=brand_choose] li{ cursor: pointer; }
+          li{ margin-bottom: 10rem; width: max-content; font-weight: 500; color: #777; font-weight: 500; opacity: 0; transform: translateX(-10rem); transition: opacity .5s ease, transform .5s ease; touch-action: none; pointer-events: none;
             &:hover{ color: $black; font-weight: 700;}
           }
           &.on{
