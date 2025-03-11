@@ -46,7 +46,7 @@ $cont_pdt: 120rem;
 
 /********** SURVEY **********/
 #survey_wrap{ width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: $white url(../images/survey_bg.jpg)no-repeat center center / cover;  
-  video{ opacity: 70%; mix-blend-mode: overlay;}
+  video{ opacity: 70%; mix-blend-mode: overlay; touch-action: none; pointer-events: none;}
   .survey_tit{ position: absolute; left: 354rem; top: 45rem; @include font-size(14rem); display: flex; align-items: center; font-weight: bold; white-space: nowrap;
     img{ margin-right: 4rem; width: 24rem;}
   }
@@ -155,9 +155,9 @@ $cont_pdt: 120rem;
       }
     }  
   }
-  #result-page{ overflow-y: auto; height: 100vh; 
-    .container{ padding: $cont_pdt 0 100rem;
-    }
+  #result-page{ height: 100vh; overflow-y: auto; 
+    &::-webkit-scrollbar{ display: block;}
+    .container{ padding: $cont_pdt 0 100rem;}
     .json_data{ color: $black; 
       .data_wrap{ display: flex; margin-bottom: 16rem; height: 500rem;  
         > div{width: 50%; background-color: $white; border-radius: 30rem; padding: 32rem;}

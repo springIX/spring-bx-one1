@@ -98,6 +98,8 @@
 #survey_wrap video {
   opacity: 70%;
   mix-blend-mode: overlay;
+  touch-action: none;
+  pointer-events: none;
 }
 #survey_wrap .survey_tit {
   position: absolute;
@@ -463,8 +465,11 @@
   animation-delay: 0.3s;
 }
 #survey_wrap #result-page {
-  overflow-y: auto;
   height: 100vh;
+  overflow-y: auto;
+}
+#survey_wrap #result-page::-webkit-scrollbar {
+  display: block;
 }
 #survey_wrap #result-page .container {
   padding: 120rem 0 100rem;
