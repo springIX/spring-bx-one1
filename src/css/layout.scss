@@ -148,10 +148,10 @@ header{ padding: 50rem 40rem; position: fixed; left: 0; top: 0; width: 100%; z-i
         }
       }
     }
-    &.retry_confirm{
-      p{ @include font-size(20rem); line-height: 1.4; font-weight: 700; margin-bottom: 20rem; color: $black;}
+    &.retry_confirm{ background: linear-gradient(0deg, rgba(196, 196, 196, 0.1) 0%, rgba(196, 196, 196, 0.1) 100%), linear-gradient(106deg, rgba(255, 21, 133, 0.45) 6.52%, rgba(0, 133, 255, 0.3) 92.88%);
+      p{ @include font-size(20rem); line-height: 1.4; font-weight: 700; margin-bottom: 32rem;}
       button{ width: 100%; height: 56rem;border-radius: 8rem; background-color: $ci;
-        &[data-btn=retry]{ border: none; margin-left: 16rem; background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.4);}
+        + button{ border: none; margin-left: 16rem; background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.4);}
       }
     }
   }
