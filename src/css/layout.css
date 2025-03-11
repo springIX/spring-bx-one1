@@ -183,7 +183,7 @@
 
 /********** HEADER **********/
 header {
-  padding: 50rem 40rem;
+  padding: 40rem;
   position: fixed;
   left: 0;
   top: 0;
@@ -214,6 +214,7 @@ header .sub_menu .company_btn i {
   background-color: #ffffff;
   position: absolute;
   left: 0;
+  transition: 0.3s ease;
 }
 header .sub_menu .company_btn i:nth-child(1) {
   top: 0;
@@ -224,6 +225,21 @@ header .sub_menu .company_btn i:nth-child(2) {
 }
 header .sub_menu .company_btn i:nth-child(3) {
   bottom: 0;
+}
+header .sub_menu .company_btn.on i {
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+}
+header .sub_menu .company_btn.on i:nth-child(1) {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+header .sub_menu .company_btn.on i:nth-child(2) {
+  transform: translate(-50%, -50%) scale(0);
+}
+header .sub_menu .company_btn.on i:nth-child(3) {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 header .footer_box {
   position: absolute;

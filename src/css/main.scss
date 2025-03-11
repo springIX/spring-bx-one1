@@ -1,10 +1,12 @@
 @charset "utf-8";
 @import "var";
 
+$cont_pdt: 120rem;
+
 #main_wrap{ background-color: $black; height: 100vh; width: 100%; overflow: hidden; position: relative;}
 
 /********** MAIN VISUAL **********/
-#main{ width: 100%; height: 100%;  padding: 162rem 0 130rem; position: absolute; left: 0; top: 0; z-index: 10; 
+#main{ width: 100%; height: 100%;  padding: $cont_pdt 0; position: absolute; left: 0; top: 0; z-index: 10; 
   video{ transition: 1s $expo; filter: brightness(.3);} 
   .ani_fade{ transition: 1s $expo;}
   .container{height: 100%;
@@ -43,14 +45,12 @@
 }
 
 /********** SURVEY **********/
-$survey_pdt: 162rem;
-
 #survey_wrap{ width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: $white url(../images/survey_bg.jpg)no-repeat center center / cover;  
   video{ opacity: 70%; mix-blend-mode: overlay;}
-  .survey_tit{ position: absolute; left: 354rem; top: 50rem; @include font-size(14rem); display: flex; align-items: center; font-weight: bold; white-space: nowrap;
+  .survey_tit{ position: absolute; left: 354rem; top: 45rem; @include font-size(14rem); display: flex; align-items: center; font-weight: bold; white-space: nowrap;
     img{ margin-right: 4rem; width: 24rem;}
   }
-  .survey_lnb{ position: absolute; left: 0; top: 0; height: 100%; width:  270rem; background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.00) 100%); backdrop-filter: blur(50px); border-right: 1px solid #fff; padding: $survey_pdt 0 0 $layout_padding; font-weight: bold; z-index: 10; transform: translateX(-100%); transition: 1s $expo;
+  .survey_lnb{ position: absolute; left: 0; top: 0; height: 100%; width:  270rem; background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.00) 100%); backdrop-filter: blur(50px); border-right: 1px solid #fff; padding: $cont_pdt 0 0 $layout_padding; font-weight: bold; z-index: 10; transform: translateX(-100%); transition: 1s $expo;
     ol{
       li{ opacity: .3;  transition: .3s ease;
         + li{ margin-top: 16rem;} 
@@ -69,17 +69,17 @@ $survey_pdt: 162rem;
 
   .survey_box{ z-index: 1; position: relative;height: 100%;
     &.on{}
-    .survey_cont{padding: $survey_pdt 352rem 100rem; height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+    .survey_cont{padding: $cont_pdt 352rem 80rem; height: 100%; display: flex; flex-direction: column; justify-content: space-between;
       .con_box{ font-weight: bold;
         .example_btn,
         .example_list li{ @include font-size(14rem); padding: 7rem 12rem; border-radius: 8rem; background-color: $white; color: $black;}
         .txt_box{ margin-bottom: 20rem; 
           span{ display: block; @include font-size(32rem); line-height: 1;}
-          .tit{ display: block; @include font-size(48rem); line-height: 1.2; margin-top: 29rem;}
+          .tit{ display: block; @include font-size(40rem); line-height: 1.2; margin-top: 29rem;}
           .loading_info{ display: flex; align-items: center; margin-top: 32rem;
             p{ width: max-content; margin-right: 15rem;}
             .loader{ display: block; width: 20px; height: 20px; border-radius: 50%; border:2px solid $white; position: relative; animation: loading1 1s linear infinite;
-              &::after{ content: ""; box-sizing: border-box; position: absolute; inset: 0px; border-radius: 50%; border: 2px solid $ci; animation: loading2 2s linear infinite alternate-reverse; width: 100%; height: 100%;}
+              &::after{ content: ""; box-sizing: border-box; position: absolute; inset: 0px; border-radius: 50%; border: 2px solid $ci; animation: loading2 2s linear infinite alternate-reverse; width: 100%; height: 100%; left: -2px; top: -2px; box-sizing: content-box;}
               @keyframes loading1 {
                 0%   {transform: rotate(0deg);}
                 100%   {transform: rotate(360deg);}
@@ -120,7 +120,9 @@ $survey_pdt: 162rem;
       }
       .write_box{ display: flex; width: 100%; border-radius: 8px;
         background: rgba(0, 0, 0, 0.50); padding: 10rem;
-        input{ width: 100%; height: 44rem; padding: 0 14rem;}
+        input{ width: 100%; height: 44rem; padding: 0 14rem;
+          &::placeholder{ color: rgba($color: $white, $alpha: .3);}
+        }
         button{ display: flex; align-items: center; padding: 10rem 30rem; flex-shrink: 0; background-color: $ci; border-radius: 4rem; transition: .5s ease;
           &[disabled]{ background-color: #777; cursor: default;}
           img{ width: 20rem; margin-left: 10rem;}
@@ -129,53 +131,14 @@ $survey_pdt: 162rem;
       }
 
       .progress_contents{ position: relative; width: 100%;
-        .icon_box{ height: 200rem; position: absolute; left: 117rem; top: 0;
-          > *:not(.icon1){display: none;}
-          .icon1{
-            .ani{ transform-origin: right bottom; animation: icon1 1s infinite alternate-reverse;}
-            @keyframes icon1 {
-              0%{ transform: rotate(-20deg) translate(29px, 26px);}
-              100%{ transform: rotate(0deg) translate(0px, 0px);}
-            }
-          }
-          .icon2{
-            .ani{ animation: icon2 1s infinite alternate-reverse;}
-            @keyframes icon2 {
-              0%{ transform: translateY(0rem);}
-              100%{ transform: translateY(-38rem);}
-            }
-          }
-          .icon3{width: 347rem;
-            transform: translateX(-75rem);
-            svg > *:not(.not_ani){ animation: icon3 2s infinite;}
-            @keyframes icon3 {
-              0%{ transform: rotate(0);}
-              15%{ transform: rotate(9deg) translate(0rem, 0rem);}
-              30%{ transform: rotate(9deg) translate(0rem, 0rem);}
-              40%{ transform: rotate(9deg) translate(10rem, 5rem);}
-              50%{ transform: rotate(9deg) translate(20rem, -5rem);}
-              60%{ transform: rotate(9deg) translate(30rem, 6rem);}
-              70%{ transform: rotate(9deg) translate(40rem, -6rem);}
-              80%{ transform: rotate(9deg) translate(50rem, 7rem);}
-              100%{ transform: rotate(9deg) translate(63rem, -8rem);}
-            }
-          }
-          .icon4{
-            .ani{ animation: icon4 1s infinite alternate-reverse; transform-origin: center center;}
-            @keyframes icon4 {
-              0%{ transform: scale(1) translateY(-9rem);}
-              100%{transform: scale(0.6) translateY(-49rem);
-              }
-            }
-          }
-        }
-        .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(240rem); font-weight: 700; text-align: right; line-height: 1;}
+        .icon_box{ position: absolute; left: 0; top: -129rem; width: 400rem;}
+        .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(180rem); font-weight: 700; text-align: right; line-height: 1;}
         .progress_container{position: relative;
           .progress_bar_wrap{ padding: 5rem;
             .progress_bar{ width: 0%; min-width: 26rem; height: 100%; border-radius: 130px; background: linear-gradient(90deg, #6132D3 0.18%, #FF1585 99.82%);}
           }
         }
-        .result_button{  display: flex; align-items: center; @include font-size(16rem); padding: 18rem 15rem; background-color: $ci; color: $white; border-radius: 8rem; margin: 80rem auto 0; touch-action: none; pointer-events: none; transform: translateY(50rem); opacity: 0; transition: 1s ease; position: relative;
+        .result_button{  display: flex; align-items: center; @include font-size(16rem); padding: 18rem 15rem; background-color: $ci; color: $white; border-radius: 8rem; margin:60rem auto 0; touch-action: none; pointer-events: none; transform: translateY(50rem); opacity: 0; transition: 1s ease; position: relative;
           img{ width: 24rem; margin-left: 10rem;}
           &::before, &::after{ content: ''; width: 90%; height: 90%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 1px solid $ci; border-radius: 8rem;}
           &.on{ opacity: 1; transform: translateY(0%); touch-action: auto; pointer-events: auto;
@@ -192,7 +155,10 @@ $survey_pdt: 162rem;
       }
     }  
   }
-  #result-page{padding: $survey_pdt 0 100rem; 
+  #result-page{
+    .container{ height: 100vh;
+      overflow-y: auto;  padding: $cont_pdt 0 100rem;
+    }
     .json_data{ color: $black; 
       .data_wrap{ display: flex; margin-bottom: 16rem; height: 500rem;  
         > div{width: 50%; background-color: $white; border-radius: 30rem; padding: 32rem;}

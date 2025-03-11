@@ -9,6 +9,12 @@ document.querySelectorAll('[data-btn]').forEach(button => {
   });
 });
 
+document.querySelector('#main_wrap').addEventListener('click', function () {
+  document.querySelectorAll('.footer_box').forEach(box => {
+    box.classList.remove('on');
+  });
+});
+
 async function fetchReport() {
   try {
     const input1 = document.getElementById("input1").value.trim();
@@ -163,7 +169,7 @@ function insertExampleName() {
   const exampleList = document.querySelector('.example_list[data-toggle="brand_name"]');
   if (!exampleList) return;
 
-  let selectedItems = getRandomItems(example_txt_name, 4); // 4개 선택
+  let selectedItems = getRandomItems(example_txt_name, 3); // 4개 선택
 
   exampleList.innerHTML = ""; // 기존 내용 초기화
   selectedItems.forEach(item => {
@@ -178,7 +184,7 @@ function insertExampleBenefit() {
   const exampleList = document.querySelector('.example_list[data-toggle="brand_benefit"]');
   if (!exampleList) return;
 
-  let selectedItems = getRandomItems(example_txt_benefit, 4); // 4개 선택
+  let selectedItems = getRandomItems(example_txt_benefit, 3); // 4개 선택
 
   exampleList.innerHTML = ""; // 기존 내용 초기화
   selectedItems.forEach(item => {
@@ -193,7 +199,7 @@ function insertExampleChoose() {
   const exampleList = document.querySelector('.example_list[data-toggle="brand_choose"]');
   if (!exampleList) return;
 
-  let selectedItems = getRandomItems(example_txt_choose, 4); // 4개 선택
+  let selectedItems = getRandomItems(example_txt_choose, 3); // 4개 선택
 
   exampleList.innerHTML = ""; // 기존 내용 초기화
   selectedItems.forEach(item => {
@@ -346,7 +352,7 @@ function submitForm() {
 
   // 텍스트가 표시될 요소
   const displayElement = document.getElementById("loading_info");
-  const loadingIcon = document.querySelector(".progress_contents .icon_box");
+  const loadingIcon = document.querySelector('.progress_contents .icon_box img');
 
   // 초기값 (첫 번째 그룹에서 무작위 선택)
   displayElement.textContent = loadingTxt[0][Math.floor(Math.random() * loadingTxt[0].length)];
@@ -364,18 +370,15 @@ function submitForm() {
 
     if (progress === changePoints[0]) {
       displayElement.textContent = loadingTxt[1][Math.floor(Math.random() * loadingTxt[1].length)];
-      loadingIcon.querySelector('.icon1').style.display = 'none';
-      loadingIcon.querySelector('.icon2').style.display = 'block';
+      loadingIcon.src = 'src/images/ico_progress2.png';
     }
     if (progress === changePoints[1]) {
       displayElement.textContent = loadingTxt[2][Math.floor(Math.random() * loadingTxt[2].length)];
-      loadingIcon.querySelector('.icon2').style.display = 'none';
-      loadingIcon.querySelector('.icon3').style.display = 'block';
+      loadingIcon.src = 'src/images/ico_progress3.png';
     }
     if (progress === changePoints[2]) {
       displayElement.textContent = loadingTxt[3][Math.floor(Math.random() * loadingTxt[3].length)];
-      loadingIcon.querySelector('.icon3').style.display = 'none';
-      loadingIcon.querySelector('.icon4').style.display = 'block';
+      loadingIcon.src = 'src/images/ico_progress4.png';
     }
 
     if (progress >= 100) {
@@ -611,7 +614,7 @@ function openModal(pdfUrl) {
 }
 
 function closeModal() {
-  document.getElementById("pdfModal").style.display = "none";
+  // document.getElementById("pdfModal").style.display = "none";
   document.getElementById("pdfViewer").src = "";
 }
 
@@ -648,6 +651,8 @@ function retryConsuling() {
   document.querySelectorAll(".example_list").forEach(div => {
     div.classList.remove('on');
   });
+
+  document.querySelector('.progress_contents .icon_box img').src = 'src/images/ico_progress1.png';
 }
 
 // document.querySelectorAll(".fx").forEach(aniTxt => {
