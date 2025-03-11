@@ -22,7 +22,7 @@ async function fetchReport() {
     };
 
     // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
+    const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
