@@ -21,14 +21,14 @@ async function fetchReport() {
       user_query: input3
     };
 
-    const response = await fetch('/bx_architect_report2.json');
-    // const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(requestData)
-    // });
+    // const response = await fetch('/bx_architect_report2.json');
+    const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -300,9 +300,10 @@ function submitForm() {
   let progressText = document.getElementById("progress-text");
   let resultButton = document.getElementById("result-button");
 
-  // 60초(60000ms) ~ 120초(120000ms) 사이의 랜덤 시간 선택
-  let duration = Math.floor(Math.random() * (120 - 60 + 1) + 60);
+  // 70초 ~ 100초 사이의 랜덤 시간 선택
+  let duration = Math.floor(Math.random() * (160 - 140 + 1) + 140);
   let intervalTime = (duration * 1000) / 100;
+  // let intervalTime = 1;
   let progress = 0;
   let jsonLoaded = false;
 
@@ -441,10 +442,10 @@ async function generatePDFWithUserInput(buttonIndex) {
     let brandingPage = pages[7]
     let IdentityPage = pages[8]
 
-    let finalReportY = 600;
+    let finalReportY = 550;
     let xMargin = 60;
     const maxY = 50;
-    const lineHeight = 30;
+    const lineHeight = 33;
     let pageIndex = 3;
     const maxTextWidth = 1000;
     const pinkColor = rgb(1, 0.082, 0.52);
@@ -542,16 +543,16 @@ async function generatePDFWithUserInput(buttonIndex) {
     addWrappedText(resultPage, step1, 62, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
     addWrappedText(resultPage, step2, 720, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
     addWrappedText(resultPage, step3, 1321, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
-    addWrappedText(finalReportPage, jsonData.social_report_title || "", 60, 800, 800, 34, customFontBold, rgb(1, 1, 1), 36);
-    addWrappedText(finalReportPage, jsonData.social_report_subtitle || "", 64, 740, 800, 25, customFont, rgb(1, 1, 1), 30);
+    addWrappedText(finalReportPage, jsonData.social_report_title || "", 60, 750, 800, 35, customFontBold, rgb(1, 1, 1), 36);
+    addWrappedText(finalReportPage, jsonData.social_report_subtitle || "", 64, 700, 800, 28, customFont, rgb(1, 1, 1), 38);
     addWrappedText(citationPage, jsonData.citation || "", 64, 800, 1000, 20, customFont, rgb(1, 1, 1), 26);
 
 
     addWrappedText(brandingPage, keyword.korean || "", 119, 825, 300, 20, customFontBold, rgb(1, 1, 1), 20);
-    addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 800, 60, customFont, pinkColor, 72);
+    addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 900, 60, customFont, pinkColor, 72);
     addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 300, 24, customFont, rgb(1, 1, 1), 32);
 
-    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 361, 750, 56, customFont, rgb(1, 1, 1), 80);
+    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 550, 900, 50, customFont, rgb(1, 1, 1), 80);
 
 
     addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 450, 20, customFont, rgb(1, 1, 1), 32);
@@ -562,7 +563,7 @@ async function generatePDFWithUserInput(buttonIndex) {
     const finalReportLines = socialReport.replace(/\*/g, "").split("\n");
 
     finalReportLines.forEach(line => {
-      let textSize = 20;
+      let textSize = 23;
       let indent = xMargin;
       let lineSpacing = lineHeight;
 
@@ -605,14 +606,43 @@ async function generatePDFWithUserInput(buttonIndex) {
   }
 }
 
+
 function openModal(pdfUrl) {
   document.getElementById("pdfViewer").src = pdfUrl;
   document.getElementById("pdfModal").style.display = "block";
 }
 
+
+// function openModal(pdfUrl) {
+//   const pdfModal = document.getElementById("pdfModal");
+//   const pdfViewerContainer = document.querySelector(".pdf_viewer");
+
+//   pdfViewerContainer.innerHTML = "";
+
+//   const newIframe = document.createElement("iframe");
+//   newIframe.id = "pdfViewer";
+//   newIframe.width = "100%";
+//   newIframe.height = "100%";
+  
+//   console.log("로드할 PDF URL:", pdfUrl);
+
+//   newIframe.src = pdfUrl + "?nocache=" + new Date().getTime();
+
+//   newIframe.onerror = function () {
+//     console.error("PDF 로드 실패:", newIframe.src);
+//     alert("PDF를 불러올 수 없습니다. 파일 경로를 확인하세요.");
+//   };
+
+//   pdfViewerContainer.appendChild(newIframe);
+//   pdfModal.style.display = "block";
+// }
+
+
 function closeModal() {
-  document.getElementById("pdfModal").style.display = "none";
-  document.getElementById("pdfViewer").src = "";
+  const pdfViewer = document.getElementById("pdfViewer");
+
+  pdfViewer.src = "";
+
 }
 
 function downloadPDFForPage(pageIndex) {

@@ -497,14 +497,14 @@
             <div class="btn_wrap">
               <button class="retry_btn" data-btn="retry">재시도 하기</button>
               <!-- <a href="" download="">현재 정보 저장하기</a> -->
-              <a href="" download="">리포트 한번에 다운받기</a>
+              <a href="javascript:void(0);" id="download-all-pdf">리포트 한번에 다운받기</a>
             </div>
           </div>
           <!-- PDF 미리보기 모달 -->
           <div id="pdfModal" class="modal_popup" data-toggle="pdf">
             <div class="dim cover" data-btn="pdf"></div>
             <div class="modal_content p_center">
-              <span class="close" data-btn="pdf">
+              <span class="close" data-btn="pdf" onclick="closeModal()">
                 <!--onclick="closeModal()"-->
                 <img src="src/images/ico_close.svg" alt="">
               </span>
