@@ -155,9 +155,8 @@ $cont_pdt: 120rem;
       }
     }  
   }
-  #result-page{
-    .container{ height: 100vh;
-      overflow-y: auto;  padding: $cont_pdt 0 100rem;
+  #result-page{ overflow-y: auto; height: 100vh; 
+    .container{ padding: $cont_pdt 0 100rem;
     }
     .json_data{ color: $black; 
       .data_wrap{ display: flex; margin-bottom: 16rem; height: 500rem;  

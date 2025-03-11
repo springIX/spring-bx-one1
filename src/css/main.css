@@ -462,9 +462,11 @@
 #survey_wrap .survey_box .survey_cont .progress_contents .result_button.on::after {
   animation-delay: 0.3s;
 }
-#survey_wrap #result-page .container {
-  height: 100vh;
+#survey_wrap #result-page {
   overflow-y: auto;
+  height: 100vh;
+}
+#survey_wrap #result-page .container {
   padding: 120rem 0 100rem;
 }
 #survey_wrap #result-page .json_data {
