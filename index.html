@@ -491,7 +491,11 @@
               <button id="download-pdf5" onclick="downloadPDFForPage(4)" data-btn="pdf">5. Brand Identity
                 Report</button>
             </div>
-            <button class="retry_btn" onclick="retryConsuling()">재시도 하기</button>
+            <div class="btn_wrap">
+              <button class="retry_btn" data-btn="retry">재시도 하기</button>
+              <!-- <a href="" download="">현재 정보 저장하기</a> -->
+              <a href="" download="">리포트 한번에 다운받기</a>
+            </div>
           </div>
           <!-- PDF 미리보기 모달 -->
           <div id="pdfModal" class="modal_popup" data-toggle="pdf">
@@ -510,55 +514,53 @@
         </div>
       </div>
     </div>
+    <!-------- LOGIN -------->
+    <div class="pop_wrap" data-toggle="login">
+      <div class="dim cover" data-btn="login"></div>
+      <div class="pop_cont login_box p_center">
+        <div class="tit">
+          <img src="src/images/profile.svg" alt="">
+          <p>로그인</p>
+        </div>
+        <img src="src/images/logo.svg" alt="" class="logo">
+        <div class="write_box">
+          <form action="">
+            <input type="button" value="랜덤아이디 생성" class="id_gen_btn" onclick="fetchRandomId();">
+
+            <input type="text" placeholder="아이디를 입력하세요." id="randomIdInput" class="id_txt" readonly value="">
+
+            <input type="button" value="Sign in" class="submit_btn" onclick="login()" data-btn="login" disabled>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!------- //LOGIN ------->
+
+    <!-------- 재시도 확인 -------->
+    <div class="pop_wrap" data-toggle="retry">
+      <div class="dim cover" data-btn="retry"></div>
+      <div class="pop_cont retry_confirm p_center">
+        <p class="taC">
+          이 페이지를 벗어나면<br>
+          입력한 정보가 삭제될 수 있습니다.
+        </p>
+        <div class="flex_cnt">
+          <button data-btn="retry" onclick="retryConsuling()">확인</button>
+          <button data-btn="retry">취소</button>
+        </div>
+      </div>
+    </div>
+    <!------- //LOGIN ------->
+
   </div>
   <!------- //CONTENTS ------->
 
-  <!-------- LOGIN -------->
-  <div class="pop_wrap" data-toggle="login">
-    <div class="dim cover" data-btn="login"></div>
-    <div class="login_box p_center">
-      <div class="tit">
-        <img src="src/images/profile.svg" alt="">
-        <p>로그인</p>
-      </div>
-      <img src="src/images/logo.svg" alt="" class="logo">
-      <div class="write_box">
-        <form action="">
-          <input type="button" value="랜덤아이디 생성" class="id_gen_btn" onclick="fetchRandomId()">
-
-          <input type="text" placeholder="아이디를 입력하세요." id="randomIdInput" class="id_txt" readonly value="">
-
-          <input type="button" value="Sign in" class="submit_btn" onclick="login()" data-btn="login" disabled>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!------- //LOGIN ------->
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
   <script src="./src/js/jquery.js"></script>
   <script src="./src/js/front_spring_bx.js"></script>
   <script src="./src/js/common.js"></script>
-  <script>
-    $(function () {
-      /********* BTN FUNCTION *********/
-      $('[data-btn]').click(function (e) {
-        let btn_vals = $(this).data('btn').toString().split(',');
-        btn_vals.forEach(function (btn_val) {
-          $(`[data-toggle=${btn_val.trim()}]`).toggleClass('on');
-        });
-      });
-
-      /********* LOGIN *********/
-      $('.login_box .id_gen_btn').click(function () {
-        $('.login_box .submit_btn').attr('disabled', false);
-      });
-
-      /********* SURVEY *********/
-
-    });
-  </script>
 </body>
 
 </html>

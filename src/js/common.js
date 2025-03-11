@@ -1,3 +1,14 @@
+document.querySelectorAll('[data-btn]').forEach(button => {
+  button.addEventListener('click', function () {
+    let btnVals = this.getAttribute('data-btn').split(',');
+    btnVals.forEach(btnVal => {
+      document.querySelectorAll(`[data-toggle="${btnVal.trim()}"]`).forEach(target => {
+        target.classList.toggle('on');
+      });
+    });
+  });
+});
+
 async function fetchReport() {
   try {
     const input1 = document.getElementById("input1").value.trim();
@@ -11,7 +22,7 @@ async function fetchReport() {
     };
 
     // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('https://27a898b3ed8e.ngrok.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
+    const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', { // 실제 데이터 API 엔드포인트 사용
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -24,7 +35,7 @@ async function fetchReport() {
       console.error("서버 응답 오류:", response.status, errorText);
 
       // 특정 에러 코드 확인 후 스크립트 실행
-      if ([500, 504, 404].includes(response.status)) {
+      if ([404, 500, 503, 504].includes(response.status)) {
         alert(`JSON 데이터를 불러오는 데 실패했습니다. 상태 코드: ${response.status}`);
         retryConsuling();
       }
@@ -273,8 +284,6 @@ inputFields.forEach((inputField, index) => {
   });
 });
 
-
-
 function submitForm() {
   document.getElementById("step3").classList.add("hidden");
   document.getElementById("loading").classList.remove("hidden");
@@ -308,10 +317,29 @@ function submitForm() {
 
   // 랜덤 텍스트 : 로딩 중 일때
   const loadingTxt = [
-    ["1-1번째텍스트", "1-2번째텍스트", "1-3번째텍스트", "1-5번째텍스트", "1-5번째텍스트"],
-    ["2-1번째텍스트", "2-2번째텍스트", "2-3번째텍스트", "2-5번째텍스트", "2-5번째텍스트"],
-    ["3-1번째텍스트", "3-2번째텍스트", "3-3번째텍스트", "3-5번째텍스트", "3-5번째텍스트"],
-    ["4-1번째텍스트", "4-2번째텍스트", "4-3번째텍스트", "4-5번째텍스트", "4-5번째텍스트"]
+    [`입력하신 정보를 바탕으로 검색 쿼리 생성 중....`,
+      `"당신의 아이디어가 현실이 되려면, 실행 전략이 필요하다. 지금 움직여라." - 블렌드엑스`,
+      `"당신이 꿈꿀수 있다면, 그것을 이룰 수도 있다." - 월트 디즈니 디즈니 창립자)`,
+      `"작게 시작하되, 크게 생각하라." - (제프 베조스 아마존 창업자)`,
+      `"고객이 만족하는 수준에 머무르면 안된다. 고객이 '와우'라고 말하게 만들어라." - 토니 셰이 자포스 창업자)`],
+
+    [`USP와 소비자 정보를 통한 Compound 생성중....`,
+      `"시장변화는 기다려주지 않는다. 전문가와 함께 재빠르게 대응하라." - 블렌드엑스 `,
+      `"고객을 만족시키는 것이 아니라 감동시키는 것이 목표다." - 하워드 슐츠(스타벅스 창업자)`,
+      `"완벽한 타이밍은 오지 않는다. 지금이 시작할 순간이다." - 스티브잡스(애플 공동창업자)`,
+      `"고객은 당신이 제공하는 서비스에 따라 회사를 기억한다." - 리처드 브랜슨(버진그룹 창업자)`],
+
+    [`수집된 소셜보이스를 기반으로 보고서 작성 중.....`,
+      `"성공한 창업자는 시행착오를 줄이는 방법을 안다. 혼자 헤매지 말고 전문가와 함께하라." - 블렌드엑스`,
+      `"경쟁자가할수 없는 것을 하라." - 피터 틸 페이팔 공동 창업자)`,
+      `"기회를 기다리는 것이 아니라 기회를 만든다." - 크리스 그로서(기업가)`,
+      `"비즈니스에서 가장 위험한 말은 '우리는 항상 이렇게 해왔다'이다." - 엘론 머스크 테슬라, 스페이스X창업자)`],
+
+    [`BX - Generation 엔진이 브랜드 아키텍처를 완성 중...`,
+      `방향을 모른다면 속도는 의미가 없다. 제대로 가고 있는지 점검하라." - 블렌드엑스`,
+      `"성공한사람과 그렇지 않은 사람의 차이는 포기하지 않는 데 있다." - 콘래드 힐튼 (힐튼호텔 창업자)`,
+      `"당신의 가장 불만족스러운 고객이야말로 가장 큰 배움의 원천이다." - 빌 게이츠(마이크로소프트 공동창업자)`,
+      `"위험을 감수하지 않으면 더 큰 위험을 감수하게 된다." - 에릭 슈미트(구글 전 CEO)`]
   ];
 
 
