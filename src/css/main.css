@@ -93,10 +93,11 @@
   position: absolute;
   left: 0;
   top: 0;
-  background: #ffffff url(../images/survey_bg.png) no-repeat center center/cover;
+  background: #ffffff url(../images/survey_bg.jpg) no-repeat center center/cover;
 }
 #survey_wrap video {
   opacity: 70%;
+  mix-blend-mode: overlay;
 }
 #survey_wrap .survey_tit {
   position: absolute;
@@ -635,7 +636,11 @@
 #survey_wrap #result-page .json_data .pdf_download button:hover::after {
   filter: invert(1);
 }
-#survey_wrap #result-page .json_data .retry_btn {
+#survey_wrap #result-page .json_data .btn_wrap {
+  display: flex;
+  justify-content: center;
+}
+#survey_wrap #result-page .json_data .btn_wrap > * {
   width: 266rem;
   background-color: #000000;
   border-radius: 8rem;
@@ -645,16 +650,24 @@
   justify-content: center;
   font-size: clamp(10px, 16rem, 999rem);
   font-weight: bold;
-  margin-left: auto;
   color: #ffffff;
-  margin: 0 auto;
 }
-#survey_wrap #result-page .json_data .retry_btn::after {
+#survey_wrap #result-page .json_data .btn_wrap > *::after {
   content: "";
   width: 24rem;
   height: 24rem;
   margin-left: 8rem;
-  background: url(../images/ico_reset.svg) no-repeat center center/cover;
+  background-color: no-repeat center center/cover;
+}
+#survey_wrap #result-page .json_data .btn_wrap .retry_btn::after {
+  background-image: url(../images/ico_reset.svg);
+}
+#survey_wrap #result-page .json_data .btn_wrap > *:not(.retry_btn) {
+  background-color: #FF1585;
+  margin-left: 16rem;
+}
+#survey_wrap #result-page .json_data .btn_wrap > *:not(.retry_btn)::after {
+  background-image: url(../images/ico_down.svg);
 }
 #survey_wrap #result-page .modal_popup {
   position: fixed;

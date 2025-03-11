@@ -309,13 +309,13 @@ header .footer_box .link_box a:hover {
   pointer-events: auto;
   opacity: 1;
 }
-.pop_wrap.on .login_box {
+.pop_wrap.on .pop_cont {
   transform: translate(-50%, -50%);
   opacity: 1;
   touch-action: auto;
   pointer-events: auto;
 }
-.pop_wrap .login_box {
+.pop_wrap .pop_cont {
   transform: translate(-50%, -30%);
   opacity: 0;
   touch-action: none;
@@ -328,44 +328,63 @@ header .footer_box .link_box a:hover {
   width: 420rem;
   padding: 32rem;
 }
-.pop_wrap .login_box .tit {
+.pop_wrap .pop_cont.login_box .tit {
   display: flex;
   align-items: center;
   font-size: clamp(10px, 24rem, 999rem);
   font-weight: bold;
 }
-.pop_wrap .login_box .tit img {
+.pop_wrap .pop_cont.login_box .tit img {
   width: 24rem;
   margin-right: 4rem;
 }
-.pop_wrap .login_box .logo {
+.pop_wrap .pop_cont.login_box .logo {
   width: 130rem;
   margin: 54rem auto 48rem;
 }
-.pop_wrap .login_box .write_box input {
+.pop_wrap .pop_cont.login_box .write_box input {
   width: 100%;
   height: 56rem;
   padding: 0 24rem;
   background-color: #ffffff;
   border-radius: 8rem;
 }
-.pop_wrap .login_box .write_box input.id_gen_btn {
+.pop_wrap .pop_cont.login_box .write_box input.id_gen_btn {
   background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
-.pop_wrap .login_box .write_box input.id_txt {
+.pop_wrap .pop_cont.login_box .write_box input.id_txt {
   color: #000000;
   cursor: auto;
   margin: 24rem 0 48rem;
 }
-.pop_wrap .login_box .write_box input.submit_btn {
+.pop_wrap .pop_cont.login_box .write_box input.submit_btn {
   background-color: #000000;
   font-size: clamp(10px, 20rem, 999rem);
 }
-.pop_wrap .login_box .write_box input.submit_btn[disabled] {
+.pop_wrap .pop_cont.login_box .write_box input.submit_btn[disabled] {
   opacity: 0.5;
   touch-action: none;
   pointer-events: none;
+}
+.pop_wrap .pop_cont.retry_confirm p {
+  font-size: clamp(10px, 20rem, 999rem);
+  line-height: 1.4;
+  font-weight: 700;
+  margin-bottom: 20rem;
+  color: #000000;
+}
+.pop_wrap .pop_cont.retry_confirm button {
+  width: 100%;
+  height: 56rem;
+  border-radius: 8rem;
+  background-color: #FF1585;
+}
+.pop_wrap .pop_cont.retry_confirm button[data-btn=retry] {
+  border: none;
+  margin-left: 16rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 @media (min-width: 751px) {

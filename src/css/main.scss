@@ -45,8 +45,8 @@
 /********** SURVEY **********/
 $survey_pdt: 162rem;
 
-#survey_wrap{ width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: $white url(../images/survey_bg.png)no-repeat center center / cover;  
-  video{ opacity: 70%;}
+#survey_wrap{ width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: $white url(../images/survey_bg.jpg)no-repeat center center / cover;  
+  video{ opacity: 70%; mix-blend-mode: overlay;}
   .survey_tit{ position: absolute; left: 354rem; top: 50rem; @include font-size(14rem); display: flex; align-items: center; font-weight: bold; white-space: nowrap;
     img{ margin-right: 4rem; width: 24rem;}
   }
@@ -227,8 +227,16 @@ $survey_pdt: 162rem;
           }
         }
       }
-      .retry_btn{width: 266rem; background-color: $black; border-radius: 8rem; height: 60rem; display: flex; align-items: center; justify-content: center; @include font-size(16rem); font-weight: bold; margin-left: auto; color: $white; margin: 0 auto;
-        &::after{ content: ''; width: 24rem; height: 24rem; margin-left: 8rem; background: url(../images/ico_reset.svg)no-repeat center center / cover;}
+      .btn_wrap{ display: flex; justify-content: center;
+        > *{ width: 266rem; background-color: $black; border-radius: 8rem; height: 60rem; display: flex; align-items: center; justify-content: center; @include font-size(16rem); font-weight: bold; color: $white;
+          &::after{  content: ''; width: 24rem; height: 24rem; margin-left: 8rem; background-color: no-repeat center center / cover;}
+        }
+        .retry_btn{
+          &::after{ background-image: url(../images/ico_reset.svg);}
+        }
+        > *:not(.retry_btn){ background-color: $ci; margin-left: 16rem;
+          &::after{background-image: url(../images/ico_down.svg);}
+        }
       }
     }
     .modal_popup{ position: fixed; left: 0; top: 0; z-index: 1000; width: 100%; height: 100%; touch-action: none; pointer-events: none; opacity: 0; transition: .5s ease;
