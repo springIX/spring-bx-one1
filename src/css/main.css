@@ -346,7 +346,9 @@
   padding: 0 14rem;
 }
 #survey_wrap .survey_box .survey_cont .write_box button {
-  width: 137rem;
+  display: flex;
+  align-items: center;
+  padding: 10rem 30rem;
   flex-shrink: 0;
   background-color: #FF1585;
   border-radius: 4rem;
@@ -357,9 +359,11 @@
   cursor: default;
 }
 #survey_wrap .survey_box .survey_cont .write_box button img {
-  display: inline-block;
   width: 20rem;
   margin-left: 10rem;
+}
+#survey_wrap .survey_box .survey_cont .write_box button.submit_btn {
+  font-weight: 600;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents {
   position: relative;

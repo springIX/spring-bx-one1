@@ -121,9 +121,10 @@ $survey_pdt: 162rem;
       .write_box{ display: flex; width: 100%; border-radius: 8px;
         background: rgba(0, 0, 0, 0.50); padding: 10rem;
         input{ width: 100%; height: 44rem; padding: 0 14rem;}
-        button{ width: 137rem; flex-shrink: 0; background-color: $ci; border-radius: 4rem; transition: .5s ease;
+        button{ display: flex; align-items: center; padding: 10rem 30rem; flex-shrink: 0; background-color: $ci; border-radius: 4rem; transition: .5s ease;
           &[disabled]{ background-color: #777; cursor: default;}
-          img{display: inline-block; width: 20rem; margin-left: 10rem;}
+          img{ width: 20rem; margin-left: 10rem;}
+          &.submit_btn{ font-weight: 600;}
         }
       }
 

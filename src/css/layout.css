@@ -96,7 +96,7 @@
 }
 
 .active .fx {
-  animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fade-up 2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @keyframes fade-up {
   0% {

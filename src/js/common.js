@@ -21,14 +21,14 @@ async function fetchReport() {
       user_query: input3
     };
 
-    // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
-    });
+    const response = await fetch('/bx_architect_report2.json');
+    // const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(requestData)
+    // });
 
     if (!response.ok) {
       const errorText = await response.text();
