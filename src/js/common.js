@@ -27,14 +27,14 @@ async function fetchReport() {
       user_query: input3
     };
 
-    // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('https://0501ffd384ee.ngrok.app/bx_one', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
-    });
+    const response = await fetch('/bx_architect_report2.json');
+    // const response = await fetch('https://0501ffd384ee.ngrok.app/bx_one', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(requestData)
+    // });
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -307,9 +307,9 @@ function submitForm() {
   let resultButton = document.getElementById("result-button");
 
   // 70초 ~ 100초 사이의 랜덤 시간 선택
-  // let duration = Math.floor(Math.random() * (160 - 140 + 1) + 140);
-  // let intervalTime = (duration * 1000) / 100;
-  let intervalTime = 1;
+  let duration = Math.floor(Math.random() * (160 - 140 + 1) + 140);
+  let intervalTime = (duration * 1000) / 100;
+  // let intervalTime = 1;
   let progress = 0;
   let jsonLoaded = false;
 
@@ -536,15 +536,15 @@ async function generatePDFWithUserInput(buttonIndex) {
 
     async function addCenteredText(page, text, x, centerY, maxWidth, fontSize, font = customFont, color = rgb(1, 1, 1), lineHeight = 28) {
       const wrappedLines = wrapFinalReportText(text, maxWidth, fontSize);
-      
+
       // 전체 텍스트 높이 계산 (줄 수 * 줄 간격)
       const totalTextHeight = wrappedLines.length * lineHeight;
-      
+
       // 세로 중앙 정렬을 위해 Y 좌표 조정
       let y = centerY + totalTextHeight / 2;
-    
+
       for (const line of wrappedLines) {
-    
+
         page.drawText(line, {
           x,
           y,
@@ -552,7 +552,7 @@ async function generatePDFWithUserInput(buttonIndex) {
           color: color,
           font: font
         });
-    
+
         y -= lineHeight;
       }
     }
@@ -636,9 +636,9 @@ async function generatePDFWithUserInput(buttonIndex) {
     }
 
     await addTextWithPageHandling();
-    
-    
-    
+
+
+
 
     // PDF 생성 및 Blob URL 생성
     const pdfBytes = await pdfDoc.save();

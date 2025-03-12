@@ -51,6 +51,12 @@
   width: 20rem;
   margin-left: 10rem;
 }
+@media screen and (max-height: 800px) {
+  #main .container .txt_wrap .main_title {
+    width: 62%;
+    margin: 0 auto;
+  }
+}
 
 #main_wrap.consulting_start #main {
   touch-action: none;
@@ -374,11 +380,12 @@
 #survey_wrap .survey_box .survey_cont .progress_contents {
   position: relative;
   width: 100%;
+  padding-top: 40rem;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .icon_box {
   position: absolute;
   left: 0;
-  top: -76rem;
+  top: -60rem;
   width: 350rem;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .progress_txt {
@@ -390,7 +397,6 @@
   font-weight: 700;
   text-align: right;
   line-height: 1;
-  margin-bottom: 54rem;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .progress_container {
   position: relative;
@@ -463,12 +469,21 @@
 #survey_wrap .survey_box .survey_cont .progress_contents .result_button.on::after {
   animation-delay: 0.3s;
 }
+#survey_wrap #loading .survey_cont {
+  display: block;
+}
 #survey_wrap #result-page {
   height: 100vh;
   overflow-y: auto;
 }
 #survey_wrap #result-page::-webkit-scrollbar {
   display: block;
+  width: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+#survey_wrap #result-page::-webkit-scrollbar-thumb {
+  background-color: #FF1585;
+  border-radius: 999rem;
 }
 #survey_wrap #result-page .container {
   padding: 120rem 0 100rem;

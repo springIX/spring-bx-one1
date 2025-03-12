@@ -18,6 +18,11 @@ $cont_pdt: 120rem;
       }
     }
   }
+  @media screen and (max-height:800px) {
+    .container{
+      .txt_wrap .main_title{ width: 62%; margin: 0 auto;} 
+    }
+  }
 }
 
 
@@ -131,9 +136,9 @@ $cont_pdt: 120rem;
         }
       }
 
-      .progress_contents{ position: relative; width: 100%;
-        .icon_box{ position: absolute; left: 0; top: -76rem; width: 350rem;}
-        .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(180rem); font-weight: 700; text-align: right; line-height: 1; margin-bottom: 54rem;}
+      .progress_contents{ position: relative; width: 100%; padding-top: 40rem;
+        .icon_box{ position: absolute; left: 0; top: -60rem; width: 350rem;}
+        .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(180rem); font-weight: 700; text-align: right; line-height: 1;}
         .progress_container{position: relative;
           .progress_bar_wrap{ padding: 5rem;
             .progress_bar{ width: 0%; min-width: 26rem; height: 100%; border-radius: 130px; background: linear-gradient(90deg, #6132D3 0.18%, #FF1585 99.82%);}
@@ -156,8 +161,14 @@ $cont_pdt: 120rem;
       }
     }  
   }
+
+  #loading{
+    .survey_cont{ display: block;}
+  }
+
   #result-page{ height: 100vh; overflow-y: auto; 
-    &::-webkit-scrollbar{ display: block;}
+    &::-webkit-scrollbar{ display: block; width: 4px; background-color: rgba(255,255,255,.2); }
+    &::-webkit-scrollbar-thumb{ background-color: $ci; border-radius: 999rem;}
     .container{ padding: $cont_pdt 0 100rem;}
     .json_data{ color: $black; 
       .data_wrap{ display: flex; margin-bottom: 16rem; height: 500rem;  
