@@ -9,12 +9,11 @@ $cont_pdt: 120rem;
 #main{ width: 100%; height: 100%;  padding: $cont_pdt 0; position: absolute; left: 0; top: 0; z-index: 10; 
   video{ transition: 1s $expo; filter: brightness(.3);} 
   .ani_fade{ transition: 1s $expo;}
-  .container{height: 100%;
-    .main_title{ }
-    .txt_box{ padding:90rem 0 0 50%; @include font-size(18rem);font-weight: bold;}
-    .process_info{ border-top: 1px solid rgba($color: #fff, $alpha: .2); padding-top: 20rem; position: absolute; left: 0; bottom: 0; width: 100%;
+  .container{height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+    .txt_box{ padding:80rem 0 0 50%; font-weight: bold;}
+    .process_info{ border-top: 1px solid rgba($color: #fff, $alpha: .2); padding-top: 20rem;
       p{}
-      .start_btn{ padding: 20rem 30rem; @include font-size(14rem); background-color: $ci; border-radius: 8rem; display: flex; align-items: center;
+      .start_btn{ padding: 20rem 30rem; @include font-size(16rem); background-color: $ci; border-radius: 8rem; display: flex; align-items: center;
         img{ width: 20rem; margin-left: 10rem;}
       }
     }
@@ -46,18 +45,18 @@ $cont_pdt: 120rem;
 
 /********** SURVEY **********/
 #survey_wrap{ width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: $white url(../images/survey_bg.jpg)no-repeat center center / cover;  
-  video{ opacity: 70%; mix-blend-mode: overlay;}
-  .survey_tit{ position: absolute; left: 354rem; top: 45rem; @include font-size(14rem); display: flex; align-items: center; font-weight: bold; white-space: nowrap;
-    img{ margin-right: 4rem; width: 24rem;}
+  video{ opacity: 70%; mix-blend-mode: overlay; touch-action: none; pointer-events: none;}
+  .survey_tit{ position: absolute; left: 354rem; top: 41rem; display: flex; align-items: center; font-weight: bold; white-space: nowrap;
+    img{ margin-right: 7rem; width: 24rem;}
   }
   .survey_lnb{ position: absolute; left: 0; top: 0; height: 100%; width:  270rem; background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.00) 100%); backdrop-filter: blur(50px); border-right: 1px solid #fff; padding: $cont_pdt 0 0 $layout_padding; font-weight: bold; z-index: 10; transform: translateX(-100%); transition: 1s $expo;
     ol{
       li{ opacity: .3;  transition: .3s ease;
         + li{ margin-top: 16rem;} 
-        .tit{ @include font-size(14rem); margin-bottom: 12rem; display: flex; align-items: center; 
+        .tit{ margin-bottom: 12rem; display: flex; align-items: center; 
           &::before{ content: ''; width: 16rem; height: 16rem; border-radius: 50%; margin-right: 8rem; background-color: $black;}
         }
-        button{ @include font-size(12rem); padding: 13rem 35rem 13rem 14rem; position: relative; background: url(../images/survey_lnb_tag.svg)no-repeat left center / auto 100%; @include ellip(1); width: 100%; display: none; text-align: left;
+        button{ @include font-size(14rem); padding: 13rem 35rem 13rem 14rem; position: relative; background: url(../images/survey_lnb_tag.svg)no-repeat left center / auto 100%; @include ellip(1); width: 100%; display: none; text-align: left;
           &::before{ content: ''; width: 15rem; height: 15rem; background: url(../images/ico_write.svg)no-repeat center center / contain; position: absolute; right: 14rem; top: 50%; transform: translateY(-50%); opacity: .5;}
         }
         &.on{ opacity: 1;
@@ -72,28 +71,29 @@ $cont_pdt: 120rem;
     .survey_cont{padding: $cont_pdt 352rem 80rem; height: 100%; display: flex; flex-direction: column; justify-content: space-between;
       .con_box{ font-weight: bold;
         .example_btn,
-        .example_list li{ @include font-size(14rem); padding: 7rem 12rem; border-radius: 8rem; background-color: $white; color: $black;}
+        .example_list li{ line-height: 1.1; padding: 7rem 12rem; border-radius: 8rem; background-color: $white; color: $black;}
         .txt_box{ margin-bottom: 20rem; 
-          span{ display: block; @include font-size(32rem); line-height: 1;}
-          .tit{ display: block; @include font-size(40rem); line-height: 1.2; margin-top: 29rem;}
-          .loading_info{ display: flex; align-items: center; margin-top: 32rem;
-            p{ width: max-content; margin-right: 15rem;}
-            .loader{ display: block; width: 20px; height: 20px; border-radius: 50%; border:2px solid $white; position: relative; animation: loading1 1s linear infinite;
-              &::after{ content: ""; box-sizing: border-box; position: absolute; inset: 0px; border-radius: 50%; border: 2px solid $ci; animation: loading2 2s linear infinite alternate-reverse; width: 100%; height: 100%; left: -2px; top: -2px; box-sizing: content-box;}
-              @keyframes loading1 {
-                0%   {transform: rotate(0deg);}
-                100%   {transform: rotate(360deg);}
-              }              
-              @keyframes loading2 {
-                  0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0);}
-                  50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-                  90%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%);}
+          span{ display: block;}
+          .tit{ display: block; @include font-size(48rem); line-height: 1.2; margin-top: 20rem;}
+          .loading_info{ @include font-size(24rem);
+            #loading_info2{ display: flex; align-items: center; margin: 32rem 0 5rem;
+              .loader{ display: block; width: 20px; height: 20px; border-radius: 50%; border:2px solid $white; position: relative; animation: loading1 1s linear infinite; margin-left: 15rem;
+                &::after{ content: ""; box-sizing: border-box; position: absolute; inset: 0px; border-radius: 50%; border: 2px solid $ci; animation: loading2 2s linear infinite alternate-reverse; width: 100%; height: 100%; left: -2px; top: -2px; box-sizing: content-box;}
+                @keyframes loading1 {
+                  0%   {transform: rotate(0deg);}
+                  100%   {transform: rotate(360deg);}
+                }              
+                @keyframes loading2 {
+                    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0);}
+                    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+                    90%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%);}
+                }
               }
             }
           }
         }
         .example_btn{ display: flex; align-items: center;
-          &::after{ content: ''; width: 12rem; height: 11rem; background: url(../images/ico_file.svg)no-repeat center center / contain; margin:1rem 0 0 10rem; transition: .3s ease;}
+          &::after{ content: ''; width: 13rem; height: 12rem; background: url(../images/ico_file.svg)no-repeat center center / contain; margin:1rem 0 0 10rem; transition: .3s ease;}
           &.on{ filter: invert(1);}
         }
         .example_list{ margin-top: 16rem;
@@ -123,7 +123,7 @@ $cont_pdt: 120rem;
         input{ width: 100%; height: 44rem; padding: 0 14rem;
           &::placeholder{ color: rgba($color: $white, $alpha: .3);}
         }
-        button{ display: flex; align-items: center; padding: 10rem 30rem; flex-shrink: 0; background-color: $ci; border-radius: 4rem; transition: .5s ease;
+        button{ display: flex; align-items: center; padding: 10rem 30rem; flex-shrink: 0; background-color: $ci; border-radius: 4rem; transition: .5s ease; @include font-size(18rem);
           &[disabled]{ background-color: #777; cursor: default;}
           img{ width: 20rem; margin-left: 10rem;}
           &.submit_btn{ font-weight: 600;}
@@ -131,14 +131,14 @@ $cont_pdt: 120rem;
       }
 
       .progress_contents{ position: relative; width: 100%;
-        .icon_box{ position: absolute; left: 0; top: -129rem; width: 400rem;}
-        .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(180rem); font-weight: 700; text-align: right; line-height: 1;}
+        .icon_box{ position: absolute; left: 0; top: -76rem; width: 350rem;}
+        .progress_txt{background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0.00) 85.67%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; @include font-size(180rem); font-weight: 700; text-align: right; line-height: 1; margin-bottom: 54rem;}
         .progress_container{position: relative;
           .progress_bar_wrap{ padding: 5rem;
             .progress_bar{ width: 0%; min-width: 26rem; height: 100%; border-radius: 130px; background: linear-gradient(90deg, #6132D3 0.18%, #FF1585 99.82%);}
           }
         }
-        .result_button{  display: flex; align-items: center; @include font-size(16rem); padding: 18rem 15rem; background-color: $ci; color: $white; border-radius: 8rem; margin:60rem auto 0; touch-action: none; pointer-events: none; transform: translateY(50rem); opacity: 0; transition: 1s ease; position: relative;
+        .result_button{  display: flex; align-items: center; @include font-size(20rem); padding: 18rem 15rem; background-color: $ci; color: $white; border-radius: 8rem; margin:60rem auto 0; touch-action: none; pointer-events: none; transform: translateY(50rem); opacity: 0; transition: 1s ease; position: relative;
           img{ width: 24rem; margin-left: 10rem;}
           &::before, &::after{ content: ''; width: 90%; height: 90%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 1px solid $ci; border-radius: 8rem;}
           &.on{ opacity: 1; transform: translateY(0%); touch-action: auto; pointer-events: auto;
@@ -155,9 +155,9 @@ $cont_pdt: 120rem;
       }
     }  
   }
-  #result-page{ overflow-y: auto; height: 100vh; 
-    .container{ padding: $cont_pdt 0 100rem;
-    }
+  #result-page{ height: 100vh; overflow-y: auto; 
+    &::-webkit-scrollbar{ display: block;}
+    .container{ padding: $cont_pdt 0 100rem;}
     .json_data{ color: $black; 
       .data_wrap{ display: flex; margin-bottom: 16rem; height: 500rem;  
         > div{width: 50%; background-color: $white; border-radius: 30rem; padding: 32rem;}
@@ -205,12 +205,13 @@ $cont_pdt: 120rem;
         }
       }
     }
-    .modal_popup{ position: fixed; left: 0; top: 0; z-index: 1000; width: 100%; height: 100%; touch-action: none; pointer-events: none; opacity: 0; transition: .5s ease;
+    .modal_popup{ position: fixed; left: 0; top: 0; z-index: 1000; width: 100%; height: 100%; touch-action: none; pointer-events: none; opacity: 0; transition: .5s ease; overflow-y: auto;
+      .modal_wrap{ position: relative;}
       .dim{ background:rgba(0, 0, 0, 0.3);}
       &.on{ touch-action: auto; pointer-events: auto; opacity: 1;
-        .modal_content{ transform: translate(-50%, -50%); opacity: 1; touch-action: auto; pointer-events: auto;}
+        .modal_content{ opacity: 1;}
       }
-      .modal_content{ transform: translate(-50%, -30%); opacity: 0; touch-action: none; transition: 1s ease; pointer-events: none; border-radius: 30px; width: 1523rem; padding:32rem;
+      .modal_content{ opacity: 0; transition: 1s ease; border-radius: 30px; width: 1523rem; padding:32rem; margin: 0 auto;
         .close{ display: block; width: 40rem; margin: 0 0 20rem auto; cursor: pointer;}
         .pdf_viewer{ margin: 23rem 0; width: 100%; height: 730rem;
           iframe{ border-radius: 30rem; overflow: hidden;}

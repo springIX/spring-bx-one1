@@ -40,7 +40,7 @@
       <div class="copyright">
         <span>Digital Marketing Agency</span>
         <span>ⓒBlend.X. All rights reserved.</span>
-        <strong>BX-GENERATION</strong>
+        <strong>GENERATION-BX</strong>
       </div>
       <div class="link_box pre flex_cnt">
         <a href="http://www.blendx.co.kr/" target="_blank" class="flex_cnt blendX_link">www.blendx.co.kr <img
@@ -58,11 +58,14 @@
     <div id="main">
       <video src="src/images/main_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <div class="container">
-        <img src="src/images/main_title.svg" alt="BX ONE 1" class="main_title  ani_fade">
-        <p class="txt_box ani_fade">작은 브랜드일수록 더욱 독보적이어야 합니다. <br>
-          BX ONE 1이 개발한 독창적인 BX-Generation 엔진으로 <br>
-          경쟁 시장에서 우뚝 설 수 있는 차별화된 브랜드 아이덴티티를 <br>
-          빠르고 간단한 절차만으로 완성해 드립니다.</p>
+        <div class="txt_wrap">
+          <img src="src/images/logo.svg" alt="BX ONE 1" class="main_title ani_fade">
+          <p class="txt_box ani_fade">
+            작은 브랜드일수록 더욱 독보적이어야 합니다. <br>
+            BX ONE 1이 개발한 독창적인 Gen-BX 엔진으로 <br>
+            경쟁 시장에서 우뚝 설 수 있는 차별화된 브랜드 아이덴티티를 <br>
+            빠르고 간단한 절차만으로 완성해 드립니다.</p>
+        </div>
         <div class="process_info flex_cnt ani_fade">
           <p>제품명, USP, 고객행동만 입력하시면, <br>
             짧은 시간 안에 당신만의 독보적인 브랜드가 탄생합니다.</p>
@@ -77,7 +80,7 @@
       <video src="src/images/sub_visual.mp4" muted autoplay loop playsinline class="cover"></video>
       <p class="survey_tit">
         <img src="src/images/ico_light.svg" alt="">
-        BX-Generation
+        Gen-BX Engine
       </p>
       <div class="survey_lnb">
         <ol>
@@ -111,7 +114,8 @@
           </div>
           <div class="write_box">
             <input type="text" id="input1" class="answer_input" placeholder="당신의 브랜드 or 제품명을 입력해주세요.">
-            <button onclick="nextStep(1)" disabled>STEP 2<img src="src/images/arr_next_bold.svg" alt=""></button>
+            <button onclick="nextStep(1)" class="answer_btn" disabled>STEP 2<img src="src/images/arr_next_bold.svg"
+                alt=""></button>
           </div>
         </div>
       </div>
@@ -122,7 +126,7 @@
               <span class="ani_fadeup">STEP 2</span>
               <div class="tit">
                 <strong class="fx">브랜드 or 제품의</strong>
-                <strong class="fx">핵심강점/ USP를 입력해주세요.</strong>
+                <strong class="fx">핵심강점(USP)을 입력해주세요.</strong>
               </div>
             </div>
             <button class="example_btn ani_fadeup ani_dly3" data-btn="brand_benefit"
@@ -132,8 +136,9 @@
             </ul>
           </div>
           <div class="write_box">
-            <input type="text" id="input2" class="answer_input" placeholder="브랜드 or 제품의 핵심강점/ USP를 입력해주세요.">
-            <button onclick="nextStep(2)" disabled>STEP 3<img src="src/images/arr_next_bold.svg" alt=""></button>
+            <input type="text" id="input2" class="answer_input" placeholder="브랜드 or 제품의 핵심강점(USP)을 입력해주세요.">
+            <button onclick="nextStep(2)" class="answer_btn" disabled>STEP 3<img src="src/images/arr_next_bold.svg"
+                alt=""></button>
           </div>
         </div>
       </div>
@@ -143,10 +148,9 @@
             <div class="txt_box">
               <span>STEP 3</span>
               <div class="tit">
-                <strong class="fx">고객이 우리 브랜드를 찾고 </strong>
-                <strong class="fx">선택해야 하는 이유를 알고 싶다면, </strong>
-                <strong class="fx">아래 질문 중 하나를 선택하거나 </strong>
-                <strong class="fx">직접 입력해보세요. </strong>
+                <strong class="fx">우리 브랜드를 고객이 찾고 </strong>
+                <strong class="fx">선택해야 하는 이유가 궁금하다면, </strong>
+                <strong class="fx">아래 질문 중 하나를 선택하거나 직접 입력해보세요. </strong>
               </div>
             </div>
             <button class="example_btn ani_fadeup ani_dly5" data-btn="brand_choose"
@@ -157,8 +161,8 @@
           </div>
           <div class="write_box">
             <input type="text" id="input3" class="answer_input" placeholder="질문을 입력해주세요.">
-            <button onclick="submitForm()" disabled class="submit_btn">
-              BX-GENERATION 실행
+            <button onclick="submitForm()" disabled class="answer_btn submit_btn">
+              Gen-BX 실행
               <img src="src/images/ico_light.svg" alt="">
             </button>
           </div>
@@ -169,12 +173,14 @@
           <div class="con_box">
             <div class="txt_box">
               <div class="tit">
-                <strong class="fx">BX-Generation</strong>
+                <strong class="fx">Generation-BX</strong>
                 <strong class="fx">보고서 완성까지 약 1~2분 소요됩니다.</strong>
               </div>
               <div class="loading_info">
+                <div id="loading_info2">
+                  <p>입력하신 정보를 바탕으로 검색 쿼리 생성 중... </p><i class="loader"></i>
+                </div>
                 <p id="loading_info"></p>
-                <i class="loader"></i>
               </div>
             </div>
           </div>
@@ -232,35 +238,32 @@
               </div>
             </div>
             <div class="pdf_download">
-              <button id="download-pdf1" onclick="downloadPDFForPage(0)" data-btn="pdf">1. Brand Identity
-                Report</button>
-              <button id="download-pdf2" onclick="downloadPDFForPage(1)" data-btn="pdf">2. Brand Identity
-                Report</button>
-              <button id="download-pdf3" onclick="downloadPDFForPage(2)" data-btn="pdf">3. Brand Identity
-                Report</button>
-              <button id="download-pdf4" onclick="downloadPDFForPage(3)" data-btn="pdf">4. Brand Identity
-                Report</button>
-              <button id="download-pdf5" onclick="downloadPDFForPage(4)" data-btn="pdf">5. Brand Identity
-                Report</button>
+              <button id="download-pdf1" onclick="downloadPDFForPage(0)" data-btn="pdf">브랜드 컨설팅 리포트 1안</button>
+              <button id="download-pdf2" onclick="downloadPDFForPage(1)" data-btn="pdf">브랜드 컨설팅 리포트 2안</button>
+              <button id="download-pdf3" onclick="downloadPDFForPage(2)" data-btn="pdf">브랜드 컨설팅 리포트 3안</button>
+              <button id="download-pdf4" onclick="downloadPDFForPage(3)" data-btn="pdf">브랜드 컨설팅 리포트 4안</button>
+              <button id="download-pdf5" onclick="downloadPDFForPage(4)" data-btn="pdf">브랜드 컨설팅 리포트 5안</button>
             </div>
             <div class="btn_wrap">
               <button class="retry_btn" data-btn="retry">재시도 하기</button>
               <!-- <a href="" download="">현재 정보 저장하기</a> -->
-              <a href="javascript:void(0);" id="download-all-pdf">리포트 한번에 다운받기</a>
+              <a href="" download="">리포트 한번에 다운받기</a>
             </div>
           </div>
           <!-- PDF 미리보기 모달 -->
           <div id="pdfModal" class="modal_popup" data-toggle="pdf">
-            <div class="dim cover" data-btn="pdf"></div>
-            <div class="modal_content p_center">
-              <span class="close" data-btn="pdf" onclick="closeModal()">
-                <!--onclick="closeModal()"-->
-                <img src="src/images/ico_close.svg" alt="">
-              </span>
-              <div class="pdf_viewer">
-                <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+            <div class="modal_wrap">
+              <div class="dim cover" data-btn="pdf"></div>
+              <div class="modal_content">
+                <span class="close" data-btn="pdf" onclick="closeModal()">
+                  <!--onclick="closeModal()"-->
+                  <img src="src/images/ico_close.svg" alt="">
+                </span>
+                <div class="pdf_viewer">
+                  <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+                </div>
+                <a href="" class="pdf_download_btn">PDF 다운로드</a>
               </div>
-              <a href="" class="pdf_download_btn">PDF 다운로드</a>
             </div>
           </div>
         </div>

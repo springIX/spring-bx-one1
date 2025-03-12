@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* Responsive */
 /* Ellipsis */
+em {
+  color: #FF1585;
+}
+
 .pps {
   font-family: "Poppins", sans-serif;
 }
