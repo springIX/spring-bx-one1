@@ -560,7 +560,7 @@ async function generatePDFWithUserInput(buttonIndex) {
     addCenteredWrappedText(brandingPage, emoFunc.functional_benefit || "", 1258, 354, 700, 24, customFont, rgb(1, 1, 1), 34);
     addCenteredWrappedText(brandingPage, (jsonData.compounds.attribute || []).join(", "), 1258, 150, 700, 24, customFont, rgb(1, 1, 1), 34);
 
-    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 600, 700, 56, customFont, rgb(1, 1, 1), 80);
+    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 580, 700, 56, customFont, rgb(1, 1, 1), 80);
 
 
 
