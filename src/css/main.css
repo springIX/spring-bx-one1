@@ -27,23 +27,21 @@
 }
 #main .container {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 #main .container .txt_box {
-  padding: 90rem 0 0 50%;
-  font-size: clamp(10px, 18rem, 999rem);
+  padding: 80rem 0 0 50%;
   font-weight: bold;
 }
 #main .container .process_info {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 20rem;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
 }
 #main .container .process_info .start_btn {
   padding: 20rem 30rem;
-  font-size: clamp(10px, 14rem, 999rem);
+  font-size: clamp(10px, 16rem, 999rem);
   background-color: #FF1585;
   border-radius: 8rem;
   display: flex;
@@ -104,15 +102,14 @@
 #survey_wrap .survey_tit {
   position: absolute;
   left: 354rem;
-  top: 45rem;
-  font-size: clamp(10px, 14rem, 999rem);
+  top: 41rem;
   display: flex;
   align-items: center;
   font-weight: bold;
   white-space: nowrap;
 }
 #survey_wrap .survey_tit img {
-  margin-right: 4rem;
+  margin-right: 7rem;
   width: 24rem;
 }
 #survey_wrap .survey_lnb {
@@ -138,7 +135,6 @@
   margin-top: 16rem;
 }
 #survey_wrap .survey_lnb ol li .tit {
-  font-size: clamp(10px, 14rem, 999rem);
   margin-bottom: 12rem;
   display: flex;
   align-items: center;
@@ -152,7 +148,7 @@
   background-color: #000000;
 }
 #survey_wrap .survey_lnb ol li button {
-  font-size: clamp(10px, 12rem, 999rem);
+  font-size: clamp(10px, 14rem, 999rem);
   padding: 13rem 35rem 13rem 14rem;
   position: relative;
   background: url(../images/survey_lnb_tag.svg) no-repeat left center/auto 100%;
@@ -197,7 +193,7 @@
 }
 #survey_wrap .survey_box .survey_cont .con_box .example_btn,
 #survey_wrap .survey_box .survey_cont .con_box .example_list li {
-  font-size: clamp(10px, 14rem, 999rem);
+  line-height: 1.1;
   padding: 7rem 12rem;
   border-radius: 8rem;
   background-color: #ffffff;
@@ -208,25 +204,22 @@
 }
 #survey_wrap .survey_box .survey_cont .con_box .txt_box span {
   display: block;
-  font-size: clamp(10px, 32rem, 999rem);
-  line-height: 1;
 }
 #survey_wrap .survey_box .survey_cont .con_box .txt_box .tit {
   display: block;
-  font-size: clamp(10px, 40rem, 999rem);
+  font-size: clamp(10px, 48rem, 999rem);
   line-height: 1.2;
-  margin-top: 29rem;
+  margin-top: 20rem;
 }
 #survey_wrap .survey_box .survey_cont .con_box .txt_box .loading_info {
+  font-size: clamp(10px, 24rem, 999rem);
+}
+#survey_wrap .survey_box .survey_cont .con_box .txt_box .loading_info #loading_info2 {
   display: flex;
   align-items: center;
-  margin-top: 32rem;
+  margin: 32rem 0 5rem;
 }
-#survey_wrap .survey_box .survey_cont .con_box .txt_box .loading_info p {
-  width: max-content;
-  margin-right: 15rem;
-}
-#survey_wrap .survey_box .survey_cont .con_box .txt_box .loading_info .loader {
+#survey_wrap .survey_box .survey_cont .con_box .txt_box .loading_info #loading_info2 .loader {
   display: block;
   width: 20px;
   height: 20px;
@@ -234,8 +227,9 @@
   border: 2px solid #ffffff;
   position: relative;
   animation: loading1 1s linear infinite;
+  margin-left: 15rem;
 }
-#survey_wrap .survey_box .survey_cont .con_box .txt_box .loading_info .loader::after {
+#survey_wrap .survey_box .survey_cont .con_box .txt_box .loading_info #loading_info2 .loader::after {
   content: "";
   box-sizing: border-box;
   position: absolute;
@@ -274,8 +268,8 @@
 }
 #survey_wrap .survey_box .survey_cont .con_box .example_btn::after {
   content: "";
-  width: 12rem;
-  height: 11rem;
+  width: 13rem;
+  height: 12rem;
   background: url(../images/ico_file.svg) no-repeat center center/contain;
   margin: 1rem 0 0 10rem;
   transition: 0.3s ease;
@@ -361,6 +355,7 @@
   background-color: #FF1585;
   border-radius: 4rem;
   transition: 0.5s ease;
+  font-size: clamp(10px, 18rem, 999rem);
 }
 #survey_wrap .survey_box .survey_cont .write_box button[disabled] {
   background-color: #777;
@@ -380,8 +375,8 @@
 #survey_wrap .survey_box .survey_cont .progress_contents .icon_box {
   position: absolute;
   left: 0;
-  top: -129rem;
-  width: 400rem;
+  top: -76rem;
+  width: 350rem;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .progress_txt {
   background: linear-gradient(180deg, #FFF 14.17%, rgba(255, 255, 255, 0) 85.67%);
@@ -392,6 +387,7 @@
   font-weight: 700;
   text-align: right;
   line-height: 1;
+  margin-bottom: 54rem;
 }
 #survey_wrap .survey_box .survey_cont .progress_contents .progress_container {
   position: relative;
@@ -409,7 +405,7 @@
 #survey_wrap .survey_box .survey_cont .progress_contents .result_button {
   display: flex;
   align-items: center;
-  font-size: clamp(10px, 16rem, 999rem);
+  font-size: clamp(10px, 20rem, 999rem);
   padding: 18rem 15rem;
   background-color: #FF1585;
   color: #ffffff;
@@ -625,6 +621,10 @@
   pointer-events: none;
   opacity: 0;
   transition: 0.5s ease;
+  overflow-y: auto;
+}
+#survey_wrap #result-page .modal_popup .modal_wrap {
+  position: relative;
 }
 #survey_wrap #result-page .modal_popup .dim {
   background: rgba(0, 0, 0, 0.3);
@@ -635,20 +635,15 @@
   opacity: 1;
 }
 #survey_wrap #result-page .modal_popup.on .modal_content {
-  transform: translate(-50%, -50%);
   opacity: 1;
-  touch-action: auto;
-  pointer-events: auto;
 }
 #survey_wrap #result-page .modal_popup .modal_content {
-  transform: translate(-50%, -30%);
   opacity: 0;
-  touch-action: none;
   transition: 1s ease;
-  pointer-events: none;
   border-radius: 30px;
   width: 1523rem;
   padding: 32rem;
+  margin: 0 auto;
 }
 #survey_wrap #result-page .modal_popup .modal_content .close {
   display: block;

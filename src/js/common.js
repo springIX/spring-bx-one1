@@ -27,14 +27,14 @@ async function fetchReport() {
       user_query: input3
     };
 
-    // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
-    });
+    const response = await fetch('/bx_architect_report2.json');
+    // const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(requestData)
+    // });
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -324,26 +324,22 @@ function submitForm() {
 
   // 랜덤 텍스트 : 로딩 중 일때
   const loadingTxt = [
-    [`입력하신 정보를 바탕으로 검색 쿼리 생성 중....`,
-      `"당신의 아이디어가 현실이 되려면, 실행 전략이 필요하다. 지금 움직여라." - 블렌드엑스`,
+    [`"당신의 아이디어가 현실이 되려면, 실행 전략이 필요하다. 지금 움직여라." - 블렌드엑스`,
       `"당신이 꿈꿀수 있다면, 그것을 이룰 수도 있다." - 월트 디즈니 (디즈니 창립자)`,
       `"작게 시작하되, 크게 생각하라." - 제프 베조스 (아마존 창업자)`,
       `"고객이 만족하는 수준에 머무르면 안된다. 고객이 '와우'라고 말하게 만들어라." - 토니 셰이 (자포스 창업자)`],
 
-    [`USP와 소비자 정보를 통한 Compound 생성중....`,
-      `"시장변화는 기다려주지 않는다. 전문가와 함께 재빠르게 대응하라." - 블렌드엑스 `,
+    [`"시장변화는 기다려주지 않는다. 전문가와 함께 재빠르게 대응하라." - 블렌드엑스 `,
       `"고객을 만족시키는 것이 아니라 감동시키는 것이 목표다." - 하워드 슐츠 (스타벅스 창업자)`,
       `"완벽한 타이밍은 오지 않는다. 지금이 시작할 순간이다." - 스티브잡스 (애플 공동창업자)`,
       `"고객은 당신이 제공하는 서비스에 따라 회사를 기억한다." - 리처드 브랜슨 (버진그룹 창업자)`],
 
-    [`수집된 소셜보이스를 기반으로 보고서 작성 중.....`,
-      `"성공한 창업자는 시행착오를 줄이는 방법을 안다. 혼자 헤매지 말고 전문가와 함께하라." - 블렌드엑스`,
+    [`"성공한 창업자는 시행착오를 줄이는 방법을 안다. 혼자 헤매지 말고 전문가와 함께하라." - 블렌드엑스`,
       `"경쟁자가할수 없는 것을 하라." - 피터 틸 (페이팔 공동 창업자)`,
       `"기회를 기다리는 것이 아니라 기회를 만든다." - 크리스 그로서 (기업가)`,
       `"비즈니스에서 가장 위험한 말은 '우리는 항상 이렇게 해왔다'이다." - 엘론 머스크 (테슬라, 스페이스X창업자)`],
 
-    [`BX - Generation 엔진이 브랜드 아키텍처를 완성 중...`,
-      `방향을 모른다면 속도는 의미가 없다. 제대로 가고 있는지 점검하라." - 블렌드엑스`,
+    [`방향을 모른다면 속도는 의미가 없다. 제대로 가고 있는지 점검하라." - 블렌드엑스`,
       `"성공한사람과 그렇지 않은 사람의 차이는 포기하지 않는 데 있다." - 콘래드 힐튼 (힐튼호텔 창업자)`,
       `"당신의 가장 불만족스러운 고객이야말로 가장 큰 배움의 원천이다." - 빌 게이츠 (마이크로소프트 공동창업자)`,
       `"위험을 감수하지 않으면 더 큰 위험을 감수하게 된다." - 에릭 슈미트 (구글 전 CEO)`]
@@ -353,6 +349,7 @@ function submitForm() {
 
   // 텍스트가 표시될 요소
   const displayElement = document.getElementById("loading_info");
+  const displayElement2 = document.querySelector("#loading_info2 p");
   const loadingIcon = document.querySelector('.progress_contents .icon_box img');
 
   // 초기값 (첫 번째 그룹에서 무작위 선택)
@@ -372,14 +369,17 @@ function submitForm() {
     if (progress === changePoints[0]) {
       displayElement.textContent = loadingTxt[1][Math.floor(Math.random() * loadingTxt[1].length)];
       loadingIcon.src = 'src/images/ico_progress2.png';
+      displayElement2.textContent = 'USP와 소비자 정보를 통한 Compound 생성중...'
     }
     if (progress === changePoints[1]) {
       displayElement.textContent = loadingTxt[2][Math.floor(Math.random() * loadingTxt[2].length)];
       loadingIcon.src = 'src/images/ico_progress3.png';
+      displayElement2.textContent = '수집된 소셜보이스를 기반으로 보고서 작성 중...'
     }
     if (progress === changePoints[2]) {
       displayElement.textContent = loadingTxt[3][Math.floor(Math.random() * loadingTxt[3].length)];
       loadingIcon.src = 'src/images/ico_progress4.png';
+      displayElement2.textContent = 'BX - Generation 엔진이 브랜드 아키텍처를 완성 중...'
     }
 
     if (progress >= 100) {
@@ -460,11 +460,11 @@ async function generatePDFWithUserInput(buttonIndex) {
     const btnTxtData = {
       compounds: {
         button_text: [
-          { btnTxt: "1. Brand Identity Report" },
-          { btnTxt: "2. Brand Identity Report" },
-          { btnTxt: "3. Brand Identity Report" },
-          { btnTxt: "4. Brand Identity Report" },
-          { btnTxt: "5. Brand Identity Report" }
+          { btnTxt: "브랜드 컨설팅 리포트 1안" },
+          { btnTxt: "브랜드 컨설팅 리포트 2안" },
+          { btnTxt: "브랜드 컨설팅 리포트 3안" },
+          { btnTxt: "브랜드 컨설팅 리포트 4안" },
+          { btnTxt: "브랜드 컨설팅 리포트 5안" }
         ]
       }
     };
@@ -626,7 +626,7 @@ function openModal(pdfUrl) {
 //   newIframe.id = "pdfViewer";
 //   newIframe.width = "100%";
 //   newIframe.height = "100%";
-  
+
 //   console.log("로드할 PDF URL:", pdfUrl);
 
 //   newIframe.src = pdfUrl + "?nocache=" + new Date().getTime();
@@ -656,6 +656,13 @@ function retryConsuling() {
   document.querySelectorAll('.answer_input').forEach(input => {
     input.value = "";
   });
+
+  document.querySelectorAll('.answer_btn').forEach(button => {
+    button.disabled = true;
+  });
+
+
+
   document.getElementById("main_wrap").classList.remove("consulting_end");
   document.getElementById("step1").classList.add("active");
   document.getElementById("step1").classList.remove("hidden");
@@ -673,6 +680,7 @@ function retryConsuling() {
     div.removeAttribute("style");
   });
   document.querySelector('.loading_info').style.opacity = 1;
+  document.querySelector('#loading_info2 p').textContent = '입력하신 정보를 바탕으로 검색 쿼리 생성 중...';
   document.getElementById("result-button").classList.remove('on');
 
   document.querySelectorAll(".example_btn").forEach(div => {
