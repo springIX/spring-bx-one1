@@ -28,7 +28,7 @@ async function fetchReport() {
     };
 
     const response = await fetch('/bx_architect_report2.json');
-    // const response = await fetch('https://4dcc20b8e693.ngrok.app/bx_one', {
+    // const response = await fetch('https://0501ffd384ee.ngrok.app/bx_one', {
     //   method: 'POST',
     //   headers: {
     //     'Content-Type': 'application/json'
@@ -307,9 +307,9 @@ function submitForm() {
   let resultButton = document.getElementById("result-button");
 
   // 70초 ~ 100초 사이의 랜덤 시간 선택
-  let duration = Math.floor(Math.random() * (160 - 140 + 1) + 140);
-  let intervalTime = (duration * 1000) / 100;
-  // let intervalTime = 1;
+  // let duration = Math.floor(Math.random() * (160 - 140 + 1) + 140);
+  // let intervalTime = (duration * 1000) / 100;
+  let intervalTime = 1;
   let progress = 0;
   let jsonLoaded = false;
 
@@ -444,13 +444,14 @@ async function generatePDFWithUserInput(buttonIndex) {
     let citationPage = pages[5];
     let brandingPage = pages[7]
     let IdentityPage = pages[8]
+    const textSize = 23;
+    const pageWidth = 1920;
+    const pageHeight = 1080;
 
-    let finalReportY = 550;
+    let finalReportY = 600;
     let xMargin = 60;
     const maxY = 50;
     const lineHeight = 33;
-    let pageIndex = 3;
-    const maxTextWidth = 1000;
     const pinkColor = rgb(1, 0.082, 0.52);
 
     // 사용자 입력 값 가져오기
@@ -543,54 +544,76 @@ async function generatePDFWithUserInput(buttonIndex) {
     addWrappedText(IdentityPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
 
 
-    addWrappedText(resultPage, step1, 62, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
-    addWrappedText(resultPage, step2, 720, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
-    addWrappedText(resultPage, step3, 1321, 688, 300, 24, customFontBold, rgb(1, 1, 1), 34);
-    addWrappedText(finalReportPage, jsonData.social_report_title || "", 60, 750, 800, 35, customFontBold, rgb(1, 1, 1), 36);
-    addWrappedText(finalReportPage, jsonData.social_report_subtitle || "", 64, 700, 800, 28, customFont, rgb(1, 1, 1), 38);
-    addWrappedText(citationPage, jsonData.citation || "", 64, 800, 1000, 20, customFont, rgb(1, 1, 1), 26);
+    addWrappedText(resultPage, step1, 62, 680, 300, 32, customFont, rgb(1, 1, 1), 42);
+    addWrappedText(resultPage, step2, 720, 680, 300, 32, customFont, rgb(1, 1, 1), 42);
+    addWrappedText(resultPage, step3, 1321, 680, 300, 32, customFont, rgb(1, 1, 1), 42);
+    addWrappedText(finalReportPage, jsonData.social_report_title || "", 60, 780, 800, 40, customFontBold, rgb(1, 1, 1), 40);
+    addWrappedText(finalReportPage, jsonData.social_report_subtitle || "", 64, 730, 800, 30, customFont, rgb(1, 1, 1), 40);
+    addWrappedText(citationPage, jsonData.citation || "", 64, 850, 1000, 25, customFont, rgb(1, 1, 1), 35);
 
 
-    addWrappedText(brandingPage, keyword.korean || "", 119, 825, 300, 20, customFontBold, rgb(1, 1, 1), 20);
-    addWrappedText(brandingPage, keyword.keyword || "", 119, 747, 900, 60, customFont, pinkColor, 72);
-    addWrappedText(brandingPage, keyword.explanation || "", 119, 240, 300, 24, customFont, rgb(1, 1, 1), 32);
+    addWrappedText(brandingPage, keyword.korean || "", 119, 701, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(brandingPage, keyword.keyword || "", 119, 620, 1000, 80, customFont, pinkColor, 90);
+    addWrappedText(brandingPage, keyword.explanation || "", 119, 480, 300, 24, customFont, rgb(1, 1, 1), 32);
 
-    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 550, 900, 50, customFont, rgb(1, 1, 1), 80);
+    addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 700, 24, customFont, rgb(1, 1, 1), 34);
+    addCenteredWrappedText(brandingPage, emoFunc.functional_benefit || "", 1258, 354, 700, 24, customFont, rgb(1, 1, 1), 34);
+    addCenteredWrappedText(brandingPage, (jsonData.compounds.attribute || []).join(", "), 1258, 150, 700, 24, customFont, rgb(1, 1, 1), 34);
+
+    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 600, 700, 56, customFont, rgb(1, 1, 1), 80);
 
 
-    addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 450, 20, customFont, rgb(1, 1, 1), 32);
-    addCenteredWrappedText(brandingPage, emoFunc.functional_benefit || "", 1258, 354, 450, 20, customFont, rgb(1, 1, 1), 32);
-    addCenteredWrappedText(brandingPage, (jsonData.compounds.attribute || []).join(", "), 1258, 150, 450, 20, customFont, rgb(1, 1, 1), 32);
 
+    async function addTextWithPageHandling() {
+      const finalReportLines = socialReport.replace(/\*/g, "").split("\n");
 
-    const finalReportLines = socialReport.replace(/\*/g, "").split("\n");
+      for (const line of finalReportLines) {
+        const wrappedLines = wrapFinalReportText(line, 1200, textSize);
 
-    finalReportLines.forEach(line => {
-      let textSize = 23;
-      let indent = xMargin;
-      let lineSpacing = lineHeight;
+        for (const subLine of wrappedLines) {
+          if (finalReportY - lineHeight < maxY) {
+            // 현재 페이지가 pages[3]이면 pages[4]로 이동
+            if (finalReportPage === pages[3]) {
+              finalReportPage = pages[4];
+              finalReportY = 950;
+            }
+            // pages[4]도 다 사용했으면 pages[4] 뒤에 새로운 페이지 추가
+            else if (finalReportPage === pages[4]) {
+              const newPage = pdfDoc.insertPage(5, [pageWidth, pageHeight]); // 📌 pages[4] 뒤에 새로운 가로 페이지 추가
+              pages.splice(5, 0, newPage); // 📌 pages 배열에서도 5번 인덱스에 추가
+              finalReportPage = newPage;
+              finalReportY = 950;
 
-      // 여기서 social_report의 너비만 1000으로 설정
-      const wrappedFinalReportLines = wrapFinalReportText(line, 1000, textSize);
+              // 🔹 pages[4]의 배경을 유지하여 새로운 페이지에 적용
+              const background = await pdfDoc.embedPage(pages[4]);
+              finalReportPage.drawPage(background);
+            }
+            // 추가된 새 페이지에도 공간이 부족할 경우 계속 새로운 페이지 생성
+            else {
+              const newPage = pdfDoc.addPage([pageWidth, pageHeight]); // 📌 가로형 새 페이지 추가
+              pages.push(newPage);
+              finalReportPage = newPage;
+              finalReportY = 950;
+            }
+          }
 
-      wrappedFinalReportLines.forEach(subLine => {
-        if (finalReportY - lineSpacing < maxY) {
-          pageIndex += 1;
-          finalReportPage = pages[pageIndex] || pdfDoc.addPage([842, 595]);
-          finalReportY = 950;
+          finalReportPage.drawText(subLine, {
+            x: xMargin,
+            y: finalReportY,
+            size: textSize,
+            font: customFont,
+            color: rgb(1, 1, 1),
+          });
+
+          finalReportY -= lineHeight;
         }
+      }
+    }
 
-        finalReportPage.drawText(subLine, {
-          x: indent,
-          y: finalReportY,
-          size: textSize,
-          font: customFont,
-          color: rgb(1, 1, 1),
-        });
-
-        finalReportY -= lineSpacing;
-      });
-    });
+    await addTextWithPageHandling();
+    
+    
+    
 
     // PDF 생성 및 Blob URL 생성
     const pdfBytes = await pdfDoc.save();
