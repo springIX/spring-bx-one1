@@ -27,14 +27,14 @@ async function fetchReport() {
       user_query: input3
     };
 
-    const response = await fetch('/bx_architect_report2.json');
-    // const response = await fetch('https://0501ffd384ee.ngrok.app/bx_one', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(requestData)
-    // });
+    // const response = await fetch('/bx_architect_report2.json');
+    const response = await fetch('https://0501ffd384ee.ngrok.app/bx_one', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -461,11 +461,11 @@ async function generatePDFWithUserInput(buttonIndex) {
     const btnTxtData = {
       compounds: {
         button_text: [
-          { btnTxt: "브랜드 컨설팅 리포트 1안" },
-          { btnTxt: "브랜드 컨설팅 리포트 2안" },
-          { btnTxt: "브랜드 컨설팅 리포트 3안" },
-          { btnTxt: "브랜드 컨설팅 리포트 4안" },
-          { btnTxt: "브랜드 컨설팅 리포트 5안" }
+          { btnTxt: "Brand Consulting Report 1" },
+          { btnTxt: "Brand Consulting Report 2" },
+          { btnTxt: "Brand Consulting Report 3" },
+          { btnTxt: "Brand Consulting Report 4" },
+          { btnTxt: "Brand Consulting Report 5" }
         ]
       }
     };
@@ -534,14 +534,37 @@ async function generatePDFWithUserInput(buttonIndex) {
       }
     }
 
+    async function addCenteredText(page, text, x, centerY, maxWidth, fontSize, font = customFont, color = rgb(1, 1, 1), lineHeight = 28) {
+      const wrappedLines = wrapFinalReportText(text, maxWidth, fontSize);
+      
+      // 전체 텍스트 높이 계산 (줄 수 * 줄 간격)
+      const totalTextHeight = wrappedLines.length * lineHeight;
+      
+      // 세로 중앙 정렬을 위해 Y 좌표 조정
+      let y = centerY + totalTextHeight / 2;
+    
+      for (const line of wrappedLines) {
+    
+        page.drawText(line, {
+          x,
+          y,
+          size: fontSize,
+          color: color,
+          font: font
+        });
+    
+        y -= lineHeight;
+      }
+    }
 
-    addWrappedText(coverPage, btnTxt.btnTxt || "", 1465, 740, 300, 25, customFontBold, rgb(1, 1, 1), 25);
-    addWrappedText(listPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
-    addWrappedText(resultPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
-    addWrappedText(finalReportPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
-    addWrappedText(brandingPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
-    addWrappedText(pages[6], btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
-    addWrappedText(IdentityPage, btnTxt.btnTxt || "", 1640, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+
+    addWrappedText(coverPage, btnTxt.btnTxt || "", 1475, 740, 300, 20, customFontBold, rgb(1, 1, 1), 25);
+    addWrappedText(listPage, btnTxt.btnTxt || "", 1595, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(resultPage, btnTxt.btnTxt || "", 1595, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(finalReportPage, btnTxt.btnTxt || "", 1595, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(brandingPage, btnTxt.btnTxt || "", 1595, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(pages[6], btnTxt.btnTxt || "", 1595, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
+    addWrappedText(IdentityPage, btnTxt.btnTxt || "", 1595, 1005, 300, 20, customFontBold, rgb(1, 1, 1), 20);
 
 
     addWrappedText(resultPage, step1, 62, 680, 300, 32, customFont, rgb(1, 1, 1), 42);
@@ -556,11 +579,13 @@ async function generatePDFWithUserInput(buttonIndex) {
     addWrappedText(brandingPage, keyword.keyword || "", 119, 620, 1000, 80, customFont, pinkColor, 90);
     addWrappedText(brandingPage, keyword.explanation || "", 119, 480, 300, 24, customFont, rgb(1, 1, 1), 32);
 
+    //가로 중앙정렬렬
     addCenteredWrappedText(brandingPage, emoFunc.emotional_benefit || "", 1258, 532, 700, 24, customFont, rgb(1, 1, 1), 34);
     addCenteredWrappedText(brandingPage, emoFunc.functional_benefit || "", 1258, 354, 700, 24, customFont, rgb(1, 1, 1), 34);
     addCenteredWrappedText(brandingPage, (jsonData.compounds.attribute || []).join(", "), 1258, 150, 700, 24, customFont, rgb(1, 1, 1), 34);
 
-    addWrappedText(IdentityPage, mktState.marketing_summary || "", 450, 580, 700, 56, customFont, rgb(1, 1, 1), 80);
+    // 세로 중앙정렬렬
+    addCenteredText(IdentityPage, mktState.marketing_summary || "", 450, 430, 690, 56, customFont, rgb(1, 1, 1), 80);
 
 
 
