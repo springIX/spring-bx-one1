@@ -54,12 +54,13 @@ $cont_pdt: 120rem;
       li{ opacity: .3;  transition: .3s ease;
         + li{ margin-top: 16rem;} 
         .tit{ margin-bottom: 12rem; display: flex; align-items: center; 
-          &::before{ content: ''; width: 16rem; height: 16rem; border-radius: 50%; margin-right: 8rem; background-color: $black;}
+          &::before{ content: ''; width: 16rem; height: 16rem; border-radius: 50%; margin-right: 8rem; background: $black no-repeat center center / 10rem auto;}
         }
         button{ @include font-size(14rem); padding: 13rem 35rem 13rem 14rem; position: relative; background: url(../images/survey_lnb_tag.svg)no-repeat left center / auto 100%; @include ellip(1); width: 100%; display: none; text-align: left;
           &::before{ content: ''; width: 15rem; height: 15rem; background: url(../images/ico_write.svg)no-repeat center center / contain; position: absolute; right: 14rem; top: 50%; transform: translateY(-50%); opacity: .5;}
         }
         &.on{ opacity: 1;
+          .tit::before{ background-image: url(../images/ico_check.svg);}
           button{ display: block;}
         }
       }
