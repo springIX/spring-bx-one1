@@ -644,6 +644,8 @@
   width: 1523rem;
   padding: 32rem;
   margin: 0 auto;
+  z-index: 5;
+  position: relative;
 }
 #survey_wrap #result-page .modal_popup .modal_content .close {
   display: block;
