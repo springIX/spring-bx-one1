@@ -28,7 +28,7 @@ async function fetchReport() {
     };
 
     // const response = await fetch('/bx_architect_report2.json');
-    const response = await fetch('http://196.168.0.45:8000/bx_one', {
+    const response = await fetch('http://192.168.0.45:8000/bx_one', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

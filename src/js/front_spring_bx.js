@@ -1,7 +1,7 @@
 
 async function fetchRandomId() {
   try {
-    const response = await fetch('http://196.168.0.45:8000/rand_id');
+    const response = await fetch('http://192.168.0.45:8000/rand_id');
     // const response = await fetch('/randomid.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
