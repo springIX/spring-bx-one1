@@ -456,7 +456,7 @@ async function generatePDFWithUserInput(buttonIndex) {
     let finalReportY = 600;
     let xMargin = 60;
     const maxY = 50;
-    const lineHeight = 33;
+    const lineHeight = 30;
     const pinkColor = rgb(1, 0.082, 0.52);
 
     // 사용자 입력 값 가져오기
@@ -598,7 +598,7 @@ async function generatePDFWithUserInput(buttonIndex) {
       const finalReportLines = socialReport.replace(/[*#]/g, "").split("\n");
     
       for (const line of finalReportLines) {
-        const wrappedLines = wrapFinalReportText(line, 1200, textSize);
+        const wrappedLines = wrapFinalReportText(line, 1250, textSize);
     
         for (const subLine of wrappedLines) {
           if (finalReportY - lineHeight < maxY) {
