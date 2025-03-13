@@ -1,8 +1,8 @@
 
 async function fetchRandomId() {
   try {
-    // const response = await fetch('https://0501ffd384ee.ngrok.app/rand_id');
-    const response = await fetch('/randomid.json');
+    const response = await fetch('http://192.168.0.145:8000/rand_id');
+    // const response = await fetch('/randomid.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

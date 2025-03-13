@@ -27,14 +27,14 @@ async function fetchReport() {
       user_query: input3
     };
 
-    const response = await fetch('/bx_architect_report2.json');
-    // const response = await fetch('https://0501ffd384ee.ngrok.app/bx_one', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(requestData)
-    // });
+    // const response = await fetch('/bx_architect_report2.json');
+    const response = await fetch('http://192.168.0.145:8000/bx_one', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -307,7 +307,7 @@ function submitForm() {
   let resultButton = document.getElementById("result-button");
 
   // 70초 ~ 100초 사이의 랜덤 시간 선택
-  let duration = Math.floor(Math.random() * (160 - 140 + 1) + 140);
+  let duration = Math.floor(Math.random() * (140 - 120 + 1) + 120);
   let intervalTime = (duration * 1000) / 100;
   // let intervalTime = 1;
   let progress = 0;
@@ -590,11 +590,11 @@ async function generatePDFWithUserInput(buttonIndex) {
 
 
     async function addTextWithPageHandling() {
-      const finalReportLines = socialReport.replace(/\*/g, "").split("\n");
-
+      const finalReportLines = socialReport.replace(/[*#]/g, "").split("\n");
+    
       for (const line of finalReportLines) {
         const wrappedLines = wrapFinalReportText(line, 1200, textSize);
-
+    
         for (const subLine of wrappedLines) {
           if (finalReportY - lineHeight < maxY) {
             // 현재 페이지가 pages[3]이면 pages[4]로 이동
@@ -604,24 +604,25 @@ async function generatePDFWithUserInput(buttonIndex) {
             }
             // pages[4]도 다 사용했으면 pages[4] 뒤에 새로운 페이지 추가
             else if (finalReportPage === pages[4]) {
-              const newPage = pdfDoc.insertPage(5, [pageWidth, pageHeight]); // 📌 pages[4] 뒤에 새로운 가로 페이지 추가
+              const newPage = pdfDoc.insertPage(5, [pageWidth, pageHeight]); // 📌 pages[4] 뒤에 새로운 페이지 추가
               pages.splice(5, 0, newPage); // 📌 pages 배열에서도 5번 인덱스에 추가
               finalReportPage = newPage;
               finalReportY = 950;
-
+    
               // 🔹 pages[4]의 배경을 유지하여 새로운 페이지에 적용
               const background = await pdfDoc.embedPage(pages[4]);
               finalReportPage.drawPage(background);
             }
             // 추가된 새 페이지에도 공간이 부족할 경우 계속 새로운 페이지 생성
             else {
-              const newPage = pdfDoc.addPage([pageWidth, pageHeight]); // 📌 가로형 새 페이지 추가
-              pages.push(newPage);
+              const newPageIndex = pages.indexOf(finalReportPage) + 1; // 🔥 현재 페이지 뒤에 추가
+              const newPage = pdfDoc.insertPage(newPageIndex, [pageWidth, pageHeight]); 
+              pages.splice(newPageIndex, 0, newPage);
               finalReportPage = newPage;
               finalReportY = 950;
             }
           }
-
+    
           finalReportPage.drawText(subLine, {
             x: xMargin,
             y: finalReportY,
@@ -629,15 +630,14 @@ async function generatePDFWithUserInput(buttonIndex) {
             font: customFont,
             color: rgb(1, 1, 1),
           });
-
+    
           finalReportY -= lineHeight;
         }
       }
     }
-
+    
     await addTextWithPageHandling();
-
-
+    
 
 
     // PDF 생성 및 Blob URL 생성
