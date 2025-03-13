@@ -379,7 +379,7 @@ function submitForm() {
     if (progress === changePoints[2]) {
       displayElement.textContent = loadingTxt[3][Math.floor(Math.random() * loadingTxt[3].length)];
       loadingIcon.src = 'src/images/ico_progress4.png';
-      displayElement2.textContent = 'BX - Generation 엔진이 브랜드 아키텍처를 완성 중...'
+      displayElement2.textContent = 'Gen-BX 엔진이 브랜드 아키텍처를 완성 중...'
     }
 
     if (progress >= 100) {
